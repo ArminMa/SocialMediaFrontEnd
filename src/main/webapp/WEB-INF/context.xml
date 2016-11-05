@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<Context path="/org.kth" distributable="true"  antiResourceLocking="true" >
+    <!--antiJARLocking="true"-->
+    <!-- Default set of monitored resources. If one of these changes, the -->
+    <!-- web application will be reloaded. -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <!--<Realm className="org.apache.catalina.realm.JAASRealm"-->
+    <!--appName="Test_JSF"-->
+    <!--useContextClassLoader="true"-->
+    <!--configFile="jaas.config"-->
+    <!--debug="true"-->
+    <!--userClassNames="org.kth.jaas.UserPrincipal"-->
+    <!--roleClassNames="org.kth.jaas.RolePrincipal" />-->
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!-- <Manager pathname="" /> -->
+
+    <!-- Uncomment this to enable Comet connection tacking (provides events
+        on session expiration as well as webapp lifecycle) -->
+    <!-- <Valve className="org.apache.catalina.valves.CometConnectionManagerValve"
+        /> -->
+    </Context>
