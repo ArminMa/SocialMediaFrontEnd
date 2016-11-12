@@ -37,16 +37,10 @@ public class Main extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(Main.class);
     }
-    
 
     @Bean
     public ServletRegistrationBean servletRegistrationBean() {
         FacesServlet servlet = new FacesServlet();
         return new ServletRegistrationBean(servlet, "html", "*.xhtml", "*.jsf");
-
-
     }
-
-
-
 }

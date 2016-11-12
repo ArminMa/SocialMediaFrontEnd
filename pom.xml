@@ -21,7 +21,6 @@
     <packaging>war</packaging>
     <name>xSocialMediaFrontEnd</name>
 
-
     <properties>
         <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
         <start-class>org.kth.Main</start-class>
@@ -31,13 +30,7 @@
         <heroku.appName>Test_JSF</heroku.appName>
 
     </properties>
-
-
     <dependencies>
-
-
-
-
         <dependency>
             <groupId>org.joinfaces</groupId>
             <artifactId>jsf-undertow-myfaces-spring-boot-starter</artifactId>
@@ -75,29 +68,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
-
-
-
     </dependencies>
-
-
 
     <!--ch.qos.logback:logback-classic:1.1.2-->
     <build>
         <finalName>xSocialMediaFrontEnd</finalName>
         <outputDirectory>target</outputDirectory>
         <plugins>
-
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>1.4.1.RELEASE</version>
             </plugin>
-
-
         </plugins>
-
-
     </build>
 </project>
