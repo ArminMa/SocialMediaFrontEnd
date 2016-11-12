@@ -17,12 +17,15 @@ public class UserHandler {
 
     private static final String baseUrlAddress = "http://localhost:8081";
 
-    public static boolean login(String user, String pass) {
-        if (user.compareToIgnoreCase("reine") == 0 &&
-                pass.compareTo("tjo") == 0)
+    public static boolean login(String userName, String password) {
+        String url = baseUrlAddress + "/login/" + userName + "/" + password;
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+        if(response.getStatusCode().equals(HttpStatus.OK)){
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public static Collection getUserNamesByName(String name) {
