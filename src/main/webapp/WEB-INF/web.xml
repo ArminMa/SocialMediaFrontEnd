@@ -5,6 +5,10 @@
           http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5" metadata-complete="true">
 
+	<context-param>
+		<param-name>org.butterfaces.autoTrimInputFields</param-name>
+		<param-value>true</param-value>
+	</context-param>
     <context-param>
         <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
         <param-name>javax.faces.CLIENT_WINDOW_MODE</param-name>
@@ -25,4 +29,25 @@
     <!--<session-config>-->
         <!--<session-timeout>10</session-timeout>-->
     <!--</session-config>-->
+    <!-- Button text when ajax request is running -->
+    <!-- default is Processing -->
+    <context-param>
+        <param-name>org.butterfaces.ajaxProcessingTextOnRequest</param-name>
+        <param-value>Processing</param-value>
+    </context-param>
+
+    <!-- Glyphicon when ajax request is running -->
+    <!-- default is empty -->
+    <context-param>
+        <param-name>org.butterfaces.ajaxProcessingTextOnRequest</param-name>
+        <param-value></param-value>
+    </context-param>
+
+    <!-- Shows waiting panel over regions that will be renderer by ajax request -->
+    <!-- Could be overridden by ajaxDisableRenderRegionsOnRequest component attribute -->
+    <!-- default is true -->
+    <context-param>
+        <param-name>org.butterfaces.ajaxDisableRenderRegionsOnRequest</param-name>
+        <param-value>true</param-value>
+    </context-param>
 </web-app>

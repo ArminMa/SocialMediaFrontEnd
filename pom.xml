@@ -28,12 +28,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <heroku.appName>Test_JSF</heroku.appName>
-
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.joinfaces</groupId>
-            <artifactId>jsf-undertow-myfaces-spring-boot-starter</artifactId>
+            <artifactId>jsf-undertow-myfaces-butterfaces-spring-boot-starter</artifactId>
         </dependency>
 
         <!-- Test environment -->
@@ -68,6 +67,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/de.larmic.butterfaces/butterfaces -->
+        <dependency>
+            <groupId>de.larmic.butterfaces</groupId>
+            <artifactId>butterfaces</artifactId>
+            <version>2.1.14</version>
+        </dependency>
+
     </dependencies>
 
     <!--ch.qos.logback:logback-classic:1.1.2-->

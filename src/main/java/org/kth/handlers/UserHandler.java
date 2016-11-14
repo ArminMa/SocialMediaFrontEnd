@@ -4,7 +4,11 @@ import org.apache.log4j.Level;
 import org.kth.GsonX;
 import org.kth.beans.UserBean;
 import org.kth.pojos.UserPojo;
+import org.kth.service.JpaServerCaller;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -44,6 +48,18 @@ public class UserHandler {
             user = GsonX.gson.fromJson(response.getBody().toString(), UserBean.class);
         }
         return user;
+    }
+
+    // logic should be in this class and not in the bean classes
+    public static String registerNewUser(UserBean userBean){
+        if(userBean == null || userBean.getUserName() == null || userBean.getEmail() == null || userBean.getPassword() == null) return null;
+
+        userBean = JpaServerCaller.register(userBean);
+        // handle the user hear
+        if(userBean == null)
+            return "search";
+
+        return "index";
     }
 
     public static String testConnection(){
