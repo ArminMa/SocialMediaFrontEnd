@@ -28,12 +28,17 @@ public class UserHandler {
         }
     }
 
-    public static Collection getUserNamesByName(String name) {
-        ArrayList<String> names = new ArrayList<>();
-        for(int i= 1; i<11; i++){
-            names.add("name =" +i);
+    public static Collection<UserBean> searchForUsersByUserName(String name) {
+        if(name == null) return null;
+
+        String url = baseUrlAddress + "/userSearch/" + name;
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<UserBean[]> response = restTemplate.getForEntity(url, UserBean[].class);
+        Collection<UserBean> matches = null;
+        if(response.getStatusCode().equals(HttpStatus.OK)){
+            return (Collection<UserBean>)GsonX.gson.fromJson(response.getBody().toString(), Collection.class);
         }
-        return names;
+        return null;
     }
 
     public static UserBean getUserByEmail(String email){
@@ -41,7 +46,7 @@ public class UserHandler {
 
         String url = baseUrlAddress + "/getEmail/" + email;
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<UserBean> response = restTemplate.getForEntity(url, UserBean.class);
+        ResponseEntity<Object[]> response = restTemplate.getForEntity(url,  Object[].class);
         UserBean user = null;
         if(response.getStatusCode().equals(HttpStatus.OK)){
             user = GsonX.gson.fromJson(response.getBody().toString(), UserBean.class);

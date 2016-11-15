@@ -9,12 +9,27 @@
 </h:head>
 <h:body>
     <h:form>
-        <h:inputText size="20" value="#{userBean.userName}">
+        <h:inputText size="20"  value="#{searchForUsers.searchString}">
             <f:ajax event="keyup" render="nameList"/>
         </h:inputText>
-        <h:dataTable id="nameList" value="#{userBean.names}" var="name" border="1">
-            <h:column>#{name}</h:column>
+        <h:dataTable id="nameList" value="#{searchForUsers.searchForUsersByName}" var="matchingUsers" border="1">
+            <h:column>#{matchingUsers}</h:column>
         </h:dataTable>
     </h:form>
+    <!--<f:view>-->
+    <!--<h:form>-->
+    <!--<h:panelGrid columns="2">-->
+    <!--<h:outputLabel value="Search for users"></h:outputLabel>-->
+    <!--<h:inputText  value="#{searchForUsers.searchString}"></h:inputText>-->
+    <!--</h:panelGrid>-->
+    <!--<h:commandButton action="#{searchForUsers.searchForUsersByName}" value="users"></h:commandButton>-->
+    <!--<h:users-->
+    <!--<h:messages layout="table"></h:messages>-->
+    <!--</h:form>-->
+    <!--<h:panelGroup>-->
+    <!--<h3> Result </h3>-->
+    <!--<h:outputLabel value="#{users}"></h:outputLabel>-->
+    <!--</h:panelGroup>-->
+    <!--</f:view>-->
 </h:body>
 </html>
