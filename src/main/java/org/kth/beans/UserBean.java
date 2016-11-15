@@ -26,6 +26,12 @@ public class UserBean {
     private Collection<PostPojo> log = new ArrayList<>();
     private Collection<ChatMessagePojo> chatMessages = new ArrayList<>();
 
+    public UserBean(String userName, String email, String password) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
