@@ -1,155 +1,106 @@
-<fa:composition template="/templates/ui.xhtml"
-				xmlns="http://www.w3.org/1999/xhtml"
-				xmlns:h="http://xmlns.jcp.org/jsf/html"
-				xmlns:f="http://xmlns.jcp.org/jsf/core"
-				xmlns:b="http://butterfaces.org/components"
-				xmlns:fa="http://java.sun.com/jsf/facelets"
-				xmlns:ng="http://xmlns.jcp.org/jsf/passthrough">
+<f:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:c="http://xmlns.jcp.org/jsf/core"
+        xmlns:b="http://butterfaces.org/components"
+        xmlns:f="http://java.sun.com/jsf/facelets"
+        xmlns:pr="http://primefaces.org/ui"
+        template="/templates/ui.xhtml">
 
-	<fa:define name="header">
-		<title>Registration</title>
-		<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css"/>
-	</fa:define>
-	<fa:define name="content">
-		<div class="ui-widget-content ui-corner-bottom ui-helper-clearfix ui-shadow">
-			<h1 class="title ui-widget-header ui-corner-all">Register Page</h1>
-			<p>* = Required Fields</p>
-
-
-
-
-			<h:form>
-
-				<b:section id="registerSection"
-						   label="Registration form"
-						   badgeText="Rigister a user and test the Application."
-						   rendered="true">
+    <f:define name="header">
+        <title>Registration</title>
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css"/>
+    </f:define>
+    <f:define name="content">
+        <div class="ui-widget-content ui-corner-bottom ui-helper-clearfix ui-shadow">
+            <h1 class="title ui-widget-header ui-corner-all">Register Page</h1>
+            <p>* = Required Fields</p>
 
 
 
 
+            <b:section height="5" />
+            <h:form>
+                <pr:panel header="Registration form">
+                    <div style="height:50px">
+                        this is a creation by Armin M And Sebastian M for the course serverDevelopment KTH.
+                        Register a user and test the Application.
+                    </div>
+
+
+                </pr:panel>
+                <pr:panel header="Registration Panel">
 
 
 
-
-					<b:text id="usernameID"
-							label="enter your unique user name"
-							hideLabel="true"
-							value="#{userBean.userName}"
-							placeholder="UserName"
-							type="String"
-							pattern="null"
-							min="3"
-							max="null"
-							styleClass="null"
-							readonly="false"
-							required="true"
-							disabled="false"
-							autoFocus="true"
-							rendered="true">
-						<f:ajax event="keyup" execute="@this" render="output"/>
-						<b:tooltip>
-							enter your user Name
-						</b:tooltip>
-					</b:text>
-					<h:outputText id="usernameID" value="someBeanThingHear"/>
-					<b:section height="5" /><b:section height="5" /><b:section height="5" />
-
-					<b:text id="emailID"
-							label="email"
-							hideLabel="true"
-							value="#{userBean.email}"
-							placeholder="enter your private email"
-							type="String"
-							pattern="null"
-							min="3"
-							max="null"
-							styleClass="null"
-							readonly="false"
-							required="true"
-							disabled="false"
-							autoFocus="true"
-							rendered="true">
-						<f:ajax event="keyup" execute="@this" render="output"/>
-						<b:tooltip>
-							enter your user Name
-						</b:tooltip>
-					</b:text>
-					<h:outputText id="emailID" value="someBeanThingHear"/>
-					<b:section height="5" /><b:section height="5" /><b:section height="5" />
+                    <pr:panelGrid columns="3" cellpadding="7">
 
 
-					<b:secret id="passwordID"
-							  label="password"
-							  hideLabel="true"
-							  value="null"
-							  placeholder="enter password her"
-							  styleClass="null"
-							  readonly="false"
-							  required="true"
-							  disabled="false"
-							  autoFocus="false"
-							  rendered="true">
-						<f:validateLength minimum="3" maximum="245"/>
-						<b:tooltip>
-							minimum of 3 characters
-						</b:tooltip>
-					</b:secret>
-					<h:outputText id="passwordID" value="someBeanThingHear"/>
-					<b:section height="5" /><b:section height="5" /><b:section height="5" />
+                        <pr:outputLabel value="*UserName" style="font-weight:bold" />
+                        <pr:inputText id="UserName"
+                                      value="#{userBean.userName}"
+                                      required="true"
+                                      requiredMessage="UserName is required" >
+
+                        </pr:inputText>
+                        <h:message for="UserName" />
 
 
-					<b:section height="5" /><b:section height="5" /><b:section height="5" />
-					<b:section height="5" /><b:section height="5" /><b:section height="5" />
+                        <pr:spacer height="5" />
+                        <pr:separator />
+                        <pr:separator />
+
+                        <pr:outputLabel value="*Email" style="font-weight:bold"/>
+                        <pr:inputText id="email"
+                                      value="#{userBean.email}"
+                                      required="true"
+                                      requiredMessage="Email is required">
+                        </pr:inputText>
+                        <h:message for="email" />
+
+                        <pr:spacer height="5" />
+                        <pr:separator />
+                        <pr:separator />
 
 
-				</b:section>
+                        <h:outputLabel for="pwd1" value="Password 1: *" style="color:#ff3c42; font-weight:bold"/>
+                        <pr:password id="pwd1" value="#{userBean.password}"
+                                     match="pwd2" label="Password 1" required="true"
+                                     requiredMessage="Password is required"
+                                     validatorMessage="pass1 should match with Confirm Password"/>
+                        <div></div>
+                        <h:outputText for="pwd2" value="Password 2: *" style="font-weight:bold"/>
+                        <pr:password id="pwd2"
+                                     value="#{userBean.password}"
+                                     label="Password 2"
+                                     feedback="true" inline="true" required="true"
+                                     requiredMessage="Password is required"
+                                     validatorMessage="pass1 should match with Confirm Password"/>
+
+                    </pr:panelGrid>
+                </pr:panel>
+                <pr:commandButton id="submitButton2"
+                                  style="width: 20%; height: 10%"
+                                  value="Register"
+                                  action="#{registerBean.registerUser(userBean.userName, userBean.email, userBean.password)}" ajax="false" />
+
+                <pr:spacer height="5" />
+                <pr:separator />
+            </h:form>
+
+            <pr:panelGrid columns="3" cellpadding="2">
+                <a style="width:10%;height: 1%" href="#{request.contextPath}/register.xhtml?faces-redirect=true">inline link register.xhtml ajax</a>
+                <pr:spacer height="5" />
+                <pr:separator />
 
 
-				<b:commandLink id="Register"
-							   action=""
-							   value="click me"
-							   styleClass="btn btn-primary">
-					<f:ajax execute="@form" render="@form"/>
-					<b:defaultAction rendered="true"/>
-				</b:commandLink>
-
-                <b:commandLink id="RegisterID"
-                               value="Register"
-                               glyphicon="glyphicon glyphicon-thumbs-up glyphicon-lg"
-                               styleClass="btn btn-primary"
-                               ajaxDisableLinkOnRequest="true"
-                               ajaxShowWaitingDotsOnRequest="true"
-                               ajaxHideGlyphiconOnRequest="false"
-                               ajaxDisableRenderRegionsOnRequest="true"
-                               ajaxProcessingGlyphicon="fa fa-refresh fa-spin"
-                               action="#{registerBean.registerUser(userBean.userName, userBean.email, userBean.password)}"
-                               rendered="true">
-                    <f:ajax render="registerSection" />
-                </b:commandLink>
+                <pr:link  href="#{request.contextPath}/search.xhtml?faces-redirect=true">search.xhtml ajax</pr:link>
+                <pr:spacer height="5" />
+                <pr:separator />
 
 
-                <b:section height="5" />
-                <a href="#{request.contextPath}/getUserByEmail.xhtml?faces-redirect=true">Test The Application</a>
-                <b:section height="5" />
-                <a href="${pageContext.request.contextPath}/index.xhtml">login2</a>
-                <b:section height="5" />
-
-                <b:commandLink id="link1ID"
-                               value="Link Test To getUserByEmail.xhtml"
-                               glyphicon="glyphicon glyphicon-thumbs-up glyphicon-lg"
-                               styleClass="btn btn-primary"
-                               ajaxDisableLinkOnRequest="false"
-                               ajaxShowWaitingDotsOnRequest="false"
-                               ajaxHideGlyphiconOnRequest="false"
-                               ajaxDisableRenderRegionsOnRequest="false"
-                               ajaxProcessingGlyphicon="fa fa-refresh fa-spin"
-                               action="getUserByEmail.xhtml"
-                               rendered="true">
-                </b:commandLink>
-
-                <b:section height="5" />
-			</h:form>
-		</div>
-	</fa:define>
-</fa:composition>
+                <a href="${pageContext.request.contextPath}/getUserByEmail.xhtml">getUserByEmail.xhtml</a>
+            </pr:panelGrid>
+        </div>
+    </f:define>
+</f:composition>

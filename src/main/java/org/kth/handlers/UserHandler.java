@@ -57,9 +57,9 @@ public class UserHandler {
         userBean = JpaServerCaller.register(userBean);
         // handle the user hear
         if(userBean == null)
-            return "search";
+            return "index";
 
-        return "index";
+        return "search";
     }
 
     public static String testConnection(){
