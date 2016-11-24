@@ -8,7 +8,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import org.kth.beans.UserBean;
-import org.kth.pojos.UserPojo;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -22,22 +21,15 @@ import static org.kth.service.JpaServerCaller.JsonUtf8Media;
 
 class RegisterUserCaller {
 
-
-
-
     private static String baseUrlAddress;
-
     private static RegisterUserCaller registerUserCaller;
-
 
     RegisterUserCaller(String baseUrlAddressParam) {
         baseUrlAddress = baseUrlAddressParam;
     }
 
-
     static UserBean register(UserBean userBean) {
-
-        String url = baseUrlAddress + "/register";
+        String url = baseUrlAddress + "/social/register";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(JsonUtf8Media);

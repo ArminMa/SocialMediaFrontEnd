@@ -2,13 +2,17 @@ package org.kth.beans;
 
 
 import org.kth.handlers.UserHandler;
-import org.kth.pojos.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.kth.pojos.User.UserPojo;
+import org.kth.pojos.chatMessage.ChatMessagePojo;
+import org.kth.pojos.friendRequest.FriendRequestPojo;
+import org.kth.pojos.mailMessage.MailMessagePojo;
+import org.kth.pojos.post.PostPojo;
 
 @ManagedBean
 @SessionScoped
@@ -16,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserBean {
 
     private Long id;
-    private String userName;
+    private String username;
     private String email;
     private String password;
     private byte[] picture; // Todo implement this Armin. low prio
@@ -26,8 +30,8 @@ public class UserBean {
     private Collection<PostPojo> log = new ArrayList<>();
     private Collection<ChatMessagePojo> chatMessages = new ArrayList<>();
 
-    public UserBean(String userName, String email, String password) {
-        this.userName = userName;
+    public UserBean(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
     }
@@ -40,12 +44,12 @@ public class UserBean {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -114,19 +118,16 @@ public class UserBean {
 
     //constructor
     public UserBean() {
-        userName="enter username";
+        username ="enter username";
     }
 
     //controller methods
     public String doLogin() {
         System.out.println("found doLogin");
-        if(UserHandler.login(userName, password))
+        if(UserHandler.login(this))
             return "search";
 
         return "index";
-    }
-    public Collection getNames() {
-        return UserHandler.getUserNamesByName(userName);
     }
 
     public String getUserByEmail(String email){

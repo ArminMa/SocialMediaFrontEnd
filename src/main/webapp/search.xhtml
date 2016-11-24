@@ -3,18 +3,20 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <title>Search with ajax</title>
 </h:head>
 <h:body>
     <h:form>
-        <h:inputText size="20" value="#{userBean.userName}">
-            <f:ajax event="keyup" render="nameList"/>
-        </h:inputText>
-        <h:dataTable id="nameList" value="#{userBean.names}" var="name" border="1">
-            <h:column>#{name}</h:column>
-        </h:dataTable>
+    <h:inputText id="inputString" size="20"  value="#{searchForUsers.searchString}" />
+        <h:commandButton value="search">
+            <f:ajax execute="inputString" render="nameList"/>
+        </h:commandButton>
+        <ui:repeat id="nameList" value="#{searchForUsers.searchForUsersByName()}" var="matchingUsers" border="1">
+            <h1>#{matchingUsers.username}</h1>
+        </ui:repeat>
     </h:form>
 </h:body>
 </html>
