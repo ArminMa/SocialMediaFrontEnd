@@ -4,8 +4,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-import java.util.Arrays;
-import java.util.Map;
+
+import java.util.*;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +15,8 @@ import org.kth.util.gsonX.GsonX;
 import org.kth.beans.UserBean;
 import org.kth.pojos.TokenPojo;
 import org.kth.service.JpaServerCaller;
+import org.primefaces.json.JSONArray;
+import org.primefaces.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -26,8 +28,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Collection;
 
 public class UserHandler {
 	public static final Logger logger1 = LoggerFactory.getLogger( UserHandler.class );
@@ -67,10 +67,11 @@ public class UserHandler {
         }
     }
 
-    public static Collection getUserNamesByName(String name) {
+    public static List<UserBean> getUserNamesByName(String name) {
 	    if(name == null) return null;
 
 	    logger1.error("in getUsersByName");
+		logger1.error("search string = " + name);
 	    String url = baseUrlAddress + "/api/userSearch/" + name;
 	    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
@@ -100,19 +101,35 @@ public class UserHandler {
 	    OkHttpClient client = new OkHttpClient();
 
 	    Request request3 = new Request.Builder()
-			    .url("http://localhost:8081/api/userSearch/e")
+			    .url("http://localhost:8081/api/userSearch/" + name)
 			    .get()
-			    .addHeader("x-authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0Iiwic2NvcGVzIjpbIlJPTEVfTUVNQkVSIl0sImlzcyI6Imh0dHA6Ly9zb2NpYWxXYXIua3RoIiwiaWF0IjoxNDgwMDE5MDk3LCJleHAiOjE0ODEzMTUwOTd9.8FtX1HOhF5Bn-wLXZhuJo_CoDQBAhw9hEgeiuMF6Y2OJrNcvQhM6JgKs1MH-t3qE1Ukw8ebQ0Ze-Vne57CVoaA")
+			    .addHeader("x-authorization", "Bearer " + token)
 			    .addHeader("cache-control", "no-cache")
-			    .addHeader("postman-token", "b26a4ef7-4a7e-57d6-1bed-63f7ad990e15")
 			    .build();
 
 	    try {
 		    Response response = client.newCall(request3).execute();
 		    if(response.isSuccessful()){
-			    System.out.println("in http ok");
-			    logger1.error("response successfull");
-			    return (Collection<UserBean>)GsonX.gson.fromJson(response.body().toString(), Collection.class);
+				logger1.error("response successful");
+				logger1.error("before conversion of response");
+				UserBean[] users = GsonX.gson2.fromJson(response.body().string(), UserBean[].class);
+				logger1.error("after jsonobject");
+				logger1.error("after conversion");
+				if(users == null) {
+					logger1.error("users = null ...");
+				} else {
+					logger1.error("size :" + users.length);
+					if(users.length > 0) {
+						logger1.error("first user name = " + users[0]);
+					}
+				}
+
+			    for(UserBean user : users){
+					logger1.error("found a user");
+					logger1.error("name: " + user.getUsername());
+				}
+			    logger1.error("response successful");
+			    return Arrays.asList(users);
 		    }
 	    } catch (Exception ex){
 
