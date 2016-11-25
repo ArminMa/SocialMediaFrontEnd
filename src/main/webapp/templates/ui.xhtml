@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsf/core"
+      xmlns:f="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://butterfaces.org/components">
+
+<h:head>
+
+    <c:facet name="first">
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <title>Social WAR</title>
+    </c:facet>
+
+    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css"/>
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('.sidebar a').hover(function () {
+                $(this).toggleClass('ui-state-hover');
+            })
+        });
+    </script>
+
+</h:head>
+
+<c:view contentType="text/html">
+    <!-- Very Strange, The ui:insert seem incapable of inserting the f:metadata tags -->
+    <c:metadata>
+        <f:insert name="metadata"/>
+    </c:metadata>
+
+
+    <h:body>
+
+        <div id="header" class="ui-widget ui-widget-header ui-shadow">
+            <div id="logo">
+                <img src="#{request.contextPath}/images/touch/favICO.png" alt="Logo" width="70px" height="70px"/>
+            </div>
+
+            <div id="menu" class="ui-widget">
+                <ul id="main">
+
+
+                        <li><a href="#{request.contextPath}/user/index.xhtml">LogIn</a></li>
+                        <li><a href="#{request.contextPath}/user/index.xhtml">Home</a></li>
+                        <li><a href="#{request.contextPath}/user/sendmessage.xhtml">Send Private Message</a></li>
+                        <li><a href="#{request.contextPath}/user/inbox.xhtml">Private Messages</a></li>
+                        <li><a href="#{request.contextPath}/login.xhtml/form/login.xhtml">LoOut</a></li>
+
+                </ul>
+            </div>
+
+        </div>
+
+        <div id="page" class="ui-widget">
+
+            <div id="content">
+                <div class="post">
+                    <f:insert name="content">...</f:insert>
+                </div>
+            </div>
+
+            <div style="clear: both;">&nbsp;</div>
+        </div>
+
+    </h:body>
+</c:view>
+</HTML>

@@ -1,10 +1,10 @@
-package org.kth.pojos;
+package org.kth.pojos.chatMessage;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PostPojo {
+public class ChatMessagePojo {
+    private Long id;
 }
