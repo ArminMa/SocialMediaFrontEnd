@@ -70,7 +70,7 @@
 
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
-        <filter-class>org.kth.jsfPrime.filter.CharacterEncodingFilter</filter-class>
+        <filter-class>org.kth.util.jsfPrime.filter.CharacterEncodingFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>Character Encoding Filter</filter-name>
@@ -88,7 +88,7 @@
 
     <filter>
         <filter-name>Browser Stats Filter</filter-name>
-        <filter-class>org.kth.jsfPrime.filter.UserAgentListener</filter-class>
+        <filter-class>org.kth.util.jsfPrime.filter.UserAgentListener</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>Browser Stats Filter</filter-name>
