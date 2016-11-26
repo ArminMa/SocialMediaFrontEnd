@@ -1,4 +1,4 @@
-package org.kth.service;
+package org.kth.model.service;
 
 import java.nio.charset.Charset;
 import org.kth.beans.UserBean;

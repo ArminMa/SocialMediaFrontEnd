@@ -1,4 +1,4 @@
-package org.kth.pojos.role;
+package org.kth.model.pojos.role;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;

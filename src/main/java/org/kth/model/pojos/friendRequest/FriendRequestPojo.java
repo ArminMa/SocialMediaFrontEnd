@@ -1,4 +1,4 @@
-package org.kth.pojos.friendRequest;
+package org.kth.model.pojos.friendRequest;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.xml.bind.annotation.XmlRootElement;

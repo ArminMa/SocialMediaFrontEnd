@@ -3,21 +3,23 @@ package org.kth.beans;
 
 import org.kth.handlers.UserHandler;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.kth.pojos.User.UserPojo;
-import org.kth.pojos.chatMessage.ChatMessagePojo;
-import org.kth.pojos.friendRequest.FriendRequestPojo;
-import org.kth.pojos.mailMessage.MailMessagePojo;
-import org.kth.pojos.post.PostPojo;
+import org.kth.model.pojos.User.UserPojo;
+import org.kth.model.pojos.chatMessage.ChatMessagePojo;
+import org.kth.model.pojos.friendRequest.FriendRequestPojo;
+import org.kth.model.pojos.mailMessage.MailMessagePojo;
+import org.kth.model.pojos.post.PostPojo;
 
 @ManagedBean
 @SessionScoped
 @XmlRootElement
-public class UserBean {
+public class UserBean implements Serializable, Comparable<UserBean> {
 
     private Long id;
     private String username;
@@ -114,6 +116,23 @@ public class UserBean {
 
     public void setChatMessages(Collection<ChatMessagePojo> chatMessages) {
         this.chatMessages = chatMessages;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(picture);
+        return result;
+    }
+
+    @Override
+    public int compareTo(UserBean o) {
+        int thisObject= this.hashCode();
+        long anotherObject = o.hashCode();
+        return (thisObject<anotherObject ? -1 : (thisObject==anotherObject ? 0 : 1));
     }
 
     //constructor

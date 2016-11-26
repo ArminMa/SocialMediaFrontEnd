@@ -1,20 +1,29 @@
-package org.kth.pojos.User;
+package org.kth.model.pojos.User;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.TreeSet;
+import java.util.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+import org.kth.beans.UserBean;
+import org.kth.model.pojos.TokenPojo;
 import org.kth.util.gsonX.GsonX;
-import org.kth.pojos.chatMessage.ChatMessagePojo;
-import org.kth.pojos.friendRequest.FriendRequestPojo;
-import org.kth.pojos.mailMessage.MailMessagePojo;
-import org.kth.pojos.post.PostPojo;
-import org.kth.pojos.role.UserRolePojo;
+import org.kth.model.pojos.chatMessage.ChatMessagePojo;
+import org.kth.model.pojos.friendRequest.FriendRequestPojo;
+import org.kth.model.pojos.mailMessage.MailMessagePojo;
+import org.kth.model.pojos.post.PostPojo;
+import org.kth.model.pojos.role.UserRolePojo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 
 @XmlRootElement
@@ -22,6 +31,10 @@ import org.kth.pojos.role.UserRolePojo;
 @JsonInclude(JsonInclude.Include.NON_NULL )
 
 public class UserPojo  implements Serializable,Comparable<UserPojo>{
+    private static final String baseUrlAddress = "http://localhost:8081";
+    private static final Logger logger1 = LoggerFactory.getLogger( UserPojo.class );
+    private static final String nLin = System.lineSeparator();
+
     private Long id;
     private String username;
     private String email;
@@ -168,7 +181,7 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
 
     @Override
     public String toString() {
-        //to ensure that json wont send empty lists/arrays when using tostring set empty arrays to null
+        //to ensure that json wont send empty lists/arrays when using toString set empty arrays to null
         if(this.friendRequests != null && this.friendRequests.isEmpty()){
             friendRequests = null;
         }
@@ -207,11 +220,60 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
         if(this.chatMessages == null){
             this.chatMessages = new ArrayList<>();
         }
-
         if(this.authorities == null){
             this.authorities = new ArrayList<>();
         }
 
         return thisJsonString;
+    }
+
+    //Backend method calls
+
+    /**
+     * Queries backend with a rest call. Returns true if successful and false if unsuccessful.
+     * @param user Object containing the user credentials.
+     * @return true on success and false on failure.
+     */
+    public static TokenPojo login(UserBean user) {
+        String url = baseUrlAddress + "/api/auth/login";
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("X-Requested-With", "XMLHttpRequest");
+        headers.set("Content-Type", "application/json");
+        headers.set("Cache-Control", "no-cache");
+        HttpEntity<UserBean> entity = new HttpEntity<UserBean>(user, headers);
+        logger1.error("Entity : " + entity + nLin);
+        ResponseEntity<TokenPojo> response = restTemplate.postForEntity(url, entity, TokenPojo.class);
+        logger1.error("BEFORE IF " + nLin);
+        if (response.getStatusCode().equals(HttpStatus.OK)) {
+            logger1.error("after httpstatus ok!" + nLin);
+            TokenPojo token = (TokenPojo) GsonX.gson.fromJson(response.getBody().toString(), TokenPojo.class);
+            logger1.error("Token = " + token.getToken());
+            logger1.error("successfully added cookie");
+            return token;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Queries backend with a rest call. Returns null if response is empty.
+     * @param token the authorization token to be included in the header
+     * @param name The name to search for
+     * @return matching names
+     */
+    public static List<UserPojo> searchUsersByName(String token, String name) {
+        final String url = baseUrlAddress + "/api/userSearch/" + name;
+        try {
+            Client c = Client.create();
+            WebResource resource = c.resource(url);
+            UserPojo[] userArray = resource.header("x-authorization", "Bearer " + token).header("cache-control", "no-cache").get(UserPojo[].class);
+            List<UserPojo> users = Arrays.asList(userArray);
+            logger1.info("response successful");
+            return users;
+        } catch (Exception e) {
+            logger1.error("call unsuccessful : " + e.toString());
+            return null;
+        }
     }
 }

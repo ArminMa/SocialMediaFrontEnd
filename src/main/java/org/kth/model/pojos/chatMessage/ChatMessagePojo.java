@@ -1,4 +1,4 @@
-package org.kth.pojos.chatMessage;
+package org.kth.model.pojos.chatMessage;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.xml.bind.annotation.XmlRootElement;

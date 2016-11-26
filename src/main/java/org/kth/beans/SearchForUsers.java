@@ -1,20 +1,18 @@
 package org.kth.beans;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.html.HtmlDataTable;
-import javax.faces.component.html.HtmlPanelGroup;
 
 import org.kth.handlers.UserHandler;
+import org.kth.model.pojos.User.UserPojo;
 
 @ManagedBean
 @SessionScoped
 public class SearchForUsers {
 	private String searchString = "";
-	private List<UserBean> users =  new ArrayList<>();
+	private List<UserPojo> users =  new ArrayList<>();
 
 	public SearchForUsers() {
 	}
@@ -23,11 +21,11 @@ public class SearchForUsers {
 		return searchString;
 	}
 
-	public List<UserBean> getUsers() {
+	public List<UserPojo> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<UserBean> users) {
+	public void setUsers(List<UserPojo> users) {
 		this.users = users;
 	}
 
@@ -37,7 +35,7 @@ public class SearchForUsers {
 
 	public void searchForUsersByName(){
 		users.clear();
-		List<UserBean> newUsers = UserHandler.getUserNamesByName(searchString);
+		List<UserPojo> newUsers = UserHandler.getUserNamesByName(searchString);
 		if(newUsers != null) {
 			users.addAll(newUsers);
 		}

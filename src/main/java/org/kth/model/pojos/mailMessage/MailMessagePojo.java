@@ -1,11 +1,11 @@
-package org.kth.pojos.mailMessage;
+package org.kth.model.pojos.mailMessage;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.kth.pojos.User.UserPojo;
+import org.kth.model.pojos.User.UserPojo;
 import org.kth.util.gsonX.GsonX;
 
 @XmlRootElement

@@ -1,22 +1,13 @@
-package org.kth.service;
-
-import java.nio.charset.Charset;
-import java.security.PublicKey;
-import java.util.Date;
-import javax.crypto.SecretKey;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+package org.kth.model.service;
 
 import org.kth.beans.UserBean;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import static org.kth.service.JpaServerCaller.JsonUtf8Media;
+import static org.kth.model.service.JpaServerCaller.JsonUtf8Media;
 
 
 class RegisterUserCaller {
@@ -28,6 +19,11 @@ class RegisterUserCaller {
         baseUrlAddress = baseUrlAddressParam;
     }
 
+    /**
+     * Makes a restless call and Attempts to register the user.
+     * @param userBean Desired user info
+     * @return The created user if successful or null if unsuccessful
+     */
     static UserBean register(UserBean userBean) {
         String url = baseUrlAddress + "/social/register";
         RestTemplate restTemplate = new RestTemplate();
