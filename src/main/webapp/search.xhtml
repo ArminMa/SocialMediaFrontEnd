@@ -18,11 +18,11 @@
 
                 <h:panelGrid columns="4" cellpadding="5">
                     <h:outputLabel for="txt1" value="Text 1: *" />
-                    <p:inputText id="txt1" value="#{searchForUsers.searchstring}" required="true" label="search String">
+                    <p:inputText id="txt1" value="#{searchForUsers.searchString}" required="true" label="search String">
                         <f:validateLength minimum="1" />
                     </p:inputText>
                     <p:message for="txt1" />
-                    <h:outputText value="#{searchForUsers.searchstring}" />
+                    <h:outputText value="#{searchForUsers.searchString}" />
 
                     <h:outputLabel for="txt2" value="Text 2: *" />
                     <h:selectOneMenu id="txt2" value="#{searchForUsers.searchOption}" required="false" label="search Options">

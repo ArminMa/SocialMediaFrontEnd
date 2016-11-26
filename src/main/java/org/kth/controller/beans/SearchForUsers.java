@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 @SessionScoped
 public class SearchForUsers {
 	public static final Logger logger1 = LoggerFactory.getLogger( UserHandler.class );
-	private String searchstring = "";
+	private String searchString = "";
 	private List<UserPojo> users =  new ArrayList<>();
 	private String searchOption = "";
 	private List<UserPojo> userBeansList =  new ArrayList<>();
@@ -22,11 +22,11 @@ public class SearchForUsers {
 	public SearchForUsers() {
 	}
 
-	public String getSearchstring() {
-		return searchstring;
+	public String getSearchString() {
+		return searchString;
 	}
-	public void setSearchstring(String searchstring) {
-		this.searchstring = searchstring;
+	public void setSearchString(String searchString) {
+		this.searchString = searchString;
 	}
 
 	public List<UserPojo> getUsers() {
@@ -58,16 +58,15 @@ public class SearchForUsers {
 		userBeansList.clear();
 		logger1.info("after clear");
 		if(getSearchOption().equals("1UserName")){
-			List<UserPojo> newUsers = UserHandler.getUserNamesByName(searchstring);
+			List<UserPojo> newUsers = UserHandler.getUserNamesByName(searchString);
 			if(newUsers != null) {
 				userBeansList.addAll(newUsers);
 			}
 		}else if(getSearchOption().equals("2Email")){
-			UserPojo newUsers = UserHandler.getUserByEmail(searchstring);
+			UserPojo newUsers = UserHandler.getUserByEmail(searchString);
 			if(newUsers != null) {
 				userBeansList.add(newUsers);
 			}
 		}
 	}
-
 }
