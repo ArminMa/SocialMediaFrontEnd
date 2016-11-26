@@ -150,10 +150,6 @@ public class UserBean implements Serializable, Comparable<UserBean> {
     }
 
     public String getUserByEmail(String email){
-//        if("Hello  World".equals(UserHandler.testConnection())){
-//            return "search";
-//        }
-//        return "index";
         UserBean userBean = UserHandler.getUserByEmail(email);
         if(userBean.getEmail().equals(email))
             return "search";
