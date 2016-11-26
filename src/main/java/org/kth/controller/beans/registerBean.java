@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.kth.controller.handlers.UserHandler;
+import org.kth.model.pojo.UserPojo;
 
 
 @ManagedBean
@@ -11,28 +12,20 @@ import org.kth.controller.handlers.UserHandler;
 @XmlRootElement
 public class registerBean {
 
-    private UserBean userBean;
-    private String userName;
+    private UserPojo userBean;
+    private String username;
     private String email;
     private String password;
 
     public registerBean() {
     }
 
-    public UserBean getUserBean() {
-        return userBean;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserBean(UserBean userBean) {
-        this.userBean = userBean;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -52,7 +45,7 @@ public class registerBean {
     }
 
     public String registerUser(String userName , String email, String password) {
-        userBean = new UserBean(userName, email, password);
+        userBean = new UserPojo(userName, email, password);
 
         return UserHandler.registerNewUser(userBean);
     }

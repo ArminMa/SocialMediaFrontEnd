@@ -1,19 +1,15 @@
-package org.kth.util.jsfPrime.convert;
+package org.kth.controller.handlers;
 
-
-import java.util.Map;
-import java.util.UUID;
-import java.util.WeakHashMap;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-
-
+import java.util.Map;
+import java.util.UUID;
+import java.util.WeakHashMap;
 
 /**
- * Generic converter provided by primefaces
- *
+ * Created by Sebastian on 2016-11-26.
  */
 @FacesConverter(value = "entityConverter")
 public class EntityConverter implements Converter {

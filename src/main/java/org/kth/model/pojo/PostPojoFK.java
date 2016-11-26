@@ -1,4 +1,4 @@
-package org.kth.model;
+package org.kth.model.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.xml.bind.annotation.XmlRootElement;

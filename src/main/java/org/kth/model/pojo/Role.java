@@ -1,4 +1,4 @@
-package org.kth.model;
+package org.kth.model.pojo;
 
 
 public enum Role {

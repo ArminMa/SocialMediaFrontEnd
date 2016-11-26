@@ -17,12 +17,12 @@
 
             <h:form>
                 User name:
-                <h:inputText id="in" value="#{userBean.username}">
+                <h:inputText id="in" value="#{loginBean.userPojo.username}">
                 </h:inputText>
                 <br/>
-                Password:<h:inputSecret value="#{userBean.password}"/><br/>
+                Password:<h:inputSecret value="#{loginBean.userPojo.password}"/><br/>
                 <h:commandButton id="knapp" value="Login"
-                                 action="#{userBean.doLogin}"/>
+                                 action="#{loginBean.doLogin()}"/>
             </h:form>
 
             <pr:spacer height="5" />

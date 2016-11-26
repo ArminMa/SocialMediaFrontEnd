@@ -27,13 +27,11 @@
                     <pr:panelGrid columns="3" cellpadding="7">
                         <pr:outputLabel value="*UserName" style="font-weight:bold" />
                         <pr:inputText id="UserName"
-                                      value="#{userBean.username}"
+                                      value="#{registerBean.username}"
                                       required="true"
                                       requiredMessage="UserName is required" >
-
                         </pr:inputText>
                         <h:message for="UserName" />
-
 
                         <pr:spacer height="5" />
                         <pr:separator />
@@ -41,47 +39,42 @@
 
                         <pr:outputLabel value="*Email" style="font-weight:bold"/>
                         <pr:inputText id="email"
-                                      value="#{userBean.email}"
+                                      value="#{registerBean.email}"
                                       required="true"
                                       requiredMessage="Email is required">
                         </pr:inputText>
                         <h:message for="email" />
-
                         <pr:spacer height="5" />
                         <pr:separator />
                         <pr:separator />
 
-
                         <h:outputLabel for="pwd1" value="Password 1: *" style="color:#ff3c42; font-weight:bold"/>
-                        <pr:password id="pwd1" value="#{userBean.password}"
+                        <pr:password id="pwd1" value="#{registerBean.password}"
                                      match="pwd2" label="Password 1" required="true"
                                      requiredMessage="Password is required"
                                      validatorMessage="pass1 should match with Confirm Password"/>
                         <div></div>
                         <h:outputText for="pwd2" value="Password 2: *" style="font-weight:bold"/>
                         <pr:password id="pwd2"
-                                     value="#{userBean.password}"
+                                     value="#{registerBean.password}"
                                      label="Password 2"
                                      feedback="true" inline="true" required="true"
                                      requiredMessage="Password is required"
                                      validatorMessage="pass1 should match with Confirm Password"/>
-
                     </pr:panelGrid>
                 </pr:panel>
                 <pr:commandButton id="submitButton2"
                                   style="width: 20%; height: 10%"
                                   value="Register"
-                                  action="#{registerBean.registerUser(userBean.username, userBean.email, userBean.password)}" ajax="false" />
-
+                                  action="#{registerBean.registerUser(registerBean.username, registerBean.email, registerBean.password)}" ajax="false" />
                 <pr:spacer height="5" />
                 <pr:separator />
             </h:form>
 
             <pr:panelGrid columns="3" cellpadding="3">
-                <a style="width:10%;height: 1%" href="#{request.contextPath}/register.xhtml?faces-redirect=true">inline link register.xhtml ajax</a>
+                <a style="width:10%;height: 1%" href="#{request.contextPath}/register.xhtml?faces-redirect=true">register</a>
                 <pr:spacer height="5" />
                 <pr:separator />
-
 
                 <pr:link  href="#{request.contextPath}/search.xhtml?faces-redirect=true">search.xhtml ajax</pr:link>
                 <pr:spacer height="5" />
