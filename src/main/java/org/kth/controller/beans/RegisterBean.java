@@ -10,14 +10,14 @@ import org.kth.model.pojo.UserPojo;
 @ManagedBean
 @ViewScoped
 @XmlRootElement
-public class registerBean {
+public class RegisterBean {
 
     private UserPojo userBean;
     private String username;
     private String email;
     private String password;
 
-    public registerBean() {
+    public RegisterBean() {
     }
 
     public String getUsername() {

@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 public class SearchForUsers {
 	public static final Logger logger1 = LoggerFactory.getLogger( UserHandler.class );
 	private String searchString = "";
-	private List<UserPojo> users =  new ArrayList<>();
 	private String searchOption = "";
+	private List<UserPojo> users =  new ArrayList<>();
 	private List<UserPojo> userBeansList =  new ArrayList<>();
 
 	public SearchForUsers() {
