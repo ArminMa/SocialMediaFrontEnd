@@ -15,6 +15,7 @@ import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -132,7 +133,7 @@ public interface BackendCaller {
             logger1.info("ClientResponse.Status.CREATED.getStatusCode() == 201");
         }
         if (response.getStatus() != 201) {
-            logger1.error("Failed : HTTP error code : " + response.getStatus());
+            logger1.error("sendPost.Failed : HTTP error code : " + response.getStatus());
             return false;
         }
         return true;
@@ -149,7 +150,7 @@ public interface BackendCaller {
                     .header("cache-control", "no-cache")
                     .post(ClientResponse.class, mailMessagePojo.toString());
             if (response.getStatus() != ClientResponse.Status.CREATED.getStatusCode()) {
-                logger1.error("Failed : HTTP error code : " + response.getStatus());
+                logger1.error("sendMail.Failed : HTTP error code : " + response.getStatus());
                 return false;
             }
             return true;
@@ -171,8 +172,41 @@ public interface BackendCaller {
                     .get(MailMessagePojo[].class);
             return Arrays.asList(messages);
         }  catch (UniformInterfaceException e){
-            logger1.error("Failed");
+            logger1.error("getPersonalMessages.Failed: " + e.toString());
             return null;
+        }
+    }
+
+    static List<PostPojo> getLog(String token, String userName) {
+        String url = baseUrlAddress + "/api/getPostsByUserName/" + userName;
+        logger1.info("username = " + userName);
+        Client c = Client.create();
+        WebResource resource = c.resource(url);
+        try {
+            PostPojo[] postPojos = resource
+                    .header("x-authorization", "Bearer " + token)
+                    .header("cache-control", "no-cache")
+                    .get(PostPojo[].class);
+            return Arrays.asList(postPojos);
+        }  catch (UniformInterfaceException e){
+            logger1.error("getLog.Failed: " + e.toString());
+            return null;
+        }
+    }
+
+    static void deletePost(String token, PostPojo post) {
+        logger1.info("delete Message");
+        String url = baseUrlAddress + "/api/deleteLogMessage";
+        Client c = Client.create();
+        WebResource resource = c.resource(url);
+        ClientResponse response = null;
+        try {
+            response = resource
+                    .header("x-authorization", "Bearer " + token)
+                    .header("cache-control", "no-cache")
+                    .post(ClientResponse.class, post);
+        }  catch (UniformInterfaceException e){
+            logger1.error("Failed deleteing message: " + e.toString());
         }
     }
 }

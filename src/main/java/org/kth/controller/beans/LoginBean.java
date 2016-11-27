@@ -1,5 +1,6 @@
 package org.kth.controller.beans;
 
+import org.kth.controller.handlers.CookieManager;
 import org.kth.controller.handlers.UserHandler;
 import org.kth.model.pojo.UserPojo;
 
@@ -32,8 +33,8 @@ public class LoginBean implements Serializable {
         if (userPojo != null){
             if(userPojo.getUsername() != null && userPojo.getPassword() != null ){
                 if(loginOK = UserHandler.login(userPojo))
-                    System.out.println("loginOK " +loginOK);
-                return "search";
+                    CookieManager.addUserName(userPojo.getUsername());
+                return "viewPersonalMessages";
             }
         }
 

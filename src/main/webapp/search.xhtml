@@ -60,7 +60,14 @@
                 <p:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId">
                     <f:ajax event="keyup" execute="messageInputId" />
                 </p:inputTextarea>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="#{searchForUsers.resultPost}" />
+                    </p:column>
+                </p:row>
             </h:panelGrid>
+
+
         </h:form>
     </ui:define>
 </ui:composition>

@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.kth.model.backendCaller.BackendCaller;
 import org.kth.model.pojo.MailMessagePojo;
+import org.kth.model.pojo.PostPojo;
 import org.kth.model.pojo.TokenPojo;
 import org.kth.model.pojo.UserPojo;
 import org.slf4j.Logger;
@@ -64,7 +65,7 @@ public class UserHandler {
 		return BackendCaller.searchUsersByEmail(email);
 	}
 
-	public static String sendPostMessage(MailMessagePojo mailMessagePojo) {
+	public static String sendMailMessage(MailMessagePojo mailMessagePojo) {
 		String token = null;
 		//Get token from cookie
 		try {
@@ -79,6 +80,20 @@ public class UserHandler {
 		return "Message could not be sent. Try again later";
 	}
 
+	public static String sendMailMessage(PostPojo postPojo) {
+		String token = null;
+		//Get token from cookie
+		try {
+			token = CookieManager.getToken();
+		} catch (CookieNotFoundException e){
+			return "Message could not be sent";
+		}
+
+		if(BackendCaller.sendPost(token, postPojo)){
+			return "successfully posted content: " + postPojo.getPostedDate();
+		}
+		return "Message could not be sent. Try again later";
+	}
 
 	public static List<MailMessagePojo> getPersonalMessages() {
 		String token = null;
@@ -89,5 +104,39 @@ public class UserHandler {
 		}
 
 		return BackendCaller.getPersonalMessages(token);
+	}
+
+	public static List<PostPojo> getLog(String userName){
+		String token = null;
+		try {
+			token = CookieManager.getToken();
+		} catch (CookieNotFoundException e){
+			return null;
+		}
+
+		return BackendCaller.getLog(token, userName);
+	}
+
+	public static List<PostPojo> getPersonalLog(){
+		logger1.info("in getPersonalLog");
+		String token = null;
+		String userName = null;
+		try {
+			token = CookieManager.getToken();
+			userName = CookieManager.getUserName();
+			return BackendCaller.getLog(token, userName);
+		} catch (CookieNotFoundException e){
+			return null;
+		}
+	}
+
+	public static void deletePost(PostPojo post) {
+		String token = null;
+		try {
+			token = CookieManager.getToken();
+			BackendCaller.deletePost(token, post);
+		} catch (CookieNotFoundException e){
+			logger1.error("Cookie not found when deleting post");
+		}
 	}
 }

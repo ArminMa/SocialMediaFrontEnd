@@ -13,7 +13,7 @@
     <ui:define name="content">
         <h:form>
             <p:remoteCommand name="onload" action="#{viewPersonalMessages.getPersonalMessages}" autoRun="true" />
-            <p:dataTable id = "messageTavleId" var="message" value="#{viewPersonalMessages.messages}">
+            <p:dataTable id ="messageTableId" var="message" value="#{viewPersonalMessages.messages}">
                 <p:column headerText="Topic">
                     <h:outputText value="#{message.topic}" />
                 </p:column>
@@ -40,6 +40,11 @@
                 <p:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId">
                     <f:ajax event="keyup" execute="messageInputId" />
                 </p:inputTextarea>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="#{searchForUsers.resultPost}" />
+                    </p:column>
+                </p:row>
             </h:panelGrid>
         </h:form>
     </ui:define>

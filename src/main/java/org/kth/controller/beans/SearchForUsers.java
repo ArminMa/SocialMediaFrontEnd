@@ -24,7 +24,6 @@ public class SearchForUsers {
 	private String topic = "";
 	private String resultPost = "";
 
-
 	public SearchForUsers() {
 	}
 
@@ -117,6 +116,6 @@ public class SearchForUsers {
 		logger1.info("message value = " + message);
 		logger1.info("receiver id = " + user.getId());
 		logger1.info("topic = " + topic);
-		resultPost = UserHandler.sendPostMessage(new MailMessagePojo(message, topic, user));
+		resultPost = UserHandler.sendMailMessage(new MailMessagePojo(message, topic, user));
 	}
 }
