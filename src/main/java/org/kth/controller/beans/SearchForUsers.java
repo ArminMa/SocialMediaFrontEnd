@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import org.kth.controller.handlers.UserHandler;
+import org.kth.model.pojo.MailMessagePojo;
 import org.kth.model.pojo.UserPojo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +16,14 @@ import org.slf4j.LoggerFactory;
 public class SearchForUsers {
 	public static final Logger logger1 = LoggerFactory.getLogger( UserHandler.class );
 	private String searchString = "";
-	private List<UserPojo> users =  new ArrayList<>();
 	private String searchOption = "";
+	private List<UserPojo> users =  new ArrayList<>();
 	private List<UserPojo> userBeansList =  new ArrayList<>();
+	private MailMessagePojo messagePojo;
+	private String message = "";
+	private String topic = "";
+	private String resultPost = "";
+
 
 	public SearchForUsers() {
 	}
@@ -53,6 +59,38 @@ public class SearchForUsers {
 		this.userBeansList = userBeansList;
 	}
 
+	public MailMessagePojo getMessagePojo() {
+		return messagePojo;
+	}
+
+	public void setMessagePojo(MailMessagePojo messagePojo) {
+		this.messagePojo = messagePojo;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+
+	public String getResultPost() {
+		return resultPost;
+	}
+
+	public void setResultPost(String resultPost) {
+		this.resultPost = resultPost;
+	}
+
 	public void searchForUsers(){
 		logger1.info("inside searchForUsers");
 		userBeansList.clear();
@@ -68,5 +106,14 @@ public class SearchForUsers {
 				userBeansList.add(newUsers);
 			}
 		}
+	}
+
+	public void sendMessage(UserPojo user){
+		if(user == null || message == "" || topic == ""){
+			resultPost = "Message cannot be sent. Require a receiver a message and a topic";
+		}
+		logger1.info("message value = " + message);
+		logger1.info("topic = " + topic);
+		resultPost = UserHandler.sendPostMessage(new MailMessagePojo(message, topic, user));
 	}
 }

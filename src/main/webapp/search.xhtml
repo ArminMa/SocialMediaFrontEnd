@@ -18,7 +18,7 @@
 
                 <h:panelGrid columns="4" cellpadding="5">
                     <h:outputLabel for="txt1" value="Text 1: *" />
-                    <p:inputText id="txt1" value="#{searchForUsers.searchString}" required="true" label="search String">
+                    <p:inputText id="txt1" value="#{searchForUsers.searchString}" label="search String">
                         <f:validateLength minimum="1" />
                     </p:inputText>
                     <p:message for="txt1" />
@@ -35,21 +35,31 @@
                 </h:panelGrid>
             </p:panel>
 
-            <p:dataTable id = "userTableID" var="userBeansList" value="#{searchForUsers.userBeansList}">
+            <p:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
                 <p:column headerText="username">
-                    <h:outputText value="#{userBeansList.username}" />
+                    <h:outputText value="#{user.username}" />
                 </p:column>
                 <p:column headerText="email">
-                    <h:outputText value="#{userBeansList.email}" />
+                    <h:outputText value="#{user.email}" />
+                </p:column>
+                <p:column>
+                    <p:commandButton process="@parent:@parent" update="@form" value="Send too" action="#{searchForUsers.sendMessage(user)}" />
                 </p:column>
             </p:dataTable>
 
             <h:panelGrid columns="2">
                 <p:commandButton process="@parent:@parent" update="@form" value="Search" action="#{searchForUsers.searchForUsers()}" />
+            </h:panelGrid>
 
-                <!--<p:commandButton process="@parent:" update="@form" value="Process: @parent: (Form)" action="#{searchForUsers.searchForUsers()}" />-->
-                <!--<p:commandButton process="@form:userTableID" update="@form" value="Process: @form:userTableID" action="#{searchForUsers.searchForUsers()}" />-->
-                <!--<p:commandButton process="@form:@child(1):userTableID" update="@form:userTableID" value="Process: @form:@child(1):userTableID" action="#{searchForUsers.searchForUsers()}" />-->
+            <h:panelGrid columns="4" cellpadding="5">
+                <h3>Topic</h3>
+                <p:inputTextarea rows="6" cols="33" value="#{searchForUsers.topic}" id="topicInputId">
+                    <f:ajax event="keyup" execute="topicInputId" />
+                </p:inputTextarea>
+                <h3>Message</h3>
+                <p:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId">
+                    <f:ajax event="keyup" execute="messageInputId" />
+                </p:inputTextarea>
             </h:panelGrid>
         </h:form>
     </ui:define>

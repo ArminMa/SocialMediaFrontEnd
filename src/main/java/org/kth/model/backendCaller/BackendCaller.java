@@ -1,7 +1,10 @@
 package org.kth.model.backendCaller;
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import org.kth.model.pojo.MailMessagePojo;
+import org.kth.model.pojo.PostPojo;
 import org.kth.model.pojo.TokenPojo;
 import org.kth.model.pojo.UserPojo;
 import org.kth.util.gsonX.GsonX;
@@ -113,5 +116,45 @@ public interface BackendCaller {
         WebResource resource = c.resource(url);
         UserPojo user = resource.get(UserPojo.class);
         return user;
+    }
+
+    static boolean sendPost(String token, PostPojo postPojo) {
+        String url = baseUrlAddress + "/api/sendPost";
+//        String input = "{\"singer\":\"Metallica\",\"title\":\"Fade To Black\"}";
+        Client c = Client.create();
+        WebResource resource = c.resource(url);
+        ClientResponse response = resource.type("application/json")
+                .header("x-authorization", "Bearer " + token)
+                .header("cache-control", "no-cache")
+                .post(ClientResponse.class, postPojo.toString());
+
+        if(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode()){
+            logger1.info("ClientResponse.Status.CREATED.getStatusCode() == 201");
+        }
+        if (response.getStatus() != 201) {
+            logger1.error("Failed : HTTP error code : " + response.getStatus());
+            return false;
+        }
+        return true;
+    }
+
+    static boolean sendMail(String token, MailMessagePojo mailMessagePojo) {
+        String url = baseUrlAddress + "/api/sendMail";
+//        String input = "{\"singer\":\"Metallica\",\"title\":\"Fade To Black\"}";
+        Client c = Client.create();
+        WebResource resource = c.resource(url);
+        ClientResponse response = resource.type("application/json")
+                .header("x-authorization", "Bearer " + token)
+                .header("cache-control", "no-cache")
+                .post(ClientResponse.class, mailMessagePojo.toString());
+
+        if(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode()){
+            logger1.info("ClientResponse.Status.CREATED.getStatusCode() == 201");
+        }
+        if (response.getStatus() != 201) {
+            logger1.error("Failed : HTTP error code : " + response.getStatus());
+            return false;
+        }
+        return true;
     }
 }

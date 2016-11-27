@@ -21,11 +21,11 @@ public class MailMessagePojo implements Serializable,Comparable<MailMessagePojo>
         this.pk = new MailMessageFKPojo();
     }
 
-    public MailMessagePojo(String messageContent, String topic, UserPojo sender, UserPojo receiver) {
+    public MailMessagePojo(String messageContent, String topic, UserPojo receiver) {
         this.messageContent = messageContent;
         this.topic = topic;
         this.sentDate = new Date(/*System.currentTimeMillis()*/);
-        this.pk = new MailMessageFKPojo(sender, receiver);
+        this.pk = new MailMessageFKPojo(null, receiver);
     }
 
     public Long getId() {
