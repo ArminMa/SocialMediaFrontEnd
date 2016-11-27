@@ -37,6 +37,8 @@
                 timestamp="true"/>
     </Host>
 
+    <Resources cachingAllowed="true" cacheMaxSize="100000" />
+
     <!-- Uncomment this to disable session persistence across Tomcat restarts -->
     <!--
     <Manager pathname="" />

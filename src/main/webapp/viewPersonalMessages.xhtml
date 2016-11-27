@@ -1,0 +1,46 @@
+<ui:composition template="/templates/ui.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="header">
+        <title>Registration</title>
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:remoteCommand name="onload" action="#{viewPersonalMessages.getPersonalMessages}" autoRun="true" />
+            <p:dataTable id = "messageTavleId" var="message" value="#{viewPersonalMessages.messages}">
+                <p:column headerText="Topic">
+                    <h:outputText value="#{message.topic}" />
+                </p:column>
+                <p:column headerText="Message">
+                    <h:outputText value="#{message.messageContent}" />
+                </p:column>
+                <p:column headerText="Sender">
+                    <h:outputText value="#{message.sender.username}" />
+                </p:column>
+                <p:column headerText="Sent date">
+                    <h:outputText value="#{message.sentDate}" />
+                </p:column>
+                <p:column>
+                    <p:commandButton process="@parent:@parent" update="@form" value="Respond" action="#{searchForUsers.sendMessage(message.sender)}" />
+                </p:column>
+            </p:dataTable>
+
+            <h:panelGrid columns="4" cellpadding="5">
+                <h3>Topic</h3>
+                <p:inputTextarea rows="6" cols="33" value="#{searchForUsers.topic}" id="topicInputId">
+                    <f:ajax event="keyup" execute="topicInputId" />
+                </p:inputTextarea>
+                <h3>Message</h3>
+                <p:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId">
+                    <f:ajax event="keyup" execute="messageInputId" />
+                </p:inputTextarea>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

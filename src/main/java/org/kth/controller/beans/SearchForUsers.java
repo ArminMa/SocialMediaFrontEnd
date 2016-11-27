@@ -112,7 +112,10 @@ public class SearchForUsers {
 		if(user == null || message == "" || topic == ""){
 			resultPost = "Message cannot be sent. Require a receiver a message and a topic";
 		}
+
+		logger1.info("receiver name = " + user.getUsername());
 		logger1.info("message value = " + message);
+		logger1.info("receiver id = " + user.getId());
 		logger1.info("topic = " + topic);
 		resultPost = UserHandler.sendPostMessage(new MailMessagePojo(message, topic, user));
 	}

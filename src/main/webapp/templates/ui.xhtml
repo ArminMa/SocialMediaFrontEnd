@@ -3,7 +3,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsf/core"
       xmlns:f="http://java.sun.com/jsf/facelets"
-      xmlns:b="http://butterfaces.org/components">
+      xmlns:b="http://butterfaces.org/components"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 
@@ -41,13 +42,18 @@
 
             <div id="menu" class="ui-widget">
                 <ul id="main">
+                        <li><a href="#{request.contextPath}/index.xhtml">LogIn</a></li>
+                        <li><a href="#{request.contextPath}/index.xhtml">Home</a></li>
+                        <li><a href="#{request.contextPath}/search.xhtml">Send Private Message</a></li>
+                        <li><a href="#{request.contextPath}/viewPersonalMessages.xhtml">Private Messages</a></li>
 
-
-                        <li><a href="#{request.contextPath}/user/index.xhtml">LogIn</a></li>
-                        <li><a href="#{request.contextPath}/user/index.xhtml">Home</a></li>
-                        <li><a href="#{request.contextPath}/user/sendmessage.xhtml">Send Private Message</a></li>
-                        <li><a href="#{request.contextPath}/user/inbox.xhtml">Private Messages</a></li>
-                        <li><a href="#{request.contextPath}/login.xhtml/form/login.xhtml">LoOut</a></li>
+                    <li>
+                        <a href="#{request.contextPath}/login.xhtml">
+                            <h:form>
+                                <p:commandButton value="Logout" action="#{menuBean.logout()}"/>
+                            </h:form>
+                        </a>
+                    </li>
 
                 </ul>
             </div>
