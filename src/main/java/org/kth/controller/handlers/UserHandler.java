@@ -78,4 +78,16 @@ public class UserHandler {
 		}
 		return "Message could not be sent. Try again later";
 	}
+
+
+	public static List<MailMessagePojo> getPersonalMessages() {
+		String token = null;
+		try {
+			token = CookieManager.getToken();
+		} catch (CookieNotFoundException e){
+			return null;
+		}
+
+		return BackendCaller.getPersonalMessages(token);
+	}
 }

@@ -2,6 +2,7 @@ package org.kth.model.backendCaller;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import org.kth.model.pojo.MailMessagePojo;
 import org.kth.model.pojo.PostPojo;
@@ -120,7 +121,6 @@ public interface BackendCaller {
 
     static boolean sendPost(String token, PostPojo postPojo) {
         String url = baseUrlAddress + "/api/sendPost";
-//        String input = "{\"singer\":\"Metallica\",\"title\":\"Fade To Black\"}";
         Client c = Client.create();
         WebResource resource = c.resource(url);
         ClientResponse response = resource.type("application/json")
@@ -140,21 +140,39 @@ public interface BackendCaller {
 
     static boolean sendMail(String token, MailMessagePojo mailMessagePojo) {
         String url = baseUrlAddress + "/api/sendMail";
-//        String input = "{\"singer\":\"Metallica\",\"title\":\"Fade To Black\"}";
         Client c = Client.create();
         WebResource resource = c.resource(url);
-        ClientResponse response = resource.type("application/json")
-                .header("x-authorization", "Bearer " + token)
-                .header("cache-control", "no-cache")
-                .post(ClientResponse.class, mailMessagePojo.toString());
-
-        if(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode()){
-            logger1.info("ClientResponse.Status.CREATED.getStatusCode() == 201");
-        }
-        if (response.getStatus() != 201) {
+        ClientResponse response = null;
+        try {
+            response = resource.type("application/json")
+                    .header("x-authorization", "Bearer " + token)
+                    .header("cache-control", "no-cache")
+                    .post(ClientResponse.class, mailMessagePojo.toString());
+            if (response.getStatus() != ClientResponse.Status.CREATED.getStatusCode()) {
+                logger1.error("Failed : HTTP error code : " + response.getStatus());
+                return false;
+            }
+            return true;
+        } catch (UniformInterfaceException e){
             logger1.error("Failed : HTTP error code : " + response.getStatus());
             return false;
         }
-        return true;
+    }
+
+    static List<MailMessagePojo> getPersonalMessages(String token) {
+        logger1.info("in getPersonalMessages");
+        String url = baseUrlAddress + "/api/getMyMails";
+        Client c = Client.create();
+        WebResource resource = c.resource(url);
+        try {
+            MailMessagePojo[] messages = resource
+                    .header("x-authorization", "Bearer " + token)
+                    .header("cache-control", "no-cache")
+                    .get(MailMessagePojo[].class);
+            return Arrays.asList(messages);
+        }  catch (UniformInterfaceException e){
+            logger1.error("Failed");
+            return null;
+        }
     }
 }
