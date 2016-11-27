@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.kth.util.gsonX.GsonX;
 
+
 @XmlRootElement
 @JsonInclude(JsonInclude.Include.NON_NULL )
 public class TokenPojo implements Serializable,Comparable<TokenPojo>{
@@ -13,6 +14,11 @@ public class TokenPojo implements Serializable,Comparable<TokenPojo>{
 	private String refreshToken;
 
 	public TokenPojo() {
+	}
+
+	public TokenPojo(String token, String refreshToken) {
+		this.token = token;
+		this.refreshToken = refreshToken;
 	}
 
 	public String getToken() {

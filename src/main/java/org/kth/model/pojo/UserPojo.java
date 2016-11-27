@@ -2,14 +2,14 @@ package org.kth.model.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.TreeSet;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.kth.util.gsonX.GsonX;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 @XmlRootElement
@@ -17,15 +17,12 @@ import org.slf4j.LoggerFactory;
 @JsonInclude(JsonInclude.Include.NON_NULL )
 
 public class UserPojo  implements Serializable,Comparable<UserPojo>{
-    private static final String baseUrlAddress = "http://localhost:8081";
-    private static final Logger logger1 = LoggerFactory.getLogger( UserPojo.class );
-    private static final String nLin = System.lineSeparator();
-
     private Long id;
     private String username;
     private String email;
     private String password;
-    private byte[] picture; // Todo implement this Armin. low prio
+    private TokenPojo token;
+    private Byte[] picture; // Todo implement this Armin. low prio
     @JsonInclude(JsonInclude.Include.NON_EMPTY )
     private Collection<FriendRequestPojo> friendRequests = new ArrayList<>();
     @JsonInclude(JsonInclude.Include.NON_EMPTY )
@@ -38,6 +35,8 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
     private Collection<ChatMessagePojo> chatMessages = new ArrayList<>();
     @JsonInclude(JsonInclude.Include.NON_EMPTY )
     private Collection<UserRolePojo> authorities = new TreeSet<>();
+
+
 
     public UserPojo() {}
 
@@ -53,6 +52,14 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public TokenPojo getToken() {
+        return token;
+    }
+
+    public void setToken(TokenPojo token) {
+        this.token = token;
     }
 
     public String getUsername() {
@@ -79,11 +86,11 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
         this.password = password;
     }
 
-    public byte[] getPicture() {
+    public Byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(byte[] picture) {
+    public void setPicture(Byte[] picture) {
         this.picture = picture;
     }
 
@@ -167,7 +174,7 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
 
     @Override
     public String toString() {
-        //to ensure that json wont send empty lists/arrays when using toString set empty arrays to null
+        //to ensure that json wont send empty lists/arrays when using tostring set empty arrays to null
         if(this.friendRequests != null && this.friendRequests.isEmpty()){
             friendRequests = null;
         }
@@ -206,6 +213,7 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
         if(this.chatMessages == null){
             this.chatMessages = new ArrayList<>();
         }
+
         if(this.authorities == null){
             this.authorities = new ArrayList<>();
         }

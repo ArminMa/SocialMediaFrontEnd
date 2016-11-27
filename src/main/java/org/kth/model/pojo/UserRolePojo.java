@@ -8,7 +8,7 @@ import org.kth.util.gsonX.GsonX;
 
 @XmlRootElement
 @JsonInclude(JsonInclude.Include.NON_NULL )
-public class UserRolePojo  implements Serializable, Comparable<UserRolePojo> {
+public class UserRolePojo implements Serializable, Comparable<UserRolePojo>{
 	private Long id;
 	private Boolean isLocked = false;
 	private RolesPojo authority;
