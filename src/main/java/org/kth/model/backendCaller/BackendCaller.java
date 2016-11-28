@@ -195,18 +195,32 @@ public interface BackendCaller {
     }
 
     static void deletePost(String token, PostPojo post) {
-        logger1.info("delete Message");
+        logger1.info(nLin + nLin +" ----------------------- BackendCaller.deletePost ----------------------- " + nLin);
+		logger1.info("BackendCaller.deletePost: post.getPostContent() = "  + post.getPostContent());
+		logger1.info("Backendcaller.deletepost: id" + post.getId());
+		logger1.info("Backendcaller.deletepost: date" + post.getPostedDate());
+		logger1.info("Backendcaller.deletepost: tostring " + post.toString());
+		logger1.info("Backendcaller.deletepost: sender tostring " + post.getSender().toString());
+		logger1.info("Backendcaller.deletepost: receiver tostring" + post.getReceiver().toString());
+
         String url = baseUrlAddress + "/api/deleteLogMessage";
         Client c = Client.create();
         WebResource resource = c.resource(url);
         ClientResponse response = null;
         try {
-            response = resource
+            response = resource.type("application/json")
                     .header("x-authorization", "Bearer " + token)
                     .header("cache-control", "no-cache")
                     .post(ClientResponse.class, post);
+            logger1.info("successfully posted with statuscode : " + response.getStatus());
         }  catch (UniformInterfaceException e){
-            logger1.error("Failed deleteing message: " + e.toString());
+            logger1.error("Failed deleting message: " + e.toString());
+            if(response != null ) {
+				logger1.info(nLin + "BackendCaller.deletePost: UniformInterfaceException response.getStatus()= "  + response.getStatus() + nLin);
+
+			}else{
+				logger1.info(nLin + "BackendCaller.deletePost: UniformInterfaceException response= null" + nLin);
+			}
         }
     }
 }
