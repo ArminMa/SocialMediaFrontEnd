@@ -118,7 +118,7 @@ public class UserHandler {
 	}
 
 	public static List<PostPojo> getPersonalLog(){
-		logger1.info("in getPersonalLog");
+		logger1.info("in getLog");
 		String token = null;
 		String userName = null;
 		try {

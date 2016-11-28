@@ -39,6 +39,7 @@ public class ViewPersonalLogBean {
 
     public void deletePost(PostPojo post){
         UserHandler.deletePost(post);
+        getPersonalPosts();
     }
 
     @PostConstruct

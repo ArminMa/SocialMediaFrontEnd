@@ -1,0 +1,64 @@
+<ui:composition template="/templates/ui.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="header">
+        <title>Registration</title>
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css"/>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form>
+            <p:panel id="panel" header="Search Form" style="margin-bottom:10px;">
+                <p:messages id="messages" />
+
+                <h:panelGrid columns="4" cellpadding="5">
+                    <h:outputLabel for="txt1" value="Text 1: *" />
+                    <p:inputText id="txt1" value="#{searchForUsers.searchString}" label="search String">
+                        <f:validateLength minimum="1" />
+                    </p:inputText>
+                    <p:message for="txt1" />
+                    <h:outputText value="#{searchForUsers.searchString}" />
+
+                    <h:outputLabel for="txt2" value="Text 2: *" />
+                    <h:selectOneMenu id="txt2" value="#{searchForUsers.searchOption}" required="false" label="search Options">
+                        <f:selectItem itemLabel="search By ?" itemValue="1UserName" noSelectionOption="true" />
+                        <f:selectItem itemLabel="search By UserName" itemValue="1UserName" />
+                        <f:selectItem itemLabel="search By Email" itemValue="2Email" />
+                    </h:selectOneMenu>
+                    <p:message for="@previous" />
+                    <h:outputText value="#{searchForUsers.searchOption}" />
+                </h:panelGrid>
+            </p:panel>
+
+            <p:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
+                <p:column headerText="username">
+                    <h:outputText value="#{user.username}" />
+                </p:column>
+                <p:column headerText="email">
+                    <h:outputText value="#{user.email}" />
+                </p:column>
+                <p:column>
+                    <p:commandButton process="@parent:@parent" update="@form" value="View Log" action="#{viewLogBean.getLog(user)}" />
+                </p:column>
+            </p:dataTable>
+
+            <h:panelGrid columns="2">
+                <p:commandButton process="@parent:@parent" update="@form" value="Search" action="#{searchForUsers.searchForUsers()}" />
+            </h:panelGrid>
+
+            <p:dataTable id ="messageTableId" var="posts" value="#{viewLogBean.posts}">
+                <p:column headerText="Post">
+                    <h:outputText value="#{posts.postContent}" />
+                </p:column>
+                <p:column headerText="Date">
+                    <h:outputText value="#{posts.postedDate}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
