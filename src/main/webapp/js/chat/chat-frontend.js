@@ -1,6 +1,7 @@
 $(function () {
     "use strict";
-
+    var token = "token";
+    var refreshToken = "refreshToken";
     // for better performance - to avoid searching in DOM
     var content = $('#content');
     var input = $('#input');
@@ -23,13 +24,30 @@ $(function () {
         return;
     }
 
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length,c.length);
+            }
+        }
+        return "";
+    }
+
     // open connection
     var connection = new WebSocket('ws://127.0.0.1:1337');
 
     connection.onopen = function () {
         // first we want users to enter their names
+        var userName = getCookie(token);
+        content.html($('<p>', { text: userName} ));
         input.removeAttr('disabled');
-        status.text('Choose name:');
+        status.text(userName);
     };
 
     connection.onerror = function (error) {

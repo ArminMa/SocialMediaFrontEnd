@@ -2,6 +2,7 @@ package org.kth.controller.handlers;
 
 import java.util.*;
 
+
 import org.kth.model.backendCaller.BackendCaller;
 import org.kth.model.pojo.MailMessagePojo;
 import org.kth.model.pojo.TokenPojo;
@@ -19,12 +20,16 @@ public class UserHandler {
 	 */
 	public static boolean login(UserPojo user) {
 		logger1.info(nLin+nLin+" ---------- UserHandler.authenticate debug start ----------\n" );
+
 		TokenPojo token = BackendCaller.login(user);
 		if(token == null){
 			return false;
 		}
+
 		CookieManager.addToken(token.getToken());
 		CookieManager.addRefreshToken(token.getRefreshToken());
+		user.setPassword(null);
+		user.setToken(token);
 		return true;
 	}
 

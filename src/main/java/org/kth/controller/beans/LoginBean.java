@@ -31,9 +31,11 @@ public class LoginBean implements Serializable {
         boolean loginOK = false;
         if (userPojo != null){
             if(userPojo.getUsername() != null && userPojo.getPassword() != null ){
-                if(loginOK = UserHandler.login(userPojo))
+                if(loginOK = UserHandler.login(userPojo)){
                     System.out.println("loginOK " +loginOK);
-                return "search";
+                    return "search";
+                }
+
             }
         }
 

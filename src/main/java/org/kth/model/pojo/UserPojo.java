@@ -15,7 +15,6 @@ import org.kth.util.gsonX.GsonX;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 @JsonInclude(JsonInclude.Include.NON_NULL )
-
 public class UserPojo  implements Serializable,Comparable<UserPojo>{
     private Long id;
     private String username;
@@ -23,19 +22,19 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
     private String password;
     private TokenPojo token;
     private Byte[] picture; // Todo implement this Armin. low prio
-    @JsonInclude(JsonInclude.Include.NON_EMPTY )
     private Collection<FriendRequestPojo> friendRequests = new ArrayList<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY )
     private Collection<MailMessagePojo> mailMessages = new ArrayList<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY )
     private Collection<UserPojo> friends = new ArrayList<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY )
     private Collection<PostPojo> log = new ArrayList<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY )
     private Collection<ChatMessagePojo> chatMessages = new ArrayList<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY )
     private Collection<UserRolePojo> authorities = new TreeSet<>();
+    private Collection<FriendRequestPojo> sentFriendRequests = new ArrayList<>();
 
+    private Collection<FriendRequestPojo> receivedFriendRequests = new ArrayList<>();
+
+    private Collection<UserFriendPojo> acceptedFriends = new ArrayList<>();
+
+    private Collection<UserFriendPojo> requestedFriends = new ArrayList<>();
 
 
     public UserPojo() {}
@@ -97,15 +96,41 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
     public Collection<FriendRequestPojo> getFriendRequests() {
         return friendRequests;
     }
-
     public void setFriendRequests(Collection<FriendRequestPojo> friendRequests) {
         this.friendRequests = friendRequests;
     }
 
-    public Collection<MailMessagePojo> getMailMessages() {
+	public Collection<FriendRequestPojo> getSentFriendRequests() {
+		return sentFriendRequests;
+	}
+	public void setSentFriendRequests(Collection<FriendRequestPojo> sentFriendRequests) {
+		this.sentFriendRequests = sentFriendRequests;
+	}
+
+	public Collection<FriendRequestPojo> getReceivedFriendRequests() {
+		return receivedFriendRequests;
+	}
+	public void setReceivedFriendRequests(Collection<FriendRequestPojo> receivedFriendRequests) {
+		this.receivedFriendRequests = receivedFriendRequests;
+	}
+
+	public Collection<UserFriendPojo> getAcceptedFriends() {
+		return acceptedFriends;
+	}
+	public void setAcceptedFriends(Collection<UserFriendPojo> acceptedFriends) {
+		this.acceptedFriends = acceptedFriends;
+	}
+
+	public Collection<UserFriendPojo> getRequestedFriends() {
+		return requestedFriends;
+	}
+	public void setRequestedFriends(Collection<UserFriendPojo> requestedFriends) {
+		this.requestedFriends = requestedFriends;
+	}
+
+	public Collection<MailMessagePojo> getMailMessages() {
         return mailMessages;
     }
-
     public void setMailMessages(Collection<MailMessagePojo> mailMessages) {
         this.mailMessages = mailMessages;
     }
@@ -113,7 +138,6 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
     public Collection<UserPojo> getFriends() {
         return friends;
     }
-
     public void setFriends(Collection<UserPojo> friends) {
         this.friends = friends;
     }
@@ -121,7 +145,6 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
     public Collection<PostPojo> getLog() {
         return log;
     }
-
     public void setLog(Collection<PostPojo> log) {
         this.log = log;
     }
@@ -129,7 +152,6 @@ public class UserPojo  implements Serializable,Comparable<UserPojo>{
     public Collection<ChatMessagePojo> getChatMessages() {
         return chatMessages;
     }
-
     public void setChatMessages(Collection<ChatMessagePojo> chatMessages) {
         this.chatMessages = chatMessages;
     }
