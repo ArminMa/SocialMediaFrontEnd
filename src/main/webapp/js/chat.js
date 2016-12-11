@@ -26,12 +26,6 @@ $(function () {
     // open connection
     var connection = new WebSocket('ws://127.0.0.1:1337');
 
-    connection.onopen = function () {
-        // first we want users to enter their names
-        input.removeAttr('disabled');
-        status.text('Choose name:');
-    };
-
     connection.onerror = function (error) {
         // just in there were some problems with conenction...
         content.html($('<p>', { text: 'Sorry, but there\'s some problem with your '
@@ -58,6 +52,8 @@ $(function () {
             input.removeAttr('disabled').focus();
             // from now user can start sending messages
         } else if (json.type === 'history') { // entire message history
+            var index = json.data.length -1 ;
+            var i = 0;
             // insert every single message to the chat window
             for (var i=0; i < json.data.length; i++) {
                 addMessage(json.data[i].author, json.data[i].text,

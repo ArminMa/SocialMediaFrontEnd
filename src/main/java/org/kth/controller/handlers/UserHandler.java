@@ -15,6 +15,7 @@ public class UserHandler {
 	public static final Logger logger1 = LoggerFactory.getLogger( UserHandler.class );
 	private static final String baseUrlAddress = "http://localhost:8081";
 	public static final String nLin = System.lineSeparator();
+	private UserPojo userFromToken;
 
 	/**
 	 * Tries to login the user with the given user credentials. Returns true if successful and false if unsuccessful.
@@ -143,5 +144,18 @@ public class UserHandler {
 		} catch (CookieNotFoundException e){
 			logger1.error("Cookie not found when deleting post");
 		}
+	}
+
+	public static UserPojo getUserFromToken() {
+		String token = null;
+		try {
+			token = CookieManager.getToken();
+			return BackendCaller.getUserFromToken(token);
+		} catch (CookieNotFoundException e){
+			logger1.error("Cookie not found when deleting post");
+			return null;
+		}
+
+
 	}
 }

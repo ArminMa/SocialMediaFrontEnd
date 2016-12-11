@@ -1,12 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<HTML xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "DTD/xhtml1-frameset.dtd">-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsf/core"
       xmlns:f="http://java.sun.com/jsf/facelets"
       xmlns:b="http://butterfaces.org/components"
       xmlns:p="http://primefaces.org/ui">
 
-<h:head>
+<h:head >
 
     <c:facet name="first">
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
@@ -24,6 +26,17 @@
         });
     </script>
 
+
+    <div id="header" >
+
+        <div id="headerContent">
+            <div class="post">
+                <f:insert name="head">...</f:insert>
+            </div>
+        </div>
+
+    </div>
+
 </h:head>
 
 <c:view contentType="text/html">
@@ -35,7 +48,7 @@
 
     <h:body>
 
-        <div id="header" class="ui-widget ui-widget-header ui-shadow">
+        <div id="shadow" class="ui-widget ui-widget-header ui-shadow">
             <div id="logo">
                 <img src="#{request.contextPath}/images/touch/favICO.png" alt="Logo" width="70px" height="70px"/>
             </div>
@@ -43,17 +56,19 @@
             <div id="menu" class="ui-widget">
                 <ul id="main">
                     <f:fragment rendered="#{authBean.authUser()}">
-                        <li><a href="#{request.contextPath}/chat3.html">chat3Works</a></li>
+                        <li><a href="#{request.contextPath}/chat3.xhtml">chat3Works</a></li>
                     </f:fragment>
 
-                    <li><a href="#{request.contextPath}/chat3.html">chat3</a></li>
+                    <li><a href="#{request.contextPath}/chat.xhtml">chat.xhtml</a></li>
+                    <li><a href="#{request.contextPath}/chatchat.xhtml">chatchat.xhtml</a></li>
+                    <li><a href="#{request.contextPath}/chat3.xhtml">chat3.xhtml</a></li>
                         <li><a href="#{request.contextPath}/index.xhtml">LogIn</a></li>
                         <li><a href="#{request.contextPath}/viewPersonalLog.xhtml">View log</a></li>
                         <li><a href="#{request.contextPath}/search.xhtml">Send Private Message</a></li>
                         <li><a href="#{request.contextPath}/viewPersonalMessages.xhtml">Private Messages</a></li>
                         <li><a href="#{request.contextPath}/writeLog.xhtml">Post to log</a></li>
                         <li><a href="#{request.contextPath}/viewLog.xhtml">View log/flow</a></li>
-                    <p:commandButton value="nodeJs/vertex Chat" action="chat3.html?redirect=true" ajax="false" style="width:150px"/>
+
                     <li>
                         <a href="#{request.contextPath}/login.xhtml">
                             <h:form>
@@ -63,6 +78,7 @@
                     </li>
 
                 </ul>
+
             </div>
 
         </div>
@@ -80,4 +96,4 @@
 
     </h:body>
 </c:view>
-</HTML>
+</html>

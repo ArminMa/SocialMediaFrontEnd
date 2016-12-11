@@ -35,3 +35,4 @@ public class ChatEndpoint {
 			log.log(Level.WARNING, "onMessage failed", e);
 		}
 	}
+}

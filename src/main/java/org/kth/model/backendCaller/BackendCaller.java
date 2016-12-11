@@ -223,4 +223,17 @@ public interface BackendCaller {
 			}
         }
     }
+
+    static UserPojo getUserFromToken(String token) {
+        Client c = Client.create();
+        String url = baseUrlAddress + "/api/getUserFromToken";
+        WebResource resource = c.resource( url );
+        UserPojo userPojo= null;
+        try{
+
+        }catch (UniformInterfaceException ue){
+            userPojo = resource.header("x-authorization", "Bearer " + token).header("cache-control", "no-cache").get(UserPojo.class);
+        }
+        return userPojo;
+    }
 }

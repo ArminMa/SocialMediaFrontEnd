@@ -1,7 +1,15 @@
 package org.kth.controller.chat;
 
+import org.primefaces.json.JSONObject;
+import org.primefaces.push.Encoder;
+
 /**
- * Created by Sys on 2016-12-11.
+ * A Simple {@link org.primefaces.push.Encoder} that decode a {@link Message} into a simple JSON object.
  */
-public class MessageEncoder {
+public final class MessageEncoder implements Encoder<Message, String> {
+
+	//@Override
+	public String encode(Message message) {
+		return new JSONObject(message).toString();
+	}
 }
