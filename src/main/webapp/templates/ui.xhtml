@@ -24,8 +24,6 @@
         });
     </script>
 
-
-
 </h:head>
 
 <c:view contentType="text/html">
@@ -50,13 +48,12 @@
 
                     <li><a href="#{request.contextPath}/chat3.html">chat3</a></li>
                         <li><a href="#{request.contextPath}/index.xhtml">LogIn</a></li>
-                        <li><a href="#{request.contextPath}/index.xhtml">Home</a></li>
+                        <li><a href="#{request.contextPath}/viewPersonalLog.xhtml">View log</a></li>
                         <li><a href="#{request.contextPath}/search.xhtml">Send Private Message</a></li>
                         <li><a href="#{request.contextPath}/viewPersonalMessages.xhtml">Private Messages</a></li>
-
-                    <p:commandButton value="nodeJs/vertex Chat" action="chat3.html?redirect=true" ajax="true" style="width:150px"/>
-
-
+                        <li><a href="#{request.contextPath}/writeLog.xhtml">Post to log</a></li>
+                        <li><a href="#{request.contextPath}/viewLog.xhtml">View log/flow</a></li>
+                    <p:commandButton value="nodeJs/vertex Chat" action="chat3.html?redirect=true" ajax="false" style="width:150px"/>
                     <li>
                         <a href="#{request.contextPath}/login.xhtml">
                             <h:form>
@@ -82,6 +79,5 @@
         </div>
 
     </h:body>
-
 </c:view>
 </HTML>

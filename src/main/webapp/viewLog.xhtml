@@ -8,7 +8,6 @@
     <ui:define name="header">
         <title>Registration</title>
         <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css"/>
-        <div> ${WorkerServerBean.SessRepl()} </div>
     </ui:define>
 
     <ui:define name="content">
@@ -44,7 +43,7 @@
                     <h:outputText value="#{user.email}" />
                 </p:column>
                 <p:column>
-                    <p:commandButton process="@parent:@parent" update="@form" value="Send too" action="#{searchForUsers.sendMessage(user)}" />
+                    <p:commandButton process="@parent:@parent" update="@form" value="View Log" action="#{viewLogBean.getLog(user)}" />
                 </p:column>
             </p:dataTable>
 
@@ -52,23 +51,14 @@
                 <p:commandButton process="@parent:@parent" update="@form" value="Search" action="#{searchForUsers.searchForUsers()}" />
             </h:panelGrid>
 
-            <h:panelGrid columns="4" cellpadding="5">
-                <h3>Topic</h3>
-                <p:inputTextarea rows="6" cols="33" value="#{searchForUsers.topic}" id="topicInputId">
-                    <f:ajax event="keyup" execute="topicInputId" />
-                </p:inputTextarea>
-                <h3>Message</h3>
-                <p:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId">
-                    <f:ajax event="keyup" execute="messageInputId" />
-                </p:inputTextarea>
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="#{searchForUsers.resultPost}" />
-                    </p:column>
-                </p:row>
-            </h:panelGrid>
-
-
+            <p:dataTable id ="messageTableId" var="posts" value="#{viewLogBean.posts}">
+                <p:column headerText="Post">
+                    <h:outputText value="#{posts.postContent}" />
+                </p:column>
+                <p:column headerText="Date">
+                    <h:outputText value="#{posts.postedDate}" />
+                </p:column>
+            </p:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>

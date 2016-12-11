@@ -4,12 +4,10 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Sebastian on 2016-11-26.
- */
 public class CookieManager {
     private final static String token = "token";
     private final static String refreshToken = "refreshToken";
+    private final static String userName = "userName";
 
     public static void addToken(String body){
         addCookie(token, body);
@@ -19,12 +17,20 @@ public class CookieManager {
         addCookie(refreshToken, body);
     }
 
+    public static void addUserName(String body){
+        addCookie(userName, body);
+    }
+
     public static String getToken() throws CookieNotFoundException{
         return getCookie(token);
     }
 
     public static String getRefreshToken() throws CookieNotFoundException{
         return getCookie(refreshToken);
+    }
+
+    public static String getUserName() throws CookieNotFoundException{
+        return getCookie(userName);
     }
 
     public static void addCookie(String name, String content) {

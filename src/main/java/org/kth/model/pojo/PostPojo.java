@@ -21,8 +21,8 @@ PostPojo implements Serializable,Comparable<PostPojo>{
 		pk = new PostPojoFK();
 	}
 
-	public PostPojo(String postContent, UserPojo sender, UserPojo receiver) {
-		this.pk = new PostPojoFK(sender, receiver);
+	public PostPojo(String postContent) {
+		this.pk = new PostPojoFK();
 		this.postContent = postContent;
 		this.postedDate = new Date(/*System.currentTimeMillis()*/);
 	}

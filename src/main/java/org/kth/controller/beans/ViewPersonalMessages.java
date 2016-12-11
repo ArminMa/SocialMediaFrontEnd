@@ -4,13 +4,15 @@ import org.kth.controller.handlers.UserHandler;
 import org.kth.model.pojo.MailMessagePojo;
 import org.springframework.context.annotation.Bean;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ViewPersonalMessages {
     private List<MailMessagePojo> messages;
 
@@ -28,5 +30,10 @@ public class ViewPersonalMessages {
 
     public void getPersonalMessages(){
         messages = UserHandler.getPersonalMessages();
+    }
+
+    @PostConstruct
+    public void init(){
+       getPersonalMessages();
     }
 }

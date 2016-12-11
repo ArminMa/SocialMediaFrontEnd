@@ -15,6 +15,7 @@ public class MailMessagePojo implements Serializable,Comparable<MailMessagePojo>
     private String messageContent;
     private String topic;
 
+
 //    private boolean read;
 
     public MailMessagePojo() {

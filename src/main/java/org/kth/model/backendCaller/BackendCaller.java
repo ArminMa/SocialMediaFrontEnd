@@ -15,6 +15,7 @@ import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -132,7 +133,7 @@ public interface BackendCaller {
             logger1.info("ClientResponse.Status.CREATED.getStatusCode() == 201");
         }
         if (response.getStatus() != 201) {
-            logger1.error("Failed : HTTP error code : " + response.getStatus());
+            logger1.error("sendPost.Failed : HTTP error code : " + response.getStatus());
             return false;
         }
         return true;
@@ -149,7 +150,7 @@ public interface BackendCaller {
                     .header("cache-control", "no-cache")
                     .post(ClientResponse.class, mailMessagePojo.toString());
             if (response.getStatus() != ClientResponse.Status.CREATED.getStatusCode()) {
-                logger1.error("Failed : HTTP error code : " + response.getStatus());
+                logger1.error("sendMail.Failed : HTTP error code : " + response.getStatus());
                 return false;
             }
             return true;
@@ -171,8 +172,55 @@ public interface BackendCaller {
                     .get(MailMessagePojo[].class);
             return Arrays.asList(messages);
         }  catch (UniformInterfaceException e){
-            logger1.error("Failed");
+            logger1.error("getPersonalMessages.Failed: " + e.toString());
             return null;
+        }
+    }
+
+    static List<PostPojo> getLog(String token, String userName) {
+        String url = baseUrlAddress + "/api/getPostsByUserName/" + userName;
+        logger1.info("username = " + userName);
+        Client c = Client.create();
+        WebResource resource = c.resource(url);
+        try {
+            PostPojo[] postPojos = resource
+                    .header("x-authorization", "Bearer " + token)
+                    .header("cache-control", "no-cache")
+                    .get(PostPojo[].class);
+            return Arrays.asList(postPojos);
+        }  catch (UniformInterfaceException e){
+            logger1.error("getLog.Failed: " + e.toString());
+            return null;
+        }
+    }
+
+    static void deletePost(String token, PostPojo post) {
+        logger1.info(nLin + nLin +" ----------------------- BackendCaller.deletePost ----------------------- " + nLin);
+		logger1.info("BackendCaller.deletePost: post.getPostContent() = "  + post.getPostContent());
+		logger1.info("Backendcaller.deletepost: id" + post.getId());
+		logger1.info("Backendcaller.deletepost: date" + post.getPostedDate());
+		logger1.info("Backendcaller.deletepost: tostring " + post.toString());
+		logger1.info("Backendcaller.deletepost: sender tostring " + post.getSender().toString());
+		logger1.info("Backendcaller.deletepost: receiver tostring" + post.getReceiver().toString());
+
+        String url = baseUrlAddress + "/api/deleteLogMessage";
+        Client c = Client.create();
+        WebResource resource = c.resource(url);
+        ClientResponse response = null;
+        try {
+            response = resource.type("application/json")
+                    .header("x-authorization", "Bearer " + token)
+                    .header("cache-control", "no-cache")
+                    .post(ClientResponse.class, post);
+            logger1.info("successfully posted with statuscode : " + response.getStatus());
+        }  catch (UniformInterfaceException e){
+            logger1.error("Failed deleting message: " + e.toString());
+            if(response != null ) {
+				logger1.info(nLin + "BackendCaller.deletePost: UniformInterfaceException response.getStatus()= "  + response.getStatus() + nLin);
+
+			}else{
+				logger1.info(nLin + "BackendCaller.deletePost: UniformInterfaceException response= null" + nLin);
+			}
         }
     }
 }
