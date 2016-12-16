@@ -1,0 +1,41 @@
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:jsf="http://xmlns.jcp.org/jsf"
+        xmlns:ac="http://beyondjava.net/angularFacesCore">
+
+
+
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Registration</title>
+    </h:head>
+    <h:body >
+        <ui:composition template="templates/menu/mainTemplate.xhtml">
+            <ui:define name="content">
+            <div id="loginUserId">
+
+        <h:form>
+            <p:remoteCommand name="onload" action="#{viewPersonalLogBean.getPersonalPosts}" autoRun="true" />
+            <p:dataTable id ="messageTableId" var="posts" value="#{viewPersonalLogBean.posts}">
+                <p:column headerText="Post">
+                    <h:outputText value="#{posts.postContent}" />
+                </p:column>
+                <p:column headerText="Date">
+                    <h:outputText value="#{posts.postedDate}" />
+                </p:column>
+                <p:column>
+                    <p:commandButton process="@parent:@parent" update="@form" value="Respond" action="#{viewPersonalLogBean.deletePost(posts)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+            </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
