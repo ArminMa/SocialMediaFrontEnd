@@ -1,6 +1,8 @@
 package org.kth.controller.chat;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
 
 	private String text;
 	private String user;

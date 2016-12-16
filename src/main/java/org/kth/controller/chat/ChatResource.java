@@ -1,4 +1,5 @@
 package org.kth.controller.chat;
+import java.io.Serializable;
 import org.primefaces.push.EventBus;
 import org.primefaces.push.RemoteEndpoint;
 import org.primefaces.push.annotation.OnClose;
@@ -15,7 +16,7 @@ import javax.servlet.ServletContext;
 
 @PushEndpoint("/{room}/{user}")
 @Singleton
-public class ChatResource {
+public class ChatResource implements Serializable {
 
 	private final Logger logger = LoggerFactory.getLogger(ChatResource.class);
 

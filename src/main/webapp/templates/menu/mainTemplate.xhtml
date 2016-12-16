@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+    <title>AngularFaces 2.1: JSF on steroids</title>
+    <meta name="author" content="Stephan Rauh" />
+    <meta name="description" content="AngularFaces adds AngularJS to JSF. That's JSF on steroids!" />
+    <meta name="robots" content="index, follow" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="DISTRIBUTION" content="GLOBAL" />
+    <xmeta http-equiv="PRAGMA" content="NO-CACHE" />
+    <meta name="copyright" content="Stephan Rauh" />
+    <h:outputStylesheet library="sh" name="css/shCore.css" />
+    <h:outputStylesheet library="sh" name="css/shCoreEclipse.css" />
+    <h:outputStylesheet library="sh" name="css/shCoreEclipse.css" />
+
+
+    <style>
+    @media ( min-width :20px) {
+      #mandelbrot {width:70px;height:70px;display:block;margin-top:5px}
+    }
+
+    @media ( min-width :40px) {
+      #mandelbrot {width:40px;height:40px;display:block}
+    }
+
+    @media ( min-width :40px) {
+      #mandelbrot {width:40px;height:40px;}
+    }
+
+    @media (min-width: 70px){
+      .container {width: 75px;}
+      #mandelbrot {width:30px;height:30px;}
+    }
+    @media (min-width: 1700px){
+      .container {width: 1500px;}
+    }
+    @media (min-width: 1800px){
+      .container {width: 1700px;}
+    }
+    label {
+      font-weight:normal;
+    }
+    .nav-list>li>a { padding:0px 0px 0px 50px;}
+    .nav-list>.dropdown-header { padding:10px 00px 3px 50px; font-size:14px;font-weight:bold}
+  </style>
+
+</h:head>
+<h:body style="padding-top: 75px;padding-bottom: 75px;">
+
+  <h:outputScript library="sh" name="js/shCore.js" target="head" />
+  <h:outputScript library="sh" name="js/shBrushXml.js" target="head" />
+  <h:outputScript library="sh" name="js/shBrushJScript.js" target="head" />
+  <h:outputScript library="sh" name="js/shBrushJava.js" target="head" />
+  <h:outputScript library="sh" name="js/shBrushGroovy.js" target="head" />
+  <h:outputScript library="sh" name="js/shBrushCss.js" target="head" />
+  <script>
+      SyntaxHighlighter.defaults['gutter'] = false;
+  </script>
+  <ui:insert name="nbtop">
+
+    <ui:include src="navbartop.xhtml" />
+  </ui:insert>
+
+  <b:container>
+    <b:row>
+      <b:column span="10">
+        <ui:insert name="content" />
+      </b:column>
+    </b:row>
+    <br />
+    <br />
+    <br />
+    <br />
+
+  </b:container>
+
+  <ui:insert name="nbottom">
+    <ui:include src="navbarbottom.xhtml" />
+  </ui:insert>
+  <script type="text/javascript">
+      SyntaxHighlighter.all();
+  </script>
+
+  <!-- Piwik -->
+  <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push([ 'trackPageView' ]);
+      _paq.push([ 'enableLinkTracking' ]);
+      (function() {
+          var u = "//www.atapuerca.de/piwik/";
+          _paq.push([ 'setTrackerUrl', u + 'piwik.php' ]);
+          _paq.push([ 'setSiteId', 4 ]);
+          var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+          g.type = 'text/javascript';
+          g.async = true;
+          g.defer = true;
+          g.src = u + 'piwik.js';
+          s.parentNode.insertBefore(g, s);
+      })();
+  </script>
+  <noscript>
+    <p>
+      <img src="//www.atapuerca.de/piwik/piwik.php?idsite=4" style="border: 0;" alt="" />
+    </p>
+  </noscript>
+  <!-- End Piwik Code -->
+
+</h:body>
+</html>

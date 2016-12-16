@@ -1,11 +1,12 @@
 package org.kth.controller.chat;
 
+import java.io.Serializable;
 import org.primefaces.push.Decoder;
 
 /**
  * A Simple {@link org.primefaces.push.Decoder} that decode a String into a {@link Message} object.
  */
-public class MessageDecoder implements Decoder<String,Message> {
+public class MessageDecoder implements Decoder<String,Message> , Serializable {
 
 	//@Override
 	public Message decode(String s) {

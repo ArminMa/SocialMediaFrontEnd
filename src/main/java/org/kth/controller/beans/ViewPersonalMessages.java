@@ -1,5 +1,6 @@
 package org.kth.controller.beans;
 
+import java.io.Serializable;
 import org.kth.controller.handlers.UserHandler;
 import org.kth.model.pojo.MailMessagePojo;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class ViewPersonalMessages {
+public class ViewPersonalMessages implements Serializable {
     private List<MailMessagePojo> messages;
 
     public ViewPersonalMessages() {

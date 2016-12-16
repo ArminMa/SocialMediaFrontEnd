@@ -158,4 +158,8 @@ public class UserHandler {
 
 
 	}
+
+	public static List<UserPojo> getAllUsers() {
+		return BackendCaller.getAllUsers();
+	}
 }

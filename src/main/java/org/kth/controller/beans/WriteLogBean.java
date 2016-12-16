@@ -1,5 +1,6 @@
 package org.kth.controller.beans;
 
+import java.io.Serializable;
 import org.kth.controller.handlers.UserHandler;
 import org.kth.model.pojo.PostPojo;
 
@@ -7,7 +8,7 @@ import javax.faces.bean.ViewScoped;
 
 @javax.faces.bean.ManagedBean
 @ViewScoped
-public class WriteLogBean {
+public class WriteLogBean implements Serializable {
     private String content = "";
     private String successMessage = "";
 

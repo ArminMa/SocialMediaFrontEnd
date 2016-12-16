@@ -34,11 +34,10 @@ public class LoginBean implements Serializable {
             if(userPojo.getUsername() != null && userPojo.getPassword() != null ){
                 if(loginOK = UserHandler.login(userPojo))
                     CookieManager.addUserName(userPojo.getUsername());
-                return "viewPersonalMessages";
+                return "/viewPersonalMessages.jsf";
             }
         }
 
-        System.out.println("loginNotOK " +loginOK);
-        return "index";
+        return "/index.jsf";
     }
 }

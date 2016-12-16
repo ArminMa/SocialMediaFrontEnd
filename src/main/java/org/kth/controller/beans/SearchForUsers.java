@@ -1,5 +1,6 @@
 package org.kth.controller.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -13,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 @ManagedBean
 @SessionScoped
-public class SearchForUsers {
+public class SearchForUsers implements Serializable {
 	public static final Logger logger1 = LoggerFactory.getLogger( UserHandler.class );
 	private String searchString = "";
 	private String searchOption = "";

@@ -1,5 +1,6 @@
 package org.kth.controller.beans;
 
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,7 +11,7 @@ import org.kth.model.pojo.UserPojo;
 @ManagedBean
 @ViewScoped
 @XmlRootElement
-public class RegisterBean {
+public class RegisterBean implements Serializable {
 
     private UserPojo userBean;
     private String username;

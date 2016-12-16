@@ -92,6 +92,9 @@ public class ChatView implements Serializable {
 	}
 
 	public boolean isLoggedIn() {
+		if(!loggedIn){
+			authUser();
+		}
 		return loggedIn;
 	}
 	public void setLoggedIn(boolean loggedIn) {
@@ -113,16 +116,16 @@ public class ChatView implements Serializable {
 	public void login() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 
-		if(users.contains(username)) {
-			loggedIn = false;
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username taken", "Try with another username."));
-			requestContext.update("growl");
-		}
-		else {
-			users.add(username);
+//		if(users.contains(username)) {
+//			loggedIn = false;
+//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username taken", "Try with another username."));
+//			requestContext.update("growl");
+//		}
+//		else {
+//			users.add(username);
 			requestContext.execute("PF('subscriber').connect('/" + username + "')");
 			loggedIn = true;
-		}
+//		}
 	}
 
 	public void disconnect() {

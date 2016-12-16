@@ -35,11 +35,56 @@
             <artifactId>jsf-undertow-myfaces-butterfaces-spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.joinfaces/jsf-primefaces-spring-boot-autoconfigure -->
+
+
         <dependency>
-            <groupId>org.joinfaces</groupId>
-            <artifactId>jsf-primefaces-spring-boot-autoconfigure</artifactId>
-            <version>2.1.1</version>
+            <groupId>de.beyondjava</groupId>
+            <artifactId>angularFaces-core</artifactId>
+            <version>2.1.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bootsfaces</groupId>
+            <artifactId>bootsfaces</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+        </dependency>
+
+        <!-- Themes -->
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>all-themes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>primefaces-extensions</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>resources-ckeditor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>resources-codemirror</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Disable devtools if you want to run inside jetty container -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
 
@@ -68,17 +113,9 @@
             <artifactId>junit</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
 
-        <!-- Disable devtools if you want to run inside jetty container -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
 
+        <!-- https://mvnrepository.com/artifact/de.beyondjava/angularFaces-core -->
 
         <dependency>
             <groupId>commons-lang</groupId>
@@ -150,12 +187,8 @@
             <version>3.0.5</version>
         </dependency>
 
-        <!-- Atmosphere -->
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-        </dependency>
+
+
 
         <!-- Logging -->
         <dependency>
@@ -165,29 +198,11 @@
 
 
 
-        <!-- Faces -->
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-        </dependency>
 
-        <!-- Themes -->
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>all-themes</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>primefaces-extensions</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>resources-ckeditor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>resources-codemirror</artifactId>
-        </dependency>
+
+
+
+
 
         <!-- GraphicImage -->
         <dependency>
@@ -213,11 +228,6 @@
             <version>2.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.atmosphere</groupId>
-            <artifactId>atmosphere-runtime</artifactId>
-            <version>2.4.6</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp/okhttp -->
         <dependency>
@@ -246,11 +256,24 @@
             <version>1.1</version>
         </dependency>
 
+        <!-- Atmosphere -->
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
         <dependency>
             <groupId>org.atmosphere</groupId>
             <artifactId>atmosphere-runtime</artifactId>
             <version>2.4.9</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+
 
     </dependencies>
     <repositories>

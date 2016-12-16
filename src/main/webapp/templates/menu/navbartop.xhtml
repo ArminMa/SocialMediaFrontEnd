@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:prime="http://primefaces.org/ui" >
+<h:head>
+
+</h:head>
+<h:body>
+
+    <ui:composition>
+        <b:navBar brand="SpringAngularFaces" brandHref="https://www.angularfaces.net/index.jsf" inverse="true" fixed="top">
+                <div id="mandelbrot" style="width: 70px; height: 90%; float: left; margin: 0 0 0 1%;">
+                    <img src="../../images/globe/MandelbrotEarth1.png" width="100%" height="100%"  alt=""/>
+                </div>
+
+                <h:outputScript library="globe" name="three.js" target="head" />
+                <h:outputScript library="globe" name="drawMandelbrotGlobe.js" target="head" />
+                <script type="text/javascript">
+                    if (navigator.userAgent.match(/Chrome/i)) {
+                        activateGlobeDemo();
+                    }
+                    if (navigator.userAgent.match(/Firefox/i)) {
+                        activateGlobeDemo();
+                    }
+                </script>
+
+            <b:container>
+                <b:navbarLinks>
+                    <b:navCommandLink icon-rotate="l" iconAwesome="thumbs-up"
+                                      value="go back" onclick="return false;"
+                                      look="info" title="icon-rotate='l'" />
+                    <b:navLink />
+                    <b:navLink />
+                    <b:dropMenu value="available JSF pages">
+                        <b:navLink value="index.jsf"               outcome="#{request.contextPath}/index.jsf"      />
+                        <b:navLink value="search.jsf"               outcome="#{request.contextPath}/search.jsf"     />
+                        <b:navLink value="register.jsf"                 outcome="#{request.contextPath}/register.jsf"   />
+                    </b:dropMenu>
+
+
+
+                </b:navbarLinks>
+
+                <b:navLink />
+
+            </b:container>
+        </b:navBar>
+
+    </ui:composition>
+</h:body>
+</html>
+

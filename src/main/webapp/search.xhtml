@@ -1,74 +1,80 @@
-<ui:composition template="/templates/ui.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="header">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:jsf="http://xmlns.jcp.org/jsf"
+        xmlns:prime="http://primefaces.org/ui"
+        xmlns:ac="http://beyondjava.net/angularFacesCore">
+
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>Registration</title>
-        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css"/>
-        <h:outputText> value = "${authBean.userPojo.username}" </h:outputText>
-    </ui:define>
+    </h:head>
+<h:body >
+    <ui:composition template="templates/menu/mainTemplate.xhtml">
+        <ui:define name="content">
+            <div id="loginUserId">
+                <prime:panel id="panel" header="Search Form" style="margin-bottom:10px;">
+                    <prime:messages id="messages" />
 
-    <ui:define name="content">
+                    <h:panelGrid columns="4" cellpadding="5">
+                        <h:outputLabel for="txt1" value="Text 1: *" />
+                        <prime:inputText id="txt1" value="#{searchForUsers.searchString}" label="search String">
+                            <f:validateLength minimum="1" />
+                        </prime:inputText>
+                        <prime:message for="txt1" />
+                        <h:outputText value="#{searchForUsers.searchString}" />
+                        <div> </div>
 
-        <h:form>
-            <p:panel id="panel" header="Search Form" style="margin-bottom:10px;">
-                <p:messages id="messages" />
+                        <h:outputLabel for="txt2" value="Text 2: *" />
+                        <h:selectOneMenu id="txt2" value="#{searchForUsers.searchOption}" required="false" label="search Options">
+                            <f:selectItem itemLabel="search By ?" itemValue="1UserName" noSelectionOption="true" />
+                            <f:selectItem itemLabel="search By UserName" itemValue="1UserName" />
+                            <f:selectItem itemLabel="search By Email" itemValue="2Email" />
+                        </h:selectOneMenu>
+                        <prime:message for="@previous" />
+                        <h:outputText value="#{searchForUsers.searchOption}" />
+                    </h:panelGrid>
+                </prime:panel>
 
-                <h:panelGrid columns="4" cellpadding="5">
-                    <h:outputLabel for="txt1" value="Text 1: *" />
-                    <p:inputText id="txt1" value="#{searchForUsers.searchString}" label="search String">
-                        <f:validateLength minimum="1" />
-                    </p:inputText>
-                    <p:message for="txt1" />
-                    <h:outputText value="#{searchForUsers.searchString}" />
+                <prime:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
+                    <prime:column headerText="username">
+                        <h:outputText value="#{user.username}" />
+                    </prime:column>
+                    <prime:column headerText="email">
+                        <h:outputText value="#{user.email}" />
+                    </prime:column>
+                    <prime:column>
+                        <prime:commandButton process="@parent:@parent" update="panel" value="Send too" action="#{searchForUsers.sendMessage(user)}" />
+                    </prime:column>
+                </prime:dataTable>
 
-                    <h:outputLabel for="txt2" value="Text 2: *" />
-                    <h:selectOneMenu id="txt2" value="#{searchForUsers.searchOption}" required="false" label="search Options">
-                        <f:selectItem itemLabel="search By ?" itemValue="1UserName" noSelectionOption="true" />
-                        <f:selectItem itemLabel="search By UserName" itemValue="1UserName" />
-                        <f:selectItem itemLabel="search By Email" itemValue="2Email" />
-                    </h:selectOneMenu>
-                    <p:message for="@previous" />
-                    <h:outputText value="#{searchForUsers.searchOption}" />
+                <h:panelGrid columns="1">
+                    <prime:commandButton process="@parent:@parent" update="panel" value="Search" action="#{searchForUsers.searchForUsers()}" />
                 </h:panelGrid>
-            </p:panel>
 
-            <p:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
-                <p:column headerText="username">
-                    <h:outputText value="#{user.username}" />
-                </p:column>
-                <p:column headerText="email">
-                    <h:outputText value="#{user.email}" />
-                </p:column>
-                <p:column>
-                    <p:commandButton process="@parent:@parent" update="@form" value="Send too" action="#{searchForUsers.sendMessage(user)}" />
-                </p:column>
-            </p:dataTable>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <h3>Topic</h3>
+                    <prime:inputTextarea rows="6" cols="33" value="#{searchForUsers.topic}" id="topicInputId">
+                        <f:ajax event="keyup" execute="topicInputId" />
+                    </prime:inputTextarea>
+                    <h3>Message</h3>
+                    <prime:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId">
+                        <f:ajax event="keyup" execute="messageInputId" />
+                    </prime:inputTextarea>
+                    <prime:row>
+                        <prime:column>
+                            <prime:outputLabel value="#{searchForUsers.resultPost}" />
+                        </prime:column>
+                    </prime:row>
+                </h:panelGrid>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</f:view>
 
-            <h:panelGrid columns="2">
-                <p:commandButton process="@parent:@parent" update="@form" value="Search" action="#{searchForUsers.searchForUsers()}" />
-            </h:panelGrid>
-
-            <h:panelGrid columns="4" cellpadding="5">
-                <h3>Topic</h3>
-                <p:inputTextarea rows="6" cols="33" value="#{searchForUsers.topic}" id="topicInputId">
-                    <f:ajax event="keyup" execute="topicInputId" />
-                </p:inputTextarea>
-                <h3>Message</h3>
-                <p:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId">
-                    <f:ajax event="keyup" execute="messageInputId" />
-                </p:inputTextarea>
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="#{searchForUsers.resultPost}" />
-                    </p:column>
-                </p:row>
-            </h:panelGrid>
-
-
-        </h:form>
-    </ui:define>
-</ui:composition>

@@ -1,91 +1,89 @@
-<f:composition
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:h="http://xmlns.jcp.org/jsf/html"
-        xmlns:c="http://xmlns.jcp.org/jsf/core"
-        xmlns:b="http://butterfaces.org/components"
-        xmlns:f="http://java.sun.com/jsf/facelets"
-        xmlns:pr="http://primefaces.org/ui"
-        template="/templates/ui.xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:prime="http://primefaces.org/ui"
+      xmlns:ac="http://beyondjava.net/angularFacesCore">
 
-    <f:define name="header">
-        <title>Registration</title>
-        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css"/>
-    </f:define>
-    <f:define name="content">
-        <div class="ui-widget-content ui-corner-bottom ui-helper-clearfix ui-shadow">
-            <h1 class="title ui-widget-header ui-corner-all">Register Page</h1>
-            <p>* = Required Fields</p>
-            <b:section height="5" />
-            <h:form>
-                <pr:panel header="Registration form">
-                    <div style="height:50px">
-                        this is a creation by Armin M And Sebastian M for the course serverDevelopment KTH.
-                        Register a user and test the Application.
-                    </div>
-                </pr:panel>
-                <pr:panel header="Registration Panel">
-                    <pr:panelGrid columns="3" cellpadding="7">
-                        <pr:outputLabel value="*UserName" style="font-weight:bold" />
-                        <pr:inputText id="UserName"
-                                      value="#{registerBean.username}"
-                                      required="true"
-                                      requiredMessage="UserName is required" >
-                        </pr:inputText>
-                        <h:message for="UserName" />
+<h:head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Registration</title>
+</h:head>
+<h:body >
+    <ui:composition template="templates/menu/mainTemplate.xhtml">
+        <ui:define name="content">
+            <div id="loginUserId">
+                    <section>
+                        <b:tabView>
 
-                        <pr:spacer height="5" />
-                        <pr:separator />
-                        <pr:separator />
 
-                        <pr:outputLabel value="*Email" style="font-weight:bold"/>
-                        <pr:inputText id="email"
-                                      value="#{registerBean.email}"
-                                      required="true"
-                                      requiredMessage="Email is required">
-                        </pr:inputText>
-                        <h:message for="email" />
-                        <pr:spacer height="5" />
-                        <pr:separator />
-                        <pr:separator />
+                                <h1 class="title ui-widget-header ui-corner-all">Register Page</h1>
+                                <p>* = Required Fields</p>
+                                <b:row height="5" />
+                                <h:form>
+                                    <prime:panel header="Registration form">
+                                        <div style="height:50px">
+                                            this is a creation by Armin M And Sebastian M for the course serverDevelopment KTH.
+                                            Register a user and test the Application.
+                                        </div>
+                                    </prime:panel>
+                                    <prime:panel header="Registration Panel">
+                                        <prime:panelGrid columns="3" cellpadding="7">
+                                            <prime:outputLabel value="*UserName" style="font-weight:bold" />
+                                            <prime:inputText id="UserName"
+                                                          value="#{registerBean.username}"
+                                                          required="true"
+                                                          requiredMessage="UserName is required" >
+                                            </prime:inputText>
+                                            <h:message for="UserName" />
 
-                        <h:outputLabel for="pwd1" value="Password 1: *" style="color:#ff3c42; font-weight:bold"/>
-                        <pr:password id="pwd1" value="#{registerBean.password}"
-                                     match="pwd2" label="Password 1" required="true"
-                                     requiredMessage="Password is required"
-                                     validatorMessage="pass1 should match with Confirm Password"/>
-                        <div></div>
-                        <h:outputText for="pwd2" value="Password 2: *" style="font-weight:bold"/>
-                        <pr:password id="pwd2"
-                                     value="#{registerBean.password}"
-                                     label="Password 2"
-                                     feedback="true" inline="true" required="true"
-                                     requiredMessage="Password is required"
-                                     validatorMessage="pass1 should match with Confirm Password"/>
-                    </pr:panelGrid>
-                </pr:panel>
-                <pr:commandButton id="submitButton2"
-                                  style="width: 20%; height: 10%"
-                                  value="Register"
-                                  action="#{registerBean.registerUser(registerBean.username, registerBean.email, registerBean.password)}" ajax="false" />
-                <pr:spacer height="5" />
-                <pr:separator />
-            </h:form>
+                                            <prime:spacer height="5" />
+                                            <prime:separator />
+                                            <prime:separator />
 
-            <pr:panelGrid columns="3" cellpadding="3">
-                <a style="width:10%;height: 1%" href="#{request.contextPath}/register.xhtml?faces-redirect=true">register</a>
-                <pr:spacer height="5" />
-                <pr:separator />
+                                            <prime:outputLabel value="*Email" style="font-weight:bold"/>
+                                            <prime:inputText id="email"
+                                                          value="#{registerBean.email}"
+                                                          required="true"
+                                                          requiredMessage="Email is required">
+                                            </prime:inputText>
+                                            <h:message for="email" />
+                                            <prime:spacer height="5" />
+                                            <prime:separator />
+                                            <prime:separator />
 
-                <pr:link  href="#{request.contextPath}/search.xhtml?faces-redirect=true">search.xhtml ajax</pr:link>
-                <pr:spacer height="5" />
-                <pr:separator />
-
-                <pr:link  href="#{request.contextPath}/chat.html?faces-redirect=true">chat.html ajax</pr:link>
-                <pr:spacer height="5" />
-                <pr:separator />
-
-                <a href="${pageContext.request.contextPath}/getUserByEmail.xhtml">getUserByEmail.xhtml</a>
-            </pr:panelGrid>
-        </div>
-    </f:define>
-</f:composition>
+                                            <h:outputLabel for="pwd1" value="Password 1: *" style="color:#ff3c42; font-weight:bold"/>
+                                            <prime:password id="pwd1" value="#{registerBean.password}"
+                                                         match="pwd2" label="Password 1" required="true"
+                                                         requiredMessage="Password is required"
+                                                         validatorMessage="pass1 should match with Confirm Password"/>
+                                            <div></div>
+                                            <h:outputText for="pwd2" value="Password 2: *" style="font-weight:bold"/>
+                                            <prime:password id="pwd2"
+                                                         value="#{registerBean.password}"
+                                                         label="Password 2"
+                                                         feedback="true" inline="true" required="true"
+                                                         requiredMessage="Password is required"
+                                                         validatorMessage="pass1 should match with Confirm Password"/>
+                                        </prime:panelGrid>
+                                    </prime:panel>
+                                    <prime:commandButton id="submitButton2"
+                                                      style="width: 20%; height: 10%"
+                                                      value="Register"
+                                                      action="#{registerBean.registerUser(registerBean.username, registerBean.email, registerBean.password)}" ajax="false" />
+                                    <prime:spacer height="5" />
+                                    <prime:separator />
+                                </h:form>
+                        </b:tabView>
+                    </section>
+                    <br />
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

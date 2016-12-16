@@ -1,5 +1,6 @@
 package org.kth.controller.beans;
 
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -9,7 +10,7 @@ import org.kth.model.pojo.UserPojo;
 
 @ManagedBean
 @SessionScoped
-public class AuthBean {
+public class AuthBean implements Serializable{
 	private UserPojo userPojo;
 
 	public AuthBean() {

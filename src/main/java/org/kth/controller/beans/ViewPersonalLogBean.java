@@ -1,5 +1,6 @@
 package org.kth.controller.beans;
 
+import java.io.Serializable;
 import org.kth.controller.handlers.UserHandler;
 import org.kth.model.pojo.PostPojo;
 import org.slf4j.Logger;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @ManagedBean
 @SessionScoped
-public class ViewPersonalLogBean {
+public class ViewPersonalLogBean implements Serializable {
     public static final Logger logger1 = LoggerFactory.getLogger( UserHandler.class );
     private List<PostPojo> posts;
 

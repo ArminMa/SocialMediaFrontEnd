@@ -236,4 +236,18 @@ public interface BackendCaller {
         }
         return userPojo;
     }
+
+    static List<UserPojo> getAllUsers() {
+
+        final String url = baseUrlAddress + "/social/getAllUsers";
+        Client c = Client.create();
+        WebResource resource = c.resource(url);
+        try {
+            UserPojo[] messages = resource.get(UserPojo[].class);
+            return Arrays.asList(messages);
+        }  catch (UniformInterfaceException e){
+            logger1.error("getAllUsers.Failed: " + e.toString());
+            return null;
+        }
+    }
 }
