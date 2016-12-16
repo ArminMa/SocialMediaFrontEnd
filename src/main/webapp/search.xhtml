@@ -6,7 +6,6 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
         xmlns:jsf="http://xmlns.jcp.org/jsf"
-        xmlns:prime="http://primefaces.org/ui"
         xmlns:ac="http://beyondjava.net/angularFacesCore">
 
     <h:head>
@@ -18,15 +17,15 @@
     <ui:composition template="templates/menu/mainTemplate.xhtml">
         <ui:define name="content">
             <div id="loginUserId">
-                <prime:panel id="panel" header="Search Form" style="margin-bottom:10px;">
-                    <prime:messages id="messages" />
+                <b:panel id="panel" header="Search Form" style="margin-bottom:10px;">
+                    <b:messages id="messages" />
 
                     <h:panelGrid columns="4" cellpadding="5">
                         <h:outputLabel for="txt1" value="Text 1: *" />
-                        <prime:inputText id="txt1" value="#{searchForUsers.searchString}" label="search String">
+                        <b:inputText id="txt1" value="#{searchForUsers.searchString}" label="search String">
                             <f:validateLength minimum="1" />
-                        </prime:inputText>
-                        <prime:message for="txt1" />
+                        </b:inputText>
+                        <b:message for="txt1" />
                         <h:outputText value="#{searchForUsers.searchString}" />
                         <div> </div>
 
@@ -36,41 +35,38 @@
                             <f:selectItem itemLabel="search By UserName" itemValue="1UserName" />
                             <f:selectItem itemLabel="search By Email" itemValue="2Email" />
                         </h:selectOneMenu>
-                        <prime:message for="@previous" />
+                        <b:message for="@previous" />
                         <h:outputText value="#{searchForUsers.searchOption}" />
                     </h:panelGrid>
-                </prime:panel>
+                </b:panel>
 
-                <prime:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
-                    <prime:column headerText="username">
+                <b:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
+                    <b:column headerText="username">
                         <h:outputText value="#{user.username}" />
-                    </prime:column>
-                    <prime:column headerText="email">
+                    </b:column>
+                    <b:column headerText="email">
                         <h:outputText value="#{user.email}" />
-                    </prime:column>
-                    <prime:column>
-                        <prime:commandButton process="@parent:@parent" update="panel" value="Send too" action="#{searchForUsers.sendMessage(user)}" />
-                    </prime:column>
-                </prime:dataTable>
+                    </b:column>
+                    <b:column>
+                        <b:commandButton process="@form" update="panel" value="Send too" action="#{searchForUsers.sendMessage(user)}" />
+                    </b:column>
+                </b:dataTable>
 
                 <h:panelGrid columns="1">
-                    <prime:commandButton process="@parent:@parent" update="panel" value="Search" action="#{searchForUsers.searchForUsers()}" />
+                    <b:commandButton process="@form" update="panel" value="Search" action="#{searchForUsers.searchForUsers()}" />
                 </h:panelGrid>
 
                 <h:panelGrid columns="3" cellpadding="5">
                     <h3>Topic</h3>
-                    <prime:inputTextarea rows="6" cols="33" value="#{searchForUsers.topic}" id="topicInputId">
+                    <b:inputTextarea rows="6" cols="33" value="#{searchForUsers.topic}" id="topicInputId">
                         <f:ajax event="keyup" execute="topicInputId" />
-                    </prime:inputTextarea>
+                    </b:inputTextarea>
                     <h3>Message</h3>
-                    <prime:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId">
+                    <b:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId" >
                         <f:ajax event="keyup" execute="messageInputId" />
-                    </prime:inputTextarea>
-                    <prime:row>
-                        <prime:column>
-                            <prime:outputLabel value="#{searchForUsers.resultPost}" />
-                        </prime:column>
-                    </prime:row>
+                    </b:inputTextarea>
+                    <b:label text="#{searchForUsers.resultPost}" id="resultPostID" severity="info"/>
+
                 </h:panelGrid>
             </div>
         </ui:define>
