@@ -21,18 +21,18 @@
             <div id="loginUserId">
 
         <h:form>
-            <p:remoteCommand name="onload" action="#{viewPersonalLogBean.getPersonalPosts}" autoRun="true" />
-            <p:dataTable id ="messageTableId" var="posts" value="#{viewPersonalLogBean.posts}">
-                <p:column headerText="Post">
+            <b:defaultCommand name="onload" action="#{viewPersonalLogBean.getPersonalPosts}" autoRun="true" />
+            <b:dataTable id ="messageTableId" var="posts" value="#{viewPersonalLogBean.posts}">
+                <b:column headerText="Post">
                     <h:outputText value="#{posts.postContent}" />
-                </p:column>
-                <p:column headerText="Date">
+                </b:column>
+                <b:column headerText="Date">
                     <h:outputText value="#{posts.postedDate}" />
-                </p:column>
-                <p:column>
-                    <p:commandButton process="@parent:@parent" update="@form" value="Respond" action="#{viewPersonalLogBean.deletePost(posts)}" />
-                </p:column>
-            </p:dataTable>
+                </b:column>
+                <b:column>
+                    <b:commandButton process="@form" update="messageTableId" value="Respond" action="#{viewPersonalLogBean.deletePost(posts)}" />
+                </b:column>
+            </b:dataTable>
         </h:form>
             </div>
             </ui:define>

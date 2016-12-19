@@ -6,7 +6,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:prime="http://primefaces.org/ui"
       xmlns:ac="http://beyondjava.net/angularFacesCore">
 
 <h:head>
@@ -26,58 +25,53 @@
                                 <p>* = Required Fields</p>
                                 <b:row height="5" />
                                 <h:form>
-                                    <prime:panel header="Registration form">
+                                    <b:panel header="Registration form">
                                         <div style="height:50px">
                                             this is a creation by Armin M And Sebastian M for the course serverDevelopment KTH.
                                             Register a user and test the Application.
                                         </div>
-                                    </prime:panel>
-                                    <prime:panel header="Registration Panel">
-                                        <prime:panelGrid columns="3" cellpadding="7">
-                                            <prime:outputLabel value="*UserName" style="font-weight:bold" />
-                                            <prime:inputText id="UserName"
+                                    </b:panel>
+                                    <b:panel header="Registration Panel">
+                                        <b:panelGrid columns="3" cellpadding="7">
+                                            <b:inputText id="UserName"
                                                           value="#{registerBean.username}"
                                                           required="true"
+                                                         label="UserName "
                                                           requiredMessage="UserName is required" >
-                                            </prime:inputText>
-                                            <h:message for="UserName" />
+                                            </b:inputText>
+                                            <b:message for="UserName" />
 
-                                            <prime:spacer height="5" />
-                                            <prime:separator />
-                                            <prime:separator />
 
-                                            <prime:outputLabel value="*Email" style="font-weight:bold"/>
-                                            <prime:inputText id="email"
+                                            <b:inputText id="email"
+                                                         label="Email "
                                                           value="#{registerBean.email}"
                                                           required="true"
                                                           requiredMessage="Email is required">
-                                            </prime:inputText>
-                                            <h:message for="email" />
-                                            <prime:spacer height="5" />
-                                            <prime:separator />
-                                            <prime:separator />
+                                            </b:inputText>
+                                            <b:message for="email" />
+
+
 
                                             <h:outputLabel for="pwd1" value="Password 1: *" style="color:#ff3c42; font-weight:bold"/>
-                                            <prime:password id="pwd1" value="#{registerBean.password}"
+                                            <b:inputSecret id="pwd1" value="#{registerBean.password}"
                                                          match="pwd2" label="Password 1" required="true"
                                                          requiredMessage="Password is required"
                                                          validatorMessage="pass1 should match with Confirm Password"/>
                                             <div></div>
                                             <h:outputText for="pwd2" value="Password 2: *" style="font-weight:bold"/>
-                                            <prime:password id="pwd2"
+                                            <b:inputSecret id="pwd2"
                                                          value="#{registerBean.password}"
                                                          label="Password 2"
                                                          feedback="true" inline="true" required="true"
                                                          requiredMessage="Password is required"
                                                          validatorMessage="pass1 should match with Confirm Password"/>
-                                        </prime:panelGrid>
-                                    </prime:panel>
-                                    <prime:commandButton id="submitButton2"
+                                        </b:panelGrid>
+                                    </b:panel>
+                                    <b:commandButton id="submitButton2"
                                                       style="width: 20%; height: 10%"
                                                       value="Register"
                                                       action="#{registerBean.registerUser(registerBean.username, registerBean.email, registerBean.password)}" ajax="false" />
-                                    <prime:spacer height="5" />
-                                    <prime:separator />
+
                                 </h:form>
                         </b:tabView>
                     </section>
