@@ -56,9 +56,15 @@ public class UserHandler {
 
 	// logic should be in this class and not in the bean classes
 	public static String registerNewUser(UserPojo userBean){
+		logger1.info("inside register new user");
 		if(userBean == null || userBean.getUsername() == null || userBean.getEmail() == null || userBean.getPassword() == null) return null;
-
-		userBean = BackendCaller.register(userBean);
+		logger1.info("past nullcheck");
+		logger1.info("username: " + userBean.getUsername() + ", email: " + userBean.getEmail() + ", password: " + userBean.getPassword() );
+		try {
+			userBean = BackendCaller.register(userBean);
+		} catch (Exception e){
+			logger1.info("RegisterNewUser: something went to hell " + e.toString());
+		}
 		// handle the user here
 		if(userBean == null)
 			return "register";

@@ -13,20 +13,20 @@ import org.kth.model.pojo.UserPojo;
 @XmlRootElement
 public class RegisterBean implements Serializable {
 
-    private UserPojo userBean;
-    private String username;
+    private UserPojo userPojo;
+    private String userName;
     private String email;
     private String password;
 
     public RegisterBean() {
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -45,9 +45,8 @@ public class RegisterBean implements Serializable {
         this.password = password;
     }
 
-    public String registerUser(String userName , String email, String password) {
-        userBean = new UserPojo(userName, email, password);
-
-        return UserHandler.registerNewUser(userBean);
+    public String registerUser() {
+        userPojo = new UserPojo(userName, email, password);
+        return UserHandler.registerNewUser(userPojo);
     }
 }

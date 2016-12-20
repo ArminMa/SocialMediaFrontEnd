@@ -14,69 +14,29 @@
     <title>Registration</title>
 </h:head>
 <h:body >
-    <ui:composition template="templates/menu/mainTemplate.xhtml">
+    <ui:composition template="/templates/menu/mainTemplate.xhtml">
         <ui:define name="content">
-            <div id="loginUserId">
-                    <section>
-                        <b:tabView>
-
-
-                                <h1 class="title ui-widget-header ui-corner-all">Register Page</h1>
-                                <p>* = Required Fields</p>
-                                <b:row height="5" />
-                                <h:form>
-                                    <b:panel header="Registration form">
-                                        <div style="height:50px">
-                                            this is a creation by Armin M And Sebastian M for the course serverDevelopment KTH.
-                                            Register a user and test the Application.
-                                        </div>
-                                    </b:panel>
-                                    <b:panel header="Registration Panel">
-                                        <b:panelGrid columns="3" cellpadding="7">
-                                            <b:inputText id="UserName"
-                                                          value="#{registerBean.username}"
-                                                          required="true"
-                                                         label="UserName "
-                                                          requiredMessage="UserName is required" >
-                                            </b:inputText>
-                                            <b:message for="UserName" />
-
-
-                                            <b:inputText id="email"
-                                                         label="Email "
-                                                          value="#{registerBean.email}"
-                                                          required="true"
-                                                          requiredMessage="Email is required">
-                                            </b:inputText>
-                                            <b:message for="email" />
-
-
-
-                                            <h:outputLabel for="pwd1" value="Password 1: *" style="color:#ff3c42; font-weight:bold"/>
-                                            <b:inputSecret id="pwd1" value="#{registerBean.password}"
-                                                         match="pwd2" label="Password 1" required="true"
-                                                         requiredMessage="Password is required"
-                                                         validatorMessage="pass1 should match with Confirm Password"/>
-                                            <div></div>
-                                            <h:outputText for="pwd2" value="Password 2: *" style="font-weight:bold"/>
-                                            <b:inputSecret id="pwd2"
-                                                         value="#{registerBean.password}"
-                                                         label="Password 2"
-                                                         feedback="true" inline="true" required="true"
-                                                         requiredMessage="Password is required"
-                                                         validatorMessage="pass1 should match with Confirm Password"/>
-                                        </b:panelGrid>
-                                    </b:panel>
-                                    <b:commandButton id="submitButton2"
-                                                      style="width: 20%; height: 10%"
-                                                      value="Register"
-                                                      action="#{registerBean.registerUser(registerBean.username, registerBean.email, registerBean.password)}" ajax="false" />
-
-                                </h:form>
-                        </b:tabView>
-                    </section>
-                    <br />
-            </div>
+            <b:container>
+                <b:panelGrid colSpans="4,8">
+                    <b:panel title="Register Form" look="primary">
+                        <h:form id="registerFormId">
+                            <b:tabView>
+                                <b:tab title="Register form" style="float:top:; offset: 10px 0 0 1%;">
+                                    <b:panelGrid columns="3" id="registerGridId">
+                                        <b:inputText id="emailId" value="#{registerBean.email}" required="true" label="Email:" />
+                                        <b:inputText id="UserNameID" value="#{registerBean.userName}" label="User name: " style="width=100%"/>
+                                        <b:inputSecret id="passwordID" value="#{registerBean.password}" required="true" label="Password: "/>
+                                        <b:tab/>
+                                        <b:commandButton value="register" action="#{registerBean.registerUser}" update="registerGridId" process="@form" />
+                                    </b:panelGrid>
+                                    <b:messages globalOnly="false" />
+                                </b:tab>
+                            </b:tabView>
+                            <br />
+                        </h:form>
+                    </b:panel>
+                </b:panelGrid>
+            </b:container>
         </ui:define>
     </ui:composition>
 </h:body>

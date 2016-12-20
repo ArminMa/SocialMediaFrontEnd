@@ -29,20 +29,22 @@ public interface BackendCaller {
 
     /**
      * Makes a restless call and Attempts to register the user.
-     * @param userBean Desired user info
+     * @param userPojo Desired user info
      * @return The created user if successful or null if unsuccessful
      */
-    public static UserPojo register(UserPojo userBean) {
+    public static UserPojo register(UserPojo userPojo) {
+        logger1.info("in register backend call");
         MediaType JsonUtf8Media = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
         String url = baseUrlAddress + "/social/register";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(JsonUtf8Media);
-        HttpEntity<UserPojo> entity = new HttpEntity<UserPojo>(userBean,headers);
+        HttpEntity<UserPojo> entity = new HttpEntity<UserPojo>(userPojo,headers);
         ResponseEntity<UserPojo> response = restTemplate.postForEntity(url, entity, UserPojo.class);
+        logger1.info("after response:" + response.getStatusCode().toString());
         if(response.getStatusCode().equals(HttpStatus.CREATED)){
-            userBean = response.getBody();
-            return userBean;
+            userPojo = response.getBody();
+            return userPojo;
         }
         return null;
     }

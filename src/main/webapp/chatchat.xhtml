@@ -1,0 +1,41 @@
+<ui:composition template="/templates/ui.menu.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://beyondjava.net/angularFaces"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+    <ui:define name="description">
+
+
+            <meta charset="utf-8"/>
+            <title>WebSockets - Simple chat</title>
+
+    </ui:define>
+
+
+
+    <ui:define name="content">
+        <a:body ng-app="calculatorApp" ng-controller="calculatorController">
+            <h:form ng:name="myform" >
+                <h:panelGrid columns="3">
+                    <a:inputText label="first number" value="#{calculatorBean.number1}" />
+
+                    <a:inputText label="second number" value="#{calculatorBean.number2}" />
+
+                    <a:commandButton value="add" action="#{calculatorBean.add}" />
+                    <h:outputText value="Angular's calculation: 42 + 80 = 122" />
+                    <h:outputText />
+                    <a:inputText label="JSF Result" value="#{calculatorBean.result}" />
+                </h:panelGrid>
+            </h:form>
+        </a:body>
+
+    </ui:define>
+
+
+</ui:composition>

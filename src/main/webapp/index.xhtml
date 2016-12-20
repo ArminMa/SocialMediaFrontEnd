@@ -24,33 +24,25 @@
     </h:head>
     <h:body >
         <h2>Welcome to Social War!</h2>
-
         <ui:composition template="/templates/menu/mainTemplate.xhtml">
             <ui:define name="content">
                 <b:container fluid="true">
                     <b:panelGrid colSpans="4,8">
                         <b:panel title="login User Form" look="primary">
-
                             <h:form id="myForm">
                                 <b:tabView>
-
                                     <b:tab title="login User users Form" style="float:top:; offset: 10px 0 0 1%;">
-
-                                            <b:panelGrid columns="3" id="loginGridId">
-                                                <b:inputText id="UserNameID" value="#{loginBean.userPojo.username}" label="User name: " style="width=100%"/>
-                                                <b:inputSecret id="passwordID" value="#{loginBean.userPojo.password}" required="true" label="Password: "/>
-                                                <b:tab/>
-                                                <b:commandButton value="login" action="#{loginBean.doLogin()}" update="loginGridId" process="@form" />
-                                            </b:panelGrid>
-                                            <b:messages globalOnly="false" />
-
+                                        <b:panelGrid columns="3" id="loginGridId">
+                                            <b:inputText id="UserNameID" value="#{loginBean.userPojo.username}" label="User name: " style="width=100%"/>
+                                            <b:inputSecret id="passwordID" value="#{loginBean.userPojo.password}" required="true" label="Password: "/>
+                                            <b:tab/>
+                                            <b:commandButton value="login" action="#{loginBean.doLogin()}" update="loginGridId" process="@form" />
+                                        </b:panelGrid>
+                                        <b:messages globalOnly="false" />
                                     </b:tab>
-
                                 </b:tabView>
-
                                 <br />
                             </h:form>
-
                         </b:panel>
                     </b:panelGrid>
                 </b:container>
