@@ -24,25 +24,34 @@
                         <f:selectItem itemLabel="search By UserName" itemValue="1UserName" />
                         <f:selectItem itemLabel="search By Email" itemValue="2Email" />
                     </h:selectOneMenu>
-                </h:form>
 
-                <b:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
-                    <b:column headerText="username">
-                        <h:outputText value="#{user.username}" />
-                    </b:column>
-                    <b:column headerText="email">
-                        <h:outputText value="#{user.email}" />
-                    </b:column>
-                    <b:column headerText="sendMessage">
-                        <h:button value="Send message">
-                            <f:ajax event="keyup" update="messageFormId" execute="#{searchForUsers.sendMessage(user)}" />
-                        </h:button>
-                    </b:column>
-                </b:dataTable>
+                    <h:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
+                        <h:column headerText="username">
+                            <h:outputText value="#{user.username}" />
+                        </h:column>
+                        <h:column headerText="email">
+                            <h:outputText value="#{user.email}" />
+                        </h:column>
+                        <h:column headerText="sendMessage">
+                            <h:commandButton process="@form" action="#{viewPersonalMessages.sendMessage(user)}" />
+                        </h:column>
+                    </h:dataTable>
 
-                <h:form id="messageFormId">
-                    <b:inputText id="topicId" value="#{searchForUsers.topic}" label="Topic: "/>
-                    <b:inputTextarea rows="6" cols="33" id="messageId" value="#{searchForUsers.message}" label="Message: "/>
+                    <h:panelGrid columns="4" cellpadding="5">
+                        <h3>Topic</h3>
+                        <h:inputTextarea rows="6" cols="33" value="#{viewPersonalMessages.topic}" id="topicInputId">
+                            <f:ajax event="keyup" execute="topicInputId" />
+                        </h:inputTextarea>
+                        <h3>Message</h3>
+                        <h:inputTextarea rows="6" cols="33" value="#{viewPersonalMessages.message}" id ="messageInputId">
+                            <f:ajax event="keyup" execute="messageInputId" />
+                        </h:inputTextarea>
+                        <b:row>
+                            <h:column>
+                                <h:outputLabel value="#{viewPersonalMessages.resultPost}" />
+                            </h:column>
+                        </b:row>
+                    </h:panelGrid>
                 </h:form>
             </ui:define>
         </ui:composition>
