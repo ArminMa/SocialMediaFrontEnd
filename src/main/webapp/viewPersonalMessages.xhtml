@@ -1,0 +1,84 @@
+
+<ui:composition template="/templates/menu/mainTemplate.xhtml"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ac="http://beyondjava.net/angularFacesCore">
+
+
+        <ui:define name="content">
+            <b:container>
+                <p>
+                    Hello world!
+                </p>
+                <h:form>
+                    <h:panelGrid>
+                        <h:dataTable id ="messageTableId" var="message" value="#{viewPersonalMessages.messages}">
+                            <h:column headerText="Topic">
+                                <h:outputText value="#{message.topic}" />
+                            </h:column>
+                            <h:column headerText="Message">
+                                <h:outputText value="#{message.messageContent}" />
+                            </h:column>
+                            <h:column headerText="Sender">
+                                <h:outputText value="#{message.sender.username}" />
+                            </h:column>
+                            <h:column headerText="Sent date">
+                                <h:outputText value="#{message.sentDate}" />
+                            </h:column>
+                            <h:column>
+                                <h:commandButton process="@form" update="messageTableId" value="Respond" action="#{searchForUsers.sendMessage(message.sender)}" />
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGrid>
+                    <h:panelGrid columns="4" cellpadding="5">
+                        <h3>Topic</h3>
+                        <h:inputTextarea rows="6" cols="33" value="#{searchForUsers.topic}" id="topicInputId">
+                            <f:ajax event="keyup" execute="topicInputId" />
+                        </h:inputTextarea>
+                        <h3>Message</h3>
+                        <h:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId">
+                            <f:ajax event="keyup" execute="messageInputId" />
+                        </h:inputTextarea>
+                        <b:row>
+                            <h:column>
+                                <h:outputLabel value="#{searchForUsers.resultPost}" />
+                            </h:column>
+                        </b:row>
+                    </h:panelGrid>
+                </h:form>
+            </b:container>
+        </ui:define>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

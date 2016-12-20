@@ -13,32 +13,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>Registration</title>
     </h:head>
-<h:body >
-    <ui:composition template="templates/menu/mainTemplate.xhtml">
-        <ui:define name="content">
-            <div id="loginUserId">
-                <b:panel id="panel" header="Search Form" style="margin-bottom:10px;">
-                    <b:messages id="messages" />
-
-                    <h:panelGrid columns="4" cellpadding="5">
-                        <h:outputLabel for="txt1" value="Text 1: *" />
-                        <b:inputText id="txt1" value="#{searchForUsers.searchString}" label="search String">
-                            <f:validateLength minimum="1" />
-                        </b:inputText>
-                        <b:message for="txt1" />
-                        <h:outputText value="#{searchForUsers.searchString}" />
-                        <div> </div>
-
-                        <h:outputLabel for="txt2" value="Text 2: *" />
-                        <h:selectOneMenu id="txt2" value="#{searchForUsers.searchOption}" required="false" label="search Options">
-                            <f:selectItem itemLabel="search By ?" itemValue="1UserName" noSelectionOption="true" />
-                            <f:selectItem itemLabel="search By UserName" itemValue="1UserName" />
-                            <f:selectItem itemLabel="search By Email" itemValue="2Email" />
-                        </h:selectOneMenu>
-                        <b:message for="@previous" />
-                        <h:outputText value="#{searchForUsers.searchOption}" />
-                    </h:panelGrid>
-                </b:panel>
+    <h:body >
+        <ui:composition template="templates/menu/mainTemplate.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <h:inputText id="searchStringId" value="#{searchForUsers.searchString}" />
+                    <b:commandButton id="searchButtonId" process="@form" update="userTableID" value="Search" action="#{searchForUsers.searchForUsers}" />
+                    <h:selectOneMenu id="selectMenuId" value="#{searchForUsers.searchOption}" required="false" label="search Options">
+                        <f:selectItem itemLabel="search By ?" itemValue="1UserName" noSelectionOption="true" />
+                        <f:selectItem itemLabel="search By UserName" itemValue="1UserName" />
+                        <f:selectItem itemLabel="search By Email" itemValue="2Email" />
+                    </h:selectOneMenu>
+                </h:form>
 
                 <b:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
                     <b:column headerText="username">
@@ -47,30 +33,18 @@
                     <b:column headerText="email">
                         <h:outputText value="#{user.email}" />
                     </b:column>
-                    <b:column>
-                        <b:commandButton process="@form" update="panel" value="Send too" action="#{searchForUsers.sendMessage(user)}" />
+                    <b:column headerText="sendMessage">
+                        <h:button value="Send message">
+                            <f:ajax event="keyup" update="messageFormId" execute="#{searchForUsers.sendMessage(user)}" />
+                        </h:button>
                     </b:column>
                 </b:dataTable>
 
-                <h:panelGrid columns="1">
-                    <b:commandButton process="@form" update="panel" value="Search" action="#{searchForUsers.searchForUsers()}" />
-                </h:panelGrid>
-
-                <h:panelGrid columns="3" cellpadding="5">
-                    <h3>Topic</h3>
-                    <b:inputTextarea rows="6" cols="33" value="#{searchForUsers.topic}" id="topicInputId">
-                        <f:ajax event="keyup" execute="topicInputId" />
-                    </b:inputTextarea>
-                    <h3>Message</h3>
-                    <b:inputTextarea rows="6" cols="33" value="#{searchForUsers.message}" id ="messageInputId" >
-                        <f:ajax event="keyup" execute="messageInputId" />
-                    </b:inputTextarea>
-                    <b:label text="#{searchForUsers.resultPost}" id="resultPostID" severity="info"/>
-
-                </h:panelGrid>
-            </div>
-        </ui:define>
-    </ui:composition>
-</h:body>
+                <h:form id="messageFormId">
+                    <b:inputText id="topicId" value="#{searchForUsers.topic}" label="Topic: "/>
+                    <b:inputTextarea rows="6" cols="33" id="messageId" value="#{searchForUsers.message}" label="Message: "/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </f:view>
-

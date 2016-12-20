@@ -27,7 +27,7 @@
                                         <b:inputText id="UserNameID" value="#{registerBean.userName}" label="User name: " style="width=100%"/>
                                         <b:inputSecret id="passwordID" value="#{registerBean.password}" required="true" label="Password: "/>
                                         <b:tab/>
-                                        <b:commandButton value="register" action="#{registerBean.registerUser}" update="registerGridId" process="@form" />
+                                        <b:commandButton process="@form" update="registerGridId" value="register" action="#{registerBean.registerUser}"  />
                                     </b:panelGrid>
                                     <b:messages globalOnly="false" />
                                 </b:tab>

@@ -65,10 +65,11 @@ public class UserHandler {
 		} catch (Exception e){
 			logger1.info("RegisterNewUser: something went to hell " + e.toString());
 		}
+		logger1.info("passed backendcall");
 		// handle the user here
 		if(userBean == null)
-			return "register";
-		return "index";
+			return "register?faces-redirect=true";
+		return "index?faces-redirect=true";
 	}
 
 	public static UserPojo getUserByEmail(String email){
