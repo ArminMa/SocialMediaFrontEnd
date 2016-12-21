@@ -18,23 +18,19 @@
     <h:body >
         <ui:composition template="templates/menu/mainTemplate.xhtml">
             <ui:define name="content">
-            <div id="loginUserId">
-
-        <h:form>
-            <b:defaultCommand name="onload" action="#{viewPersonalLogBean.getPersonalPosts}" autoRun="true" />
-            <b:dataTable id ="messageTableId" var="posts" value="#{viewPersonalLogBean.posts}">
-                <b:column headerText="Post">
-                    <h:outputText value="#{posts.postContent}" />
-                </b:column>
-                <b:column headerText="Date">
-                    <h:outputText value="#{posts.postedDate}" />
-                </b:column>
-                <b:column>
-                    <b:commandButton process="@form" update="messageTableId" value="Respond" action="#{viewPersonalLogBean.deletePost(posts)}" />
-                </b:column>
-            </b:dataTable>
-        </h:form>
-            </div>
+                <h:form>
+                    <h:dataTable id ="messageTableId" var="posts" value="#{viewPersonalLogBean.posts}">
+                        <h:column headerText="Post">
+                            <h:outputText value="#{posts.postContent}" />
+                        </h:column>
+                        <h:column headerText="Date">
+                            <h:outputText value="#{posts.postedDate}" />
+                        </h:column>
+                        <h:column>
+                            <h:commandButton process="@form" update="messageTableId" value="Delete" action="#{viewPersonalLogBean.deletePost(posts)}" />
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

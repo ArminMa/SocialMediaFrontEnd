@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+<ui:define name="header">
+    <title>Registration</title>
+    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css"/>
+</ui:define>
+
+<f:view>
+    <h:form>
+        <h:panelGrid columns="4" cellpadding="5">
+            <h3>Message</h3>
+            <h:inputTextarea rows="6" cols="33" value="#{writeLogBean.content}" id ="messageInputId">
+                <f:ajax event="keyup" execute="messageInputId" />
+            </h:inputTextarea>
+            <h:column>
+                <h:commandButton process="@parent:@parent" update="@form" value="Post on board" action="#{writeLogBean.writePost}" />
+            </h:column>
+            <b:row>
+                <h:column>
+                    <h:outputLabel value="#{writeLogBean.successMessage}" />
+                </h:column>
+            </b:row>
+        </h:panelGrid>
+    </h:form>
+</f:view>
+</html>

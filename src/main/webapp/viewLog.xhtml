@@ -1,0 +1,52 @@
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:jsf="http://xmlns.jcp.org/jsf"
+        xmlns:ac="http://beyondjava.net/angularFacesCore">
+
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Registration</title>
+    </h:head>
+    <h:body >
+        <ui:composition template="templates/menu/mainTemplate.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <h:inputText id="searchStringId" value="#{searchForUsers.searchString}" />
+                    <b:commandButton id="searchButtonId" process="@form" update="userTableID" value="Search" action="#{searchForUsers.searchForUsers}" />
+                    <h:selectOneMenu id="selectMenuId" value="#{searchForUsers.searchOption}" required="false" label="search Options">
+                        <f:selectItem itemLabel="search By ?" itemValue="1UserName" noSelectionOption="true" />
+                        <f:selectItem itemLabel="search By UserName" itemValue="1UserName" />
+                        <f:selectItem itemLabel="search By Email" itemValue="2Email" />
+                    </h:selectOneMenu>
+
+                    <h:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
+                        <h:column headerText="username">
+                            <h:outputText value="#{user.username}" />
+                        </h:column>
+                        <h:column headerText="email">
+                            <h:outputText value="#{user.email}" />
+                        </h:column>
+                        <h:column headerText="sendMessage">
+                            <h:commandButton process="@form" action="#{viewLogBean.getLog(user)}" />
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:dataTable  var="posts" value="#{viewLogBean.posts}">
+                        <h:column headerText="Post">
+                            <h:outputText value="#{posts.postContent}" />
+                        </h:column>
+                        <h:column headerText="Date">
+                            <h:outputText value="#{posts.postedDate}" />
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
