@@ -16,25 +16,24 @@
                     Hello world!
                 </p>
                 <h:form>
-                    <h:panelGrid>
-                        <h:dataTable id ="messageTableId" var="message" value="#{viewPersonalMessages.messages}">
-                            <h:column headerText="Topic">
-                                <h:outputText value="#{message.topic}" />
-                            </h:column>
-                            <h:column headerText="Message">
-                                <h:outputText value="#{message.messageContent}" />
-                            </h:column>
-                            <h:column headerText="Sender">
-                                <h:outputText value="#{message.sender.username}" />
-                            </h:column>
-                            <h:column headerText="Sent date">
-                                <h:outputText value="#{message.sentDate}" />
-                            </h:column>
-                            <h:column>
-                                <h:commandButton process="@form" update="messageTableId" value="Respond" action="#{viewPersonalMessages.sendMessage(message.sender)}" />
-                            </h:column>
-                        </h:dataTable>
-                    </h:panelGrid>
+                    <b:dataTable value="#{viewPersonalMessages.messages}"
+                                 var="message"
+                                 class="MessageTable"
+                                 id="messageTableId">
+                        <b:dataTableColumn value="#{message.topic}" />
+                        <b:dataTableColumn value="#{message.messageContent}" />
+                        <b:dataTableColumn value="#{message.sender.username}" label="Sender"/>
+                        <b:dataTableColumn value="#{message.sentDate}"  orderable="true" order="desc" />
+                        <b:dataTableColumn lable="Respond">
+
+                            <b:commandButton process="@form" icon="edit"
+                                             update="messageTableId"
+                                             value="Respond"
+                                             action="#{viewPersonalMessages.sendMessage(message.sender)}" />
+
+                        </b:dataTableColumn>
+                    </b:dataTable>
+
                     <h:panelGrid columns="4" cellpadding="5">
                         <h3>Topic</h3>
                         <h:inputTextarea rows="6" cols="33" value="#{viewPersonalMessages.topic}" id="topicInputId">

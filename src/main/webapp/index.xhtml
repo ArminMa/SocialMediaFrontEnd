@@ -26,26 +26,58 @@
         <h2>Welcome to Social War!</h2>
         <ui:composition template="/templates/menu/mainTemplate.xhtml">
             <ui:define name="content">
-                <b:container fluid="true">
-                    <b:panelGrid colSpans="4,8">
-                        <b:panel title="login User Form" look="primary">
-                            <h:form id="myForm">
-                                <b:tabView>
-                                    <b:tab title="login User users Form" style="float:top:; offset: 10px 0 0 1%;">
-                                        <b:panelGrid columns="3" id="loginGridId">
-                                            <b:inputText id="UserNameID" value="#{loginBean.userPojo.username}" label="User name: " style="width=100%"/>
-                                            <b:inputSecret id="passwordID" value="#{loginBean.userPojo.password}" required="true" label="Password: "/>
-                                            <b:tab/>
-                                            <b:commandButton value="login" action="#{loginBean.doLogin()}" update="loginGridId" process="@form" />
-                                        </b:panelGrid>
-                                        <b:messages globalOnly="false" />
-                                    </b:tab>
-                                </b:tabView>
-                                <br />
-                            </h:form>
+
+                <h:form id="myForm">
+                    <b:container layout="fluid">
+                        <b:panel title="login screen" look="primary">
+                            <b:row>
+                                <b:column medium-screen="4">
+                                    <b:inputText placeholder="Username" id="UserNameId"
+                                                 value="#{loginBean.username}"
+                                                 required="true"
+                                                 ajax="true"
+                                                 autocomplete="false"
+                                                 update="@(.message)">
+                                        <f:facet name="prepend">
+                                            <b:icon name="user" />
+                                        </f:facet>
+                                    </b:inputText>
+                                </b:column>
+                                <b:column medium-screen="6" style-class="message">
+                                    <b:message for="UserNameId" />
+                                </b:column>
+                            </b:row>
+                            <b:row tooltip="dont forget your password.">
+
+                                <b:column medium-screen="4">
+                                    <b:inputSecret placeholder="Password" id="passwordId"
+                                                   value="#{loginBean.password}"
+                                                   required="true"
+                                                   ajax="true" autocomplete="false" update="@(.message)">
+                                        <f:facet name="prepend">
+                                            <b:iconAwesome name="key" />
+                                        </f:facet>
+                                    </b:inputSecret>
+                                </b:column>
+                                <b:column medium-screen="6" styleClass="message">
+                                    <b:message for="passwordId" />
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column span="2" >
+                                    <b:commandButton value="login" action="#{loginBean.doLogin()}" onclick="ajax:loginBean.login()" update="@form" look="primary"
+                                                     style="width:100%" />
+                                </b:column>
+
+                                <b:column span="2">
+                                    <b:commandButton value="password forgotten" onclick="ajax:loginBean.forgotPassword()" update="@form"
+                                                     look="danger" style="width:100%" />
+                                </b:column>
+                            </b:row>
                         </b:panel>
-                    </b:panelGrid>
-                </b:container>
+                    </b:container>
+                </h:form>
+
             </ui:define>
         </ui:composition>
     </h:body>
