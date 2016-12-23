@@ -25,17 +25,25 @@
                         <f:selectItem itemLabel="search By Email" itemValue="2Email" />
                     </h:selectOneMenu>
 
-                    <h:dataTable id = "userTableID" var="user" value="#{searchForUsers.userBeansList}">
-                        <h:column headerText="username">
-                            <h:outputText value="#{user.username}" />
-                        </h:column>
-                        <h:column headerText="email">
-                            <h:outputText value="#{user.email}" />
-                        </h:column>
-                        <h:column headerText="sendMessage">
-                            <h:commandButton process="@form" action="#{viewPersonalMessages.sendMessage(user)}" />
-                        </h:column>
-                    </h:dataTable>
+                    <b:dataTable value="#{searchForUsers.userBeansList}"
+                                 var="user"
+                                 class="userListTable"
+                                 id = "userTableID" >
+                        <b:dataTableColumn value="#{user.username}" />
+                        <b:dataTableColumn value="#{user.email}" />
+                        <b:dataTableColumn lable="Respond" id="respondColumnId">
+                            <b:commandButton process="@form"
+                                             update="userTableID"
+                                             value="sendMessage"
+                                             action="#{viewPersonalMessages.sendMessage(user)}" />
+                        </b:dataTableColumn>
+                        <b:dataTableColumn lable="Chat" id="chatColumnId">
+                            <b:commandButton  id="startChatButtonId" process="@form"
+
+                                             value="chater"
+                                             action="#{chatBean.startChat(user)}"/>
+                        </b:dataTableColumn>
+                    </b:dataTable>
 
                     <h:panelGrid columns="4" cellpadding="5">
                         <h3>Topic</h3>
@@ -52,7 +60,16 @@
                             </h:column>
                         </b:row>
                     </h:panelGrid>
+
+
+
+
                 </h:form>
+
+                <b:panel id="iframDivId" collapsible="false" >
+                    <iframe id="display" width="550" height="350"  frameborder="1" marginwidth="0" marginheight="0" src="../chat/chat.xhtml"  ></iframe>
+                </b:panel>
+
             </ui:define>
         </ui:composition>
     </h:body>

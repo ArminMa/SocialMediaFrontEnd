@@ -78,8 +78,8 @@ function init() {
 	// shadow
 
 	var canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = 128;
+	canvas.width = 0;
+	canvas.height = 0;
 
 	var context = canvas.getContext('2d');
 	var gradient = context.createRadialGradient(canvas.width / 2, canvas.height / 2, 0, canvas.width / 2,

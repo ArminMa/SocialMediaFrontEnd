@@ -9888,7 +9888,7 @@ THREE.DirectionalLight = function ( hex, intensity ) {
 	this.shadowCameraVisible = false;
 
 	this.shadowBias = 0;
-	this.shadowDarkness = 0.5;
+	this.shadowDarkness = 0.9;
 
 	this.shadowMapWidth = 512;
 	this.shadowMapHeight = 512;

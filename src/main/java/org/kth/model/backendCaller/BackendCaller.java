@@ -232,11 +232,12 @@ public interface BackendCaller {
         WebResource resource = c.resource( url );
         UserPojo userPojo= null;
         try{
-
-        }catch (UniformInterfaceException ue){
             userPojo = resource.header("x-authorization", "Bearer " + token).header("cache-control", "no-cache").get(UserPojo.class);
+            return userPojo;
+        }catch (UniformInterfaceException ue){
+            return null;
         }
-        return userPojo;
+
     }
 
     static List<UserPojo> getAllUsers() {

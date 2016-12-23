@@ -22,6 +22,8 @@
     <h:outputStylesheet library="sh" name="css/shCoreEclipse.css" />
 
 
+    <ui:insert name="header" />
+
     <style>
     @media ( min-width :20px) {
       #mandelbrot {width:70px;height:70px;display:block;margin-top:5px}
@@ -71,7 +73,7 @@
 
   <b:container>
     <b:row>
-      <b:column span="10">
+      <b:column span="12">
         <ui:insert name="content" />
       </b:column>
     </b:row>

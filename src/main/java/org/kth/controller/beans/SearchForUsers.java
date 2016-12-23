@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
+import org.kth.controller.beans.chat.ChatBean;
 import org.kth.controller.handlers.UserHandler;
 import org.kth.model.pojo.MailMessagePojo;
 import org.kth.model.pojo.UserPojo;
@@ -26,7 +28,18 @@ public class SearchForUsers implements Serializable {
 	private String topic = "";
 	private String resultPost = "";
 
+
+
 	public SearchForUsers() {
+	}
+
+	@ManagedProperty("#{chatBean}")
+	private ChatBean chatBean;
+	public ChatBean getChatBean() {
+		return chatBean;
+	}
+	public void setChatBean(ChatBean chatBean) {
+		this.chatBean = chatBean;
 	}
 
 	public String getSearchString() {
@@ -112,11 +125,25 @@ public class SearchForUsers implements Serializable {
 	public void sendMessage(UserPojo user){
 		if(user == null || message == "" || topic == ""){
 			resultPost = "Message cannot be sent. Require a receiver a message and a topic";
+
 		}
 
-		logger1.info("receiver name = " + user.getUsername());
+		if(user != null ){
+			if(user.getUsername() != null ){
+				logger1.info("receiver name = " + user.getUsername());
+			}else{
+				logger1.info("receiver name = null" );
+			}
+			if(user.getId() != null ){
+				logger1.info("receiver id = " + user.getId());
+			}else{
+				logger1.info("receiver id = null" );
+			}
+		}
+
+
 		logger1.info("message value = " + message);
-		logger1.info("receiver id = " + user.getId());
+
 		logger1.info("topic = " + topic);
 		resultPost = UserHandler.sendMailMessage(new MailMessagePojo(message, topic, user));
 	}
