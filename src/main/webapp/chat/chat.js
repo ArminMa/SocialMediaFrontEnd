@@ -18,7 +18,7 @@ var app = angular.module('AngularChat', [ "angularfaces" ]).controller(
         var newConnection = true;
         var user1Name = userLogdIn1;
         var user2Name = false;
-        var user1AsJson;
+        var user1AsJson = user1AsJson1;
         var user2AsJson;
         $scope.setUser1 = function(newValue, oldValue) {if ( newValue != oldValue) {this.user1AsJson = newValue;}};
         $scope.setUser2 = function(newValue, oldValue) {if ( newValue != oldValue) {this.user2AsJson = newValue;}};

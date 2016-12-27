@@ -48,8 +48,6 @@ public class ChatBean implements Serializable {
 			this.user2AsJson = user2.toString();
 			this.user2Name = user2.getUsername();
 		}
-
-
 	}
 
 	public String getUser1Name() {
