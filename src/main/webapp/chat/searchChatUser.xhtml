@@ -37,11 +37,20 @@
                                               update="userTableID"
                                               value="chater"
                                               action="#{chatBean.startChat(user)}"
-                                              onclick="window.open('/chat/chatFrame.jsf','_blank')"/>
+                                              onclick="openInExternalWindow()"/>
                         </b:dataTableColumn>
                     </b:dataTable>
                 </h:form>
             </ui:define>
+
+            <h:outputScript >
+                function openInExternalWindow() {
+
+                window.open("/chat/gulpChat/sample/index.xhtml", "", "width=400, height=600");
+                }
+
+            </h:outputScript>
+
         </ui:composition>
     </h:body>
 </f:view>

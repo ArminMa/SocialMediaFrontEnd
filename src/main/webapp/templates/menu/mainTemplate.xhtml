@@ -41,12 +41,10 @@
       .container {width: 75px;}
       #mandelbrot {width:30px;height:30px;}
     }
-    @media (min-width: 1700px){
-      .container {width: 1500px;}
+    @media (min-width: 1366px){
+      .container {width: 1200px;}
     }
-    @media (min-width: 1800px){
-      .container {width: 1700px;}
-    }
+
     label {
       font-weight:normal;
     }
@@ -66,7 +64,7 @@
   <script>
       SyntaxHighlighter.defaults['gutter'] = false;
   </script>
-  <ui:insert name="nbtop">
+  <ui:insert name="nbtop" >
 
     <ui:include src="navbartop.xhtml" />
   </ui:insert>
@@ -91,29 +89,6 @@
       SyntaxHighlighter.all();
   </script>
 
-  <!-- Piwik -->
-  <script type="text/javascript">
-      var _paq = _paq || [];
-      _paq.push([ 'trackPageView' ]);
-      _paq.push([ 'enableLinkTracking' ]);
-      (function() {
-          var u = "//www.atapuerca.de/piwik/";
-          _paq.push([ 'setTrackerUrl', u + 'piwik.php' ]);
-          _paq.push([ 'setSiteId', 4 ]);
-          var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-          g.type = 'text/javascript';
-          g.async = true;
-          g.defer = true;
-          g.src = u + 'piwik.js';
-          s.parentNode.insertBefore(g, s);
-      })();
-  </script>
-  <noscript>
-    <p>
-      <img src="//www.atapuerca.de/piwik/piwik.php?idsite=4" style="border: 0;" alt="" />
-    </p>
-  </noscript>
-  <!-- End Piwik Code -->
 
 </h:body>
 </html>

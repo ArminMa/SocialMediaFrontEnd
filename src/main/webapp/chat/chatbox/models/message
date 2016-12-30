@@ -1,0 +1,14 @@
+// set up a mongoose model
+
+var sender;
+var receiver;
+var theMessage;
+var date;
+
+module.exports = model('message', {
+
+    sender: {type: String},
+    receiver:{type: String},
+    theMessage:{type: String},
+    date:{type: Date}
+});

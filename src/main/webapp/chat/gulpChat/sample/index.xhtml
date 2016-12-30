@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ac="http://beyondjava.net/angularFacesCore">
+
+<head>
+  <title>
+    AngularJS+Bootstrap Simple Chat Directive Sample
+  </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="../src/css/style.css"/>
+    <link rel="stylesheet" href="../src/css/themes.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script type="text/javascript">
+
+      var userLogdIn1 = '#{chatBean.getUser1Name()}';
+      var user1AsJson1 = '#{chatBean.getUser1AsJson()}';
+      var token = '#{chatBean.getToken()}';
+  </script>
+</head>
+<ac:body ng-app="testApp" ng-controller="Shell as vm">
+
+  <div class="chat-container">
+    <ac:puiDiv  ng-controller="ironSimpleChat" angularJSFile="testApp.js"
+        messages="vm.messages"
+        username="vm.username"
+        input-placeholder-text="You can write here"
+        submit-button-text="Send your message"
+        title="Super Awesome Chat"
+        theme="material"
+        submit-function="vm.sendMessage"
+        visible="true">
+
+        <div ng-show="visible" class="row chat-window col-xs-5 col-md-3 {{vm.theme}}" ng-class="{minimized: vm.isHidden}">
+            <div class="col-xs-12 col-md-12">
+                <div class="panel">
+                    <div class="panel-heading chat-top-bar">
+                        <div class="col-md-8 col-xs-8">
+                            <h3 class="panel-title"><span class="fa fa-comment-o"></span> {{vm.title}}</h3>
+                        </div>
+                        <div class="col-md-4 col-xs-4 window-actions" style="text-align: right;">
+                            <span class="fa" ng-class="vm.chatButtonClass" ng-click="vm.toggle()"></span>
+                            <span class="fa fa-close" ng-click="vm.close()"></span>
+                        </div>
+                    </div>
+                    <div class="panel-body msg-container-base" ng-style="vm.panelStyle">
+                        <div class="row msg-container" ng-repeat="message in vm.messages" ng-init="selfAuthored = vm.myUserId == message.fromUserId">
+                            <div class="col-md-12 col-xs-12">
+                                <div class="chat-msg" ng-class="{'chat-msg-sent': selfAuthored, 'chat-msg-recieved': !selfAuthored}">
+                                    <span class="hide">myUserId:{{vm.myUserId}}</span>
+                                    <h:graphicImage ng-if="message.imageUrl" class="profile" ng-class="{'pull-right': selfAuthored, 'pull-left': !selfAuthored}" ng-src="{{message.imageUrl}}" />
+                                    <p>{{message.content}}</p>
+                                    <div class="chat-msg-author">
+                                        <strong>{{message.username}}</strong>&#160;
+                                        <span class="date">{{message.date|date:hh:mm:a}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer chat-bottom-bar">
+                        <h:form style="display:inherit" ng-submit="vm.submitFunction()">
+                            <div class="input-group" >
+                                <input type="text" class="form-control input-sm chat-input" placeholder="{{vm.inputPlaceholderText}}" ng-model="vm.writingMessage" />
+                                <span class="input-group-btn">
+                            <input type="submit" class="btn btn-sm chat-submit-button" value="{{vm.submitButtonText}}" />
+                        </span>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </ac:puiDiv>
+  </div>
+
+
+  <script type="text/javascript" src="../bower_components/lodash/dist/lodash.js"></script>
+
+
+
+  <script type="text/javascript" src="app.js"></script>
+
+</ac:body>
+</html>

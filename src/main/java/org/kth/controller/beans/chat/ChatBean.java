@@ -1,10 +1,13 @@
 package org.kth.controller.beans.chat;
 
 
+import java.io.IOException;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import org.kth.controller.handlers.CookieManager;
 import org.kth.controller.handlers.CookieNotFoundException;
 import org.kth.controller.handlers.UserHandler;
@@ -25,6 +28,9 @@ public class ChatBean implements Serializable {
 
 	public ChatBean() {
 	}
+
+
+
 
 	@PostConstruct
 	public void init() {
