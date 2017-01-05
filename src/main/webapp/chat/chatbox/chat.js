@@ -13,7 +13,7 @@ app.controller('ChatController', function($scope , UserService) {
     addMessage3('more messages comming in');
 
     var asjgdk = UserService.name;
-
+    var x = new awesome();
     // // open connection
     // var connection = new WebSocket('ws://127.0.0.1:1337');
     var newConnection = true;
@@ -60,7 +60,7 @@ app.controller('ChatController', function($scope , UserService) {
         if(this.user1Name == undefined || this.user1Name == 'undefined'){
             this.user1Name = userLogdIn1;
         }
-        awesome();
+        x.sendSocketMessage("hi!");
         $scope.myTextarea += this.user1Name + ' @ ' + $scope.inputText + '\n';
         $scope.inputText = '';
     }

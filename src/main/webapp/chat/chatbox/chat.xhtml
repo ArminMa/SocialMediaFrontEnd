@@ -10,9 +10,12 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:ac="http://beyondjava.net/angularFacesCore">
 <h:head>
+    <h:outputScript id="jsfBeanValue" >
+        var userLogdIn1 = '#{loginBean.username}';
+    </h:outputScript>
 
-
-
+    <h:outputScript id="jsfBeanValue2" library="js" name="help.js">
+    </h:outputScript>
 </h:head>
 
 <h:body>
@@ -27,13 +30,6 @@
         <ac:updateModelAfterAJAXRequest/>
             <ac:sync value="{{grid.rows}}" direction="serverToClient"  />
 
-            <h:outputScript id="jsfBeanValue" >
-                var userLogdIn1 = '#{loginBean.username}';
-            </h:outputScript>
-
-            <h:outputScript id="jsfBeanValue2" library="js" name="help.js">
-                awesome();
-            </h:outputScript>
 
 
             <b:well>
