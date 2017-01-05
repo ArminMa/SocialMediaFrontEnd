@@ -30,11 +30,10 @@
                                              update="messageTableId"
                                              value="Respond"
                                              action="#{viewPersonalMessages.sendMessage(message.sender)}" />
-
                         </b:dataTableColumn>
                     </b:dataTable>
 
-                    <h:panelGrid columns="4" cellpadding="5">
+                    <h:panelGrid columns="33" cellpadding="5">
                         <h3>Topic</h3>
                         <h:inputTextarea rows="6" cols="33" value="#{viewPersonalMessages.topic}" id="topicInputId">
                             <f:ajax event="keyup" execute="topicInputId" />

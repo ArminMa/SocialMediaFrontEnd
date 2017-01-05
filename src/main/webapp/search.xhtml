@@ -32,14 +32,14 @@
                         <b:dataTableColumn value="#{user.username}" />
                         <b:dataTableColumn value="#{user.email}" />
                         <b:dataTableColumn lable="Respond" id="respondColumnId">
-                            <b:commandButton process="@form"
-                                             update="userTableID"
+                            <h:commandButton process="@form"
+                                             update="userTableID resultLabel"
                                              value="sendMessage"
                                              action="#{viewPersonalMessages.sendMessage(user)}" />
                         </b:dataTableColumn>
                     </b:dataTable>
 
-                    <h:panelGrid columns="4" cellpadding="5">
+                    <h:panelGrid columns="33" cellpadding="5">
                         <h3>Topic</h3>
                         <h:inputTextarea rows="6" cols="33" value="#{viewPersonalMessages.topic}" id="topicInputId">
                             <f:ajax event="keyup" execute="topicInputId" />
@@ -48,17 +48,9 @@
                         <h:inputTextarea rows="6" cols="33" value="#{viewPersonalMessages.message}" id ="messageInputId">
                             <f:ajax event="keyup" execute="messageInputId" />
                         </h:inputTextarea>
-                        <b:row>
-                            <h:column>
-                                <h:outputLabel value="#{viewPersonalMessages.resultPost}" />
-                            </h:column>
-                        </b:row>
                     </h:panelGrid>
+                    <h:outputLabel id="resultLabel" value="#{viewPersonalMessages.resultPost}" />
                 </h:form>
-
-                <b:panel id="iframDivId" collapsible="false" >
-                    <iframe id="display" width="550" height="350"  frameborder="1" marginwidth="0" marginheight="0" src="../chat/chat.xhtml"  ></iframe>
-                </b:panel>
 
             </ui:define>
         </ui:composition>
