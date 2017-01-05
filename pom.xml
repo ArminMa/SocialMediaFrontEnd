@@ -27,7 +27,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <primefacesVersion>6.0</primefacesVersion>
+
     </properties>
     <dependencies>
         <dependency>
@@ -44,6 +44,20 @@
             <scope>compile</scope>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>com.github.bessemHmidi</groupId>-->
+            <!--<artifactId>angularBeans</artifactId>-->
+            <!--<version>1.0.2-RELEASE</version>-->
+        <!--</dependency>-->
+
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.webjars/angularjs &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.webjars</groupId>-->
+            <!--<artifactId>angularjs</artifactId>-->
+            <!--<version>2.0.0-alpha.22</version>-->
+        <!--</dependency>-->
+
+
         <dependency>
             <groupId>net.bootsfaces</groupId>
             <artifactId>bootsfaces</artifactId>
@@ -51,10 +65,10 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.primefaces</groupId>-->
+            <!--<artifactId>primefaces</artifactId>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.omnifaces</groupId>
@@ -62,23 +76,23 @@
         </dependency>
 
         <!-- Themes -->
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>all-themes</artifactId>
-            <version>1.0.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>primefaces-extensions</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>resources-ckeditor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>resources-codemirror</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.primefaces.extensions</groupId>-->
+            <!--<artifactId>all-themes</artifactId>-->
+            <!--<version>1.0.8</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.primefaces.extensions</groupId>-->
+            <!--<artifactId>primefaces-extensions</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.primefaces.extensions</groupId>-->
+            <!--<artifactId>resources-ckeditor</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.primefaces.extensions</groupId>-->
+            <!--<artifactId>resources-codemirror</artifactId>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

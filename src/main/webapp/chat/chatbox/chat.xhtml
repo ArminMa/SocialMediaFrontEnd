@@ -1,50 +1,69 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:ac="http://beyondjava.net/angularFacesCore">
-<head>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-    <style type="text/css">
-        * { font-family:tahoma; font-size:12px; padding:0px; margin:0px; }
-        p { line-height:18px; }
-        div { width:500px; margin-left:auto; margin-right:auto;}
-        #content { padding:5px; background:#ddd; border-radius:5px; overflow-y: scroll;
-            border:1px solid #CCC; margin-top:10px; height: 160px; }
-        #input { border-radius:2px; border:1px solid #ccc;
-            margin-top:10px; padding:5px; width:400px;  }
-        #status { width:88px; display:block; float:left; margin-top:15px; }
-    </style>
-    <script type="text/javascript">
-
-        var userLogdIn1 = '#{chatBean.getUser1Name()}';
-        var user1AsJson1 = '#{chatBean.getUser1AsJson()}';
-        var token = '#{chatBean.getToken()}';
-    </script>
-</head>
-<body>
-
-        <ac:puiDiv id="content" ng-app="AngularChat" ng-controller="ChatController" angularJSFile="chat.js">
+<h:head>
 
 
 
+</h:head>
 
-            <div>
-                <span id="status">Connecting...</span>
-                <input type="text" id="input" disabled="disabled" />
-            </div>
+<h:body>
 
 
-            <script src="chat.js" type="text/javascript"></script>
+    <h:form id="myForm" styleClass="form-horizontal">
 
-            <span id="messageGoesHere"/>
+        <ac:puiDiv  id="angular"
+                    ng-app="anchat"
+                    ng-controller="ChatController"
+                    angularJSFile="chat.js">
+        <ac:updateModelAfterAJAXRequest/>
+            <ac:sync value="{{grid.rows}}" direction="serverToClient"  />
 
-            <script type="text/javascript"></script>
+            <h:outputScript id="jsfBeanValue" >
+                var userLogdIn1 = '#{chatBean.getUser1Name()}';
+            </h:outputScript>
+
+
+            <b:well>
+                <b:row >
+                    <b:column medium-screen="12">
+                        <b:inputTextarea id="messageBord" style="resize: none;"  rows="8" span="9" readonly="true" value="{{myTextarea}}" />
+                    </b:column>
+                </b:row>
+
+                <b:row>
+                    <b:column medium-screen="12">
+                        <b:inputText id="inputTextID"
+                                     readonly="false"
+                                     type="text"
+                                     placeholder="send message...."
+                                     ng-model="inputText"
+                                     required="false"
+                                     value="{{inputText}}"
+                                     autocomplete="none"
+                                     col-xs="10">
+                            <f:facet name="prepend">
+                                <b:icon name="glyphicon-pencil" />
+                            </f:facet>
+                        </b:inputText>
+                    </b:column>
+                    <b:button look="primary" ng-click="sendMessage()" type="button" value="add" outcome="@none" />
+                </b:row>
+
+            </b:well>
+
         </ac:puiDiv>
+    </h:form>
 
-</body>
+</h:body>
 </html>
 
 

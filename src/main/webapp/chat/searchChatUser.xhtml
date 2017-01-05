@@ -17,6 +17,7 @@
         <ui:composition template="../templates/menu/mainTemplate.xhtml">
             <ui:define name="content">
                 <h:form>
+                    <ac:updateModelAfterAJAXRequest/>
                     <h:inputText id="searchStringId" value="#{searchForUsers.searchString}" />
                     <b:commandButton id="searchButtonId" process="@form" update="userTableID" value="Search" action="#{searchForUsers.searchForUsers}" />
                     <h:selectOneMenu id="selectMenuId" value="#{searchForUsers.searchOption}" required="false" label="search Options">
@@ -45,8 +46,7 @@
 
             <h:outputScript >
                 function openInExternalWindow() {
-
-                window.open("/chat/gulpChat/sample/index.xhtml", "", "width=400, height=600");
+                    window.open('/chat/chatbox/chat.jsf', '', "width=250, height=300") ;
                 }
 
             </h:outputScript>

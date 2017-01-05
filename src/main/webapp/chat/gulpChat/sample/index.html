@@ -5,21 +5,14 @@
   <title>
     AngularJS+Bootstrap Simple Chat Directive Sample
   </title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link
-    rel="stylesheet"
-    href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link
-    rel="stylesheet"
-    href="../src/css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="../src/css/style.css"/>
+  <link rel="stylesheet" href="../src/css/themes.css"/>
+  <link rel="stylesheet" href="style.css"/>
 
-    <link
-    rel="stylesheet"
-    href="../src/css/themes.css">
 
-  <link
-    rel="stylesheet"
-    href="style.css">
+
 </head>
 <body ng-controller="Shell as vm">
 
@@ -44,7 +37,15 @@
   <script src="../src/scripts/index.js"></script>
 
 
-  <script src="app.js"></script>
+  <script src="app.js">
 
+  </script>
+  <script type="text/javascript">
+
+      vm.userLogdIn1 = "#{chatBean.getUser1Name()}";
+      var userLogdIn2 = '#{chatBean.getUser2Name()}';
+      var user1AsJson1 = '#{chatBean.getUser1AsJson()}';
+      var token = '#{chatBean.getToken()}';
+  </script>
 </body>
 </html>

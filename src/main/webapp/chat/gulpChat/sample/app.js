@@ -1,17 +1,20 @@
 (function() {
   'use strict';
 
-  angular.module('app', ['simpleChat']);
+  var app = angular.module('app', ['simpleChat']);
 
-  angular.module('app').controller('Shell', Shell);
+    app.controller('Shell', Shell);
 
   function Shell() {
 
     var vm = this;
 
+      vm.userLogdIn1 = userLogdIn1;
+      var user2Name = userLogdIn2;
+
     vm.messages = [
       {
-        'username': 'Matt',
+        'username': vm.userLogdIn1,
         'content': 'Hi!'
       },
       {

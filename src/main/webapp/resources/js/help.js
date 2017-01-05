@@ -1,0 +1,1 @@
+var userLogdIn1 = '#{chatBean.getUser1Name()}';

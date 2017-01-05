@@ -42,10 +42,10 @@
                         <b:navLink value="viewLog"                      outcome="#{request.contextPath}/viewLog.jsf" />
                         <b:navLink value="viewPersonalMessages"                 outcome="#{request.contextPath}/viewPersonalMessages.jsf"   />
                         <b:navLink value="writeLog"                 outcome="#{request.contextPath}/writeLog.jsf" />
-                        <b:navLink value="car"                 outcome="#{request.contextPath}/carshop/index.jsf"   />
+
                         <b:navLink value="searchChatUser"                 outcome="#{request.contextPath}/chat/searchChatUser.jsf"   />
-                        <b:navLink value="chat"                 outcome="#{request.contextPath}/chat/chatFrame.jsf"   />
-                        <b:navLink value="chatgulp"        onclick="openInExternalWindow()"/>
+
+                        <b:navLink value="chat"        onclick="openInExternalWindow()"/>
 
                     </b:dropMenu>
                 </b:navbarLinks>
@@ -55,7 +55,7 @@
 
         <h:outputScript >
             function openInExternalWindow() {
-                window.open("/chat/gulpChat/sample/index.xhtml", "", "width=400, height=600");
+                window.open('/chat/chatbox/chat.jsf', '', "width=250, height=300") ;
             }
 
         </h:outputScript>

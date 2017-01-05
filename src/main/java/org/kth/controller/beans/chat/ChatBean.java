@@ -1,13 +1,15 @@
 package org.kth.controller.beans.chat;
 
 
-import java.io.IOException;
+
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+
 import org.kth.controller.handlers.CookieManager;
 import org.kth.controller.handlers.CookieNotFoundException;
 import org.kth.controller.handlers.UserHandler;
@@ -25,12 +27,12 @@ public class ChatBean implements Serializable {
 	private String user2AsJson;
 	private String user2Name;
 	private String token;
+	private String message;
+
+	private List<message> messages = new ArrayList<>();
 
 	public ChatBean() {
 	}
-
-
-
 
 	@PostConstruct
 	public void init() {
@@ -45,6 +47,26 @@ public class ChatBean implements Serializable {
 			token = null;
 		}
 
+		messages.add(new message("Armin", "hi")) ;
+		messages.add(new message("Elisa", "Whats up??")) ;
+		messages.add(new message("Armin", "nice AngularJS Directive")) ;
+		messages.add(new message("Elisa", "Looks Great!!!")) ;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public List<message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<message> messages) {
+		this.messages = messages;
 	}
 
 	public void startChat(UserPojo userPojo2){
