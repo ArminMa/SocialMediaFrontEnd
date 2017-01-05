@@ -28,7 +28,11 @@
             <ac:sync value="{{grid.rows}}" direction="serverToClient"  />
 
             <h:outputScript id="jsfBeanValue" >
-                var userLogdIn1 = '#{chatBean.getUser1Name()}';
+                var userLogdIn1 = '#{loginBean.username}';
+            </h:outputScript>
+
+            <h:outputScript id="jsfBeanValue2" library="js" name="help.js">
+                awesome();
             </h:outputScript>
 
 

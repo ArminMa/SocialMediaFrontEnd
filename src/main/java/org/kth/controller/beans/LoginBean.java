@@ -1,6 +1,7 @@
 package org.kth.controller.beans;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -13,7 +14,7 @@ import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class LoginBean implements Serializable {
 
     @Size(min=1, max=50)
