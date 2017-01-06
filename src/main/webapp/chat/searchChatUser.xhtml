@@ -10,47 +10,74 @@
 
     <h:head>
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
         <title>Registration</title>
     </h:head>
-    <h:body >
+    <h:body>
         <ui:composition template="../templates/menu/mainTemplate.xhtml">
             <ui:define name="content">
-                <h:form>
-                    <ac:updateModelAfterAJAXRequest/>
-                    <h:inputText id="searchStringId" value="#{searchForUsers.searchString}" />
-                    <b:commandButton id="searchButtonId" process="@form" update="userTableID" value="Search" action="#{searchForUsers.searchForUsers}" />
-                    <h:selectOneMenu id="selectMenuId" value="#{searchForUsers.searchOption}" required="false" label="search Options">
-                        <f:selectItem itemLabel="search By ?" itemValue="1UserName" noSelectionOption="true" />
-                        <f:selectItem itemLabel="search By UserName" itemValue="1UserName" />
-                        <f:selectItem itemLabel="search By Email" itemValue="2Email" />
-                    </h:selectOneMenu>
 
-                    <b:dataTable value="#{searchForUsers.userBeansList}"
-                                 var="user"
-                                 class="userListTable"
-                                 id = "userTableID" >
-                        <b:dataTableColumn value="#{user.username}" />
-                        <b:dataTableColumn value="#{user.email}" />
-                        <b:dataTableColumn lable="Chat" id="chatColumnId">
-                            <b:commandButton  id="startChatButtonId"
-                                              process="@form"
-                                              update="userTableID"
-                                              value="chater"
-                                              action="#{chatBean.startChat(user)}"
-                                              onclick="openInExternalWindow()"/>
-                        </b:dataTableColumn>
-                    </b:dataTable>
-                </h:form>
+
+                <ac:puiDiv  id="angular"
+                            ng-app="lisnerApp"
+                            ng-controller="lisnerController"
+                            angularJSFile="searchChatUser.js">
+                    <h:form>
+                        <ac:updateModelAfterAJAXRequest/>
+                        <h:inputText id="searchStringId" value="#{searchForUsers.searchString}" />
+                        <b:commandButton id="searchButtonId" process="@form" update="userTableID" value="Search" action="#{searchForUsers.searchForUsers}" />
+                        <h:selectOneMenu id="selectMenuId" value="#{searchForUsers.searchOption}" required="false" label="search Options">
+                            <f:selectItem itemLabel="search By ?" itemValue="1UserName" noSelectionOption="true" />
+                            <f:selectItem itemLabel="search By UserName" itemValue="1UserName" />
+                            <f:selectItem itemLabel="search By Email" itemValue="2Email" />
+                        </h:selectOneMenu>
+
+                        <b:dataTable value="#{searchForUsers.userBeansList}"
+                                     var="userrr"
+                                     class="userListTable"
+                                     id = "userTableID" >
+                            <b:dataTableColumn value="#{userrr.username}" />
+                            <b:dataTableColumn value="#{userrr.email}" />
+                            <b:dataTableColumn lable="Chat" id="chatColumnId">
+                                <b:commandButton  id="startChatButtonId"
+                                                  process="@form"
+                                                  update="userTableID"
+                                                  value="chater"
+                                                  action="#{chatBean.startChat(userrr)}"
+                                                  onclick="chatWith()">
+
+                                </b:commandButton>
+                            </b:dataTableColumn>
+                        </b:dataTable>
+
+
+
+                    </h:form>
+                    <h:outputScript >
+                        var userNamee = '#{loginBean.username}';
+                        var passwooord ='#{loginBean.password}';
+                        var socket;
+                        var chatWithThisUserName = '#{chatBean.user2Name}';
+
+                        function chatWith(){
+                            if(chatWithThisUserName == "WTF is this?"){
+                                chatWithThisUserName = '#{chatBean.user2Name}';
+                                setTimeout(chatWith(), 1000);
+                            }else{
+                                var userNameOfUserToChatWith = chatWithThisUserName;
+                                alert("function chatWith called =" + userNameOfUserToChatWith);
+                                sendSocketMessage2(userNamee, passwooord , userNameOfUserToChatWith);
+                                chatWithThisUserName = "WTF is this?";
+                            }
+
+
+                        }
+
+                    </h:outputScript>
+                </ac:puiDiv>
             </ui:define>
 
-            <h:outputScript >
-                function openInExternalWindow() {
-                    window.open('/chat/chatbox/chat.jsf','', "width=250, height=300") ;
-                }
-
-            </h:outputScript>
-
         </ui:composition>
+
     </h:body>
 </f:view>

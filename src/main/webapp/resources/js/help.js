@@ -39,3 +39,39 @@ function awesome() {
 function openInExternalWindow() {
     window.open('/chat/chatbox/chat.jsf','', "width=250, height=300");
 }
+
+function chatConnectionSocketListener(userName, password){
+    alert("chatConnectionSocketListener function alert window!!!!");
+    var host = "ws://localhost:5091/myapp";
+    var wSocket = new WebSocket(host);
+
+    // called when a message is received
+    wSocket.onmessage = function(event) {
+        var received_msg = event.data;
+        alert(received_msg);
+    };
+    // called when socket closes
+    wSocket.onclose = function() {
+        alert("Connection is closed...");
+    };
+
+    wSocket.onopen = function(){
+        alert(" Web Socket is connected, sending data");
+    };
+    wSocket.onerror = function(){
+        alert("Fel!");
+    };
+
+    this.socket = wSocket;
+
+    this.sendSocketMessage = function(username, password){
+        alert("in sendSocketMessage");
+        var user = {
+                username: username,
+                password: password
+        };
+
+        var userPojo = JSON.stringify({ type: 'message', data: user });
+        this.socket.send(userPojo);
+    }
+}

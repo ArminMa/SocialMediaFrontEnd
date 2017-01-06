@@ -71,7 +71,6 @@ public class ChatBean implements Serializable {
 
 	public void startChat(UserPojo userPojo2){
 		if(userPojo2 != null){
-			init();
 			this.user2 = userPojo2;
 			this.user2AsJson = user2.toString();
 			this.user2Name = user2.getUsername();
@@ -95,6 +94,8 @@ public class ChatBean implements Serializable {
 	}
 
 	public String getUser2Name() {
+		if (user2Name == null || user2Name.isEmpty())
+			return "WTF is this?";
 		return user2Name;
 	}
 
