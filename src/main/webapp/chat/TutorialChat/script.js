@@ -242,7 +242,7 @@ var app = angular.module('AngularChat', [ "angularfaces" ]).controller(
             }
         }
 
-        sendBtnEl.onclick = sendMessage;
+        sendBtnEl.onclick = loginToChat;
         chatToAllEl.onclick = chatToFn('all');
 
         function sendMessage() {

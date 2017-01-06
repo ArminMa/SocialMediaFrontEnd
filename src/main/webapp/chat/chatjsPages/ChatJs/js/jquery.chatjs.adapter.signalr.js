@@ -8,8 +8,8 @@ var SignalRServerAdapter = (function () {
         this.hubServer = chatHubServer;
     }
     // sends a message to a room, conversation or user
-    SignalRServerAdapter.prototype.sendMessage = function (roomId, conversationId, otherUserId, messageText, clientGuid, done) {
-        this.hubServer.sendMessage(roomId, conversationId, otherUserId, messageText, clientGuid).done(function () {
+    SignalRServerAdapter.prototype.loginToChat = function (roomId, conversationId, otherUserId, messageText, clientGuid, done) {
+        this.hubServer.loginToChat(roomId, conversationId, otherUserId, messageText, clientGuid).done(function () {
             done();
         });
     };
@@ -75,7 +75,7 @@ var SignalRClientAdapter = (function () {
         this.hubClient = chatHubClient;
 
         // called by the server when a new message arrives
-        this.hubClient.sendMessage = function (message) {
+        this.hubClient.loginToChat = function (message) {
             _this.triggerMessagesChanged(message);
         };
 

@@ -29,6 +29,7 @@
 
             <h:outputScript id="jsfBeanValue" >
                 var userLogdIn1 = '#{loginBean.username}';
+                var passworrdd = '#{loginBean.password}';
             </h:outputScript>
 
             <h:outputScript id="jsfBeanValue2" library="js" name="help.js">
@@ -57,7 +58,7 @@
                             </f:facet>
                         </b:inputText>
                     </b:column>
-                    <b:button look="primary" ng-click="sendMessage()" type="button" value="add" outcome="@none" />
+                    <b:button look="primary" ng-click="loginToChat()" type="button" value="add" outcome="@none" />
                 </b:row>
 
             </b:well>

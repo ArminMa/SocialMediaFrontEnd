@@ -126,7 +126,7 @@ class MessageBoard {
                 if (e.which == 13) {
                     e.preventDefault();
                     if (this.$textBox.val()) {
-                        this.sendMessage(this.$textBox.val());
+                        this.loginToChat(this.$textBox.val());
                         this.$textBox.val('').trigger("autosize.resize");
                     }
                 }
@@ -181,7 +181,7 @@ class MessageBoard {
 
         this.addMessage(message);
 
-        this.options.adapter.server.sendMessage(this.options.roomId, this.options.conversationId, this.options.otherUserId, messageText, clientGuid, () => {});
+        this.options.adapter.server.loginToChat(this.options.roomId, this.options.conversationId, this.options.otherUserId, messageText, clientGuid, () => {});
     }
 
     playSound() {

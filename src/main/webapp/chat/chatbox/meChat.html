@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hi!</h1>
+<div ng-app="myApp" ng-controller="customersCtrl">
+    <ul>
+        <li ng-repeat="x in myData">
+            {{ x.username}}
+        </li>
+    </ul>
+</div>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function($scope, $http) {
+        $http.get(" http://localhost:8081/social//getAllUsers").then(function (response) {
+            alert("got a response from http:get");
+            $scope.myData = response.data.records;
+        });
+    });
+</script>
+
+</body>
+</html>

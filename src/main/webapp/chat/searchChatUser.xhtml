@@ -16,12 +16,18 @@
     <h:body>
         <ui:composition template="../templates/menu/mainTemplate.xhtml">
             <ui:define name="content">
-
-
                 <ac:puiDiv  id="angular"
                             ng-app="lisnerApp"
                             ng-controller="lisnerController"
                             angularJSFile="searchChatUser.js">
+
+                    <h:outputScript id="jsfBeanValue" >
+                        var userLogdIn1 = '#{loginBean.username}';
+                        var currentUserPassword = '#{loginBean.password}';
+                    </h:outputScript>
+
+                    <h:outputScript id="jsfBeanValue2" library="js" name="help.js">
+                    </h:outputScript>
                     <h:form>
                         <ac:updateModelAfterAJAXRequest/>
                         <h:inputText id="searchStringId" value="#{searchForUsers.searchString}" />
@@ -33,51 +39,23 @@
                         </h:selectOneMenu>
 
                         <b:dataTable value="#{searchForUsers.userBeansList}"
-                                     var="userrr"
+                                     var="user"
                                      class="userListTable"
                                      id = "userTableID" >
-                            <b:dataTableColumn value="#{userrr.username}" />
-                            <b:dataTableColumn value="#{userrr.email}" />
+                            <b:dataTableColumn value="#{user.username}" />
+                            <b:dataTableColumn value="#{user.email}" />
                             <b:dataTableColumn lable="Chat" id="chatColumnId">
                                 <b:commandButton  id="startChatButtonId"
                                                   process="@form"
                                                   update="userTableID"
-                                                  value="chater"
-                                                  action="#{chatBean.startChat(userrr)}"
-                                                  onclick="chatWith()">
-
+                                                  value="chat"
+                                                  ng-click="startChatWithUser('#{chatBean.startChat(user)}')">
                                 </b:commandButton>
                             </b:dataTableColumn>
                         </b:dataTable>
-
-
-
                     </h:form>
-                    <h:outputScript >
-                        var userNamee = '#{loginBean.username}';
-                        var passwooord ='#{loginBean.password}';
-                        var socket;
-                        var chatWithThisUserName = '#{chatBean.user2Name}';
-
-                        function chatWith(){
-                            if(chatWithThisUserName == "WTF is this?"){
-                                chatWithThisUserName = '#{chatBean.user2Name}';
-                                setTimeout(chatWith(), 1000);
-                            }else{
-                                var userNameOfUserToChatWith = chatWithThisUserName;
-                                alert("function chatWith called =" + userNameOfUserToChatWith);
-                                sendSocketMessage2(userNamee, passwooord , userNameOfUserToChatWith);
-                                chatWithThisUserName = "WTF is this?";
-                            }
-
-
-                        }
-
-                    </h:outputScript>
                 </ac:puiDiv>
             </ui:define>
-
         </ui:composition>
-
     </h:body>
 </f:view>

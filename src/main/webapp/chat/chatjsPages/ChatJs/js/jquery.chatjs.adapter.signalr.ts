@@ -44,7 +44,7 @@ class SignalRServerAdapter implements IServerAdapter {
 
     // sends a message to a room, conversation or user
     sendMessage(roomId: number, conversationId: number, otherUserId: number, messageText: string, clientGuid: string, done: () => void): void {
-        this.hubServer.sendMessage(roomId, conversationId, otherUserId, messageText, clientGuid).done(() => {
+        this.hubServer.loginToChat(roomId, conversationId, otherUserId, messageText, clientGuid).done(() => {
             done();
         });
     }
@@ -113,7 +113,7 @@ class SignalRClientAdapter implements IClientAdapter {
         this.hubClient = chatHubClient;
 
         // called by the server when a new message arrives
-        this.hubClient.sendMessage = (message: ChatMessageInfo) => {
+        this.hubClient.loginToChat = (message: ChatMessageInfo) => {
             this.triggerMessagesChanged(message);
         };
 

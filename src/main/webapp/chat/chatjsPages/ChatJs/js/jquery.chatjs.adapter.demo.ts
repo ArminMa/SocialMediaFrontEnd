@@ -100,7 +100,7 @@ class DemoServerAdapter implements IServerAdapter {
     }
 
     sendMessage(roomId:number, conversationId:number, otherUserId:number, messageText:string, clientGuid:string, done:() => void):void {
-        console.log("DemoServerAdapter: sendMessage");
+        console.log("DemoServerAdapter: loginToChat");
 
         // we have to send the current message to the current user first
         // in chatjs, when you send a message to someone, the same message bounces back to the user

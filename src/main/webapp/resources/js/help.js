@@ -28,8 +28,8 @@ function awesome() {
 
     this.socket = wSocket;
 
-    this.sendSocketMessage = function(message){
-        alert("in sendSocketMessage");
+    this.sendMessage = function(message){
+        alert("in loginToChat");
         alert(message);
         this.socket.send(message);
     }
@@ -42,6 +42,7 @@ function openInExternalWindow() {
 
 function chatConnectionSocketListener(userName, password){
     alert("chatConnectionSocketListener function alert window!!!!");
+    alert("username:" + userName + ", password: "  + password);
     var host = "ws://localhost:5091/myapp";
     var wSocket = new WebSocket(host);
 
@@ -64,14 +65,10 @@ function chatConnectionSocketListener(userName, password){
 
     this.socket = wSocket;
 
-    this.sendSocketMessage = function(username, password){
-        alert("in sendSocketMessage");
-        var user = {
-                username: username,
-                password: password
-        };
-
-        var userPojo = JSON.stringify({ type: 'message', data: user });
-        this.socket.send(userPojo);
+    this.startChatWith = function (username){
+        alert("in start chat with js");
+        alert("username " + username);
+        this.socket.send(username);
+        alert("after socket send username" + username);
     }
 }

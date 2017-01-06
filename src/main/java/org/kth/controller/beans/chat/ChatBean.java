@@ -69,11 +69,15 @@ public class ChatBean implements Serializable {
 		this.messages = messages;
 	}
 
-	public void startChat(UserPojo userPojo2){
+	public String startChat(UserPojo userPojo2){
+		System.out.println("called startChat");
 		if(userPojo2 != null){
 			this.user2 = userPojo2;
 			this.user2AsJson = user2.toString();
 			this.user2Name = user2.getUsername();
+			return user2.getUsername();
+		} else {
+			return "anonymus";
 		}
 	}
 

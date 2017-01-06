@@ -105,7 +105,7 @@ var MessageBoard = (function () {
                 if (e.which == 13) {
                     e.preventDefault();
                     if (_this.$textBox.val()) {
-                        _this.sendMessage(_this.$textBox.val());
+                        _this.loginToChat(_this.$textBox.val());
                         _this.$textBox.val('').trigger("autosize.resize");
                     }
                 }
@@ -147,7 +147,7 @@ var MessageBoard = (function () {
         });
     };
 
-    MessageBoard.prototype.sendMessage = function (messageText) {
+    MessageBoard.prototype.loginToChat = function (messageText) {
         /// <summary>Sends a message to the other user</summary>
         /// <param FullName="messageText" type="String">Message being sent</param>
         var generateGuidPart = function () {
@@ -162,7 +162,7 @@ var MessageBoard = (function () {
 
         this.addMessage(message, clientGuid);
 
-        this.options.adapter.server.sendMessage(this.options.roomId, this.options.conversationId, this.options.otherUserId, messageText, clientGuid, function () {
+        this.options.adapter.server.loginToChat(this.options.roomId, this.options.conversationId, this.options.otherUserId, messageText, clientGuid, function () {
         });
     };
 

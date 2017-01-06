@@ -33,7 +33,7 @@
 
     vm.username = 'Matt';
 
-    vm.sendMessage = function(message, username) {
+    vm.loginToChat = function(message, username) {
       if(message && message !== '' && username) {
         vm.messages.push({
           'username': username,

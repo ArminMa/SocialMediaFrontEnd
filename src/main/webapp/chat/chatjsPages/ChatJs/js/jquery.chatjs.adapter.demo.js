@@ -94,9 +94,9 @@ var DemoServerAdapter = (function () {
             };
         });
     }
-    DemoServerAdapter.prototype.sendMessage = function (roomId, conversationId, otherUserId, messageText, clientGuid, done) {
+    DemoServerAdapter.prototype.loginToChat = function (roomId, conversationId, otherUserId, messageText, clientGuid, done) {
         var _this = this;
-        console.log("DemoServerAdapter: sendMessage");
+        console.log("DemoServerAdapter: loginToChat");
 
         // we have to send the current message to the current user first
         // in chatjs, when you send a message to someone, the same message bounces back to the user

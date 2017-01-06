@@ -18,6 +18,7 @@ app.controller('ChatController', function($scope , UserService) {
     // var connection = new WebSocket('ws://127.0.0.1:1337');
     var newConnection = true;
     var user1Name = userLogdIn1;
+    var passwordd = passworrdd;
     var user2Name = false;
 
     $scope.setUser1Name = function(newValue, oldValue) {if ( newValue != oldValue) {this.user1Name = newValue;}};
@@ -56,11 +57,11 @@ app.controller('ChatController', function($scope , UserService) {
 
     $scope.inputText = "";
     $scope.myTextarea= "";
-    $scope.sendMessage = function () {
+    $scope.loginToChat = function () {
         if(this.user1Name == undefined || this.user1Name == 'undefined'){
             this.user1Name = userLogdIn1;
         }
-        x.sendSocketMessage("hi!");
+        x.loginToChat("hi!");
         $scope.myTextarea += this.user1Name + ' @ ' + $scope.inputText + '\n';
         $scope.inputText = '';
     }
