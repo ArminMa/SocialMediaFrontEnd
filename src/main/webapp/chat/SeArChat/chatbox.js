@@ -7,7 +7,7 @@ angular.module('MyApp').factory('MyService', ['$q', '$rootScope', function($q, $
     var currentCallbackId = 0;
     // Create our websocket object with the address to the websocket
     var ws5091 = new WebSocket("ws://localhost:5091/groupManager");
-    var ws5092 = new WebSocket("ws://localhost:5091/messages");
+    var ws5092 = new WebSocket("ws://localhost:5092/messages");
 
 
     ws5091.onopen = function(){

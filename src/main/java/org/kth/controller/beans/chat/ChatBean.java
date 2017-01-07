@@ -1,8 +1,5 @@
 package org.kth.controller.beans.chat;
 
-
-
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +11,6 @@ import org.kth.controller.handlers.CookieManager;
 import org.kth.controller.handlers.CookieNotFoundException;
 import org.kth.controller.handlers.UserHandler;
 import org.kth.model.pojo.UserPojo;
-
 
 @ManagedBean
 @SessionScoped
