@@ -14,9 +14,9 @@ function chatConnectionSocketListener(userName, password){
     // called when a message is received
     wSocket.onmessage = function(event) {
         alert("in on message");
-        var received_msg = event.data;
+        var received_msg = JSON.parse(event.data);
         alert("after tostring");
-        alert("data received: " + received_msg);
+        alert("data received: " + received_msg.groupid);
     };
     // called when socket closes
     wSocket.onclose = function() {
