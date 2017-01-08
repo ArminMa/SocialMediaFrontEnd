@@ -13,3 +13,4 @@ app.controller('lisnerController', function($scope) {
         chatSocketConnection.startChatWith(hey);
     }
 });
+
