@@ -3,7 +3,7 @@ var helloWorld = 'helo';
 var socket;
 
 function openInExternalWindow(group) {
-    window.open('/chat/chatbox/chat.jsf?groupid=' + group,'', "width=250, height=300");
+    window.open('/chat/chatbox/chat.jsf?groupid=' + group,'', "width=350, height=300");
 }
 
 function chatConnectionSocketListener(userName, password){
