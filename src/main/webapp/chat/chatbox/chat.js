@@ -26,8 +26,10 @@ app.controller('ChatController', function($scope , UserService) {
     // called when a message is received
     wSocket.onmessage = function(event) {
         alert("in on message in chat socket");
-        alert("message: " + event.data.toString);
-        addMessage3(event.data.toString);
+        alert("message: " + event.data);
+        var wuut = event.data;
+        addMessage3(wuut);
+        $scope.$apply();
     };
     wSocket.onclose = function() {
         alert("chat socket Connection is closed...");
@@ -41,31 +43,29 @@ app.controller('ChatController', function($scope , UserService) {
 
     this.socket = wSocket;
 
-    this.socket.sendMessage = function (group, message){
-        alert("in chatsocket send message");
-        var messagePojo = {
-            groupid:group,
-            message:message
-        }
-        alert(messagePojo.groupid + ", " + messagePojo.message);
-        this.socket.send(JSON.stringify(messagePojo));
-    }
-
     $scope.setUser1Name = function(newValue, oldValue) {if ( newValue != oldValue) {this.user1Name = newValue;}};
     $scope.setUser2Name = function(newValue, oldValue) {if ( newValue != oldValue) {this.user2Name = newValue;}};
     $scope.$watch('chatBean.user1Name', $scope.setUser1Name);
     $scope.$watch('chatBean.user2Name', $scope.setUser2Name);
 
     $scope.buttonClict = function() {
-        alert("in buttonclick");
-        addMessage3($scope.inputText);
-        wSocket.send($scope.inputText);
+        alert("in chatsocket send message");
+        var groupid = $_GET('groupid');
+        var message = $scope.inputText;
+        var messagePojo = {
+            groupid:group,
+            message:message,
+            sendername:userLogdIn1
+        }
+        alert(messagePojo.groupid + ", " + messagePojo.message + ", " + messagePojo.sendername);
+        wSocket.send(JSON.stringify(messagePojo));
         alert("after sendmessage");
     };
 
-    function addMessage3( message) {
+    function addMessage3(message) {
         alert("in add message");
-        $scope.myTextarea += $scope.inputText + '\n';
+        alert("message: " + message);
+        $scope.myTextarea += message + '\n';
         alert("addmessage3 done");
     }
 });
