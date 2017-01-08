@@ -10,8 +10,6 @@ app.controller('lisnerController', function($scope) {
     var chatSocketConnection = new chatConnectionSocketListener(user1Name, userPassword);
 
     $scope.startChatWithUser = function (hey) {
-        alert("in searchChatUser.js startChatWithUser");
-        alert(hey);
         chatSocketConnection.startChatWith(hey);
     }
 });

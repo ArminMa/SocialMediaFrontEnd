@@ -9,10 +9,8 @@ app.controller('ChatController', function($scope , UserService) {
     // This initializes the Angular Model with the values of the JSF
     // bean attributes
     initJSFScope($scope);
-    alert("in chatboxcontroller");
 
     var group = $_GET('groupid');
-    alert("groupID = " + group);
     var newConnection = true;
     var user1Name = userLogdIn1;
     var passwordd = passworrdd;
@@ -20,13 +18,10 @@ app.controller('ChatController', function($scope , UserService) {
     $scope.inputText = "";
     $scope.myTextarea= "";
 
-    alert("creating chat socket!!!!");
     var host = "ws://localhost:5092/myapp";
     var wSocket = new WebSocket(host);
     // called when a message is received
     wSocket.onmessage = function(event) {
-        alert("in on message in chat socket");
-        alert("message: " + event.data);
         var wuut = event.data;
         addMessage3(wuut);
         $scope.$apply();
@@ -35,10 +30,15 @@ app.controller('ChatController', function($scope , UserService) {
         alert("chat socket Connection is closed...");
     };
     wSocket.onopen = function(){
-        alert(" chat Socket is connected");
+        var messagePojo = {
+            sendername:userLogdIn1,
+            message:"",
+            groupid:group
+        }
+        wSocket.send(JSON.stringify(messagePojo));
     };
     wSocket.onerror = function(){
-        alert("Fel chat socket!");
+        alert("Error chat socket!");
     };
 
     this.socket = wSocket;
@@ -49,7 +49,6 @@ app.controller('ChatController', function($scope , UserService) {
     $scope.$watch('chatBean.user2Name', $scope.setUser2Name);
 
     $scope.buttonClict = function() {
-        alert("in chatsocket send message");
         var groupid = $_GET('groupid');
         var message = $scope.inputText;
         var messagePojo = {
@@ -57,16 +56,11 @@ app.controller('ChatController', function($scope , UserService) {
             message:message,
             sendername:userLogdIn1
         }
-        alert(messagePojo.groupid + ", " + messagePojo.message + ", " + messagePojo.sendername);
         wSocket.send(JSON.stringify(messagePojo));
-        alert("after sendmessage");
     };
 
     function addMessage3(message) {
-        alert("in add message");
-        alert("message: " + message);
         $scope.myTextarea += message + '\n';
-        alert("addmessage3 done");
     }
 });
 
