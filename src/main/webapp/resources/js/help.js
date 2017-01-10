@@ -25,6 +25,7 @@ function chatConnectionSocketListener(userName, password){
             username:userName,
             password:password
         };
+        var jsonStr = "{'username:'" + userName + "', 'password':'" + password + "'}";
         wSocket.send(JSON.stringify(myuser));
     };
 

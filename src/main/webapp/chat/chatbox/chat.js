@@ -18,7 +18,7 @@ app.controller('ChatController', function($scope , UserService) {
     $scope.inputText = "";
     $scope.myTextarea= "";
 
-    var host = "ws://localhost:5092/myapp";
+    var host = "ws://localhost:5092";
     var wSocket = new WebSocket(host);
     // called when a message is received
     wSocket.onmessage = function(event) {
