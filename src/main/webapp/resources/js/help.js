@@ -7,7 +7,7 @@ function openInExternalWindow(group) {
 }
 
 function chatConnectionSocketListener(userName, password){
-    var host = "ws://localhost:5091/myapp";
+    var host = "ws://104.199.70.136:5091/myapp";
     var wSocket = new WebSocket(host);
     // called when a message is received
     wSocket.onmessage = function(event) {

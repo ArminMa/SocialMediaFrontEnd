@@ -23,7 +23,7 @@ import java.util.List;
  * Backend method calls
  */
 public interface BackendCaller {
-    static final String baseUrlAddress = "http://localhost:8081";
+    static final String baseUrlAddress = "http://104.199.70.136:8081";
     static final Logger logger1 = LoggerFactory.getLogger( UserPojo.class );
     static final String nLin = System.lineSeparator();
 

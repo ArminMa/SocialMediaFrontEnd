@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class UserHandler {
 	public static final Logger logger1 = LoggerFactory.getLogger( UserHandler.class );
-	private static final String baseUrlAddress = "http://localhost:8081";
+	private static final String baseUrlAddress = "http://104.199.70.136:8081";
 	public static final String nLin = System.lineSeparator();
 	private UserPojo userFromToken;
 

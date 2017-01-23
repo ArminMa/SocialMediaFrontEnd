@@ -6,8 +6,8 @@ angular.module('MyApp').factory('MyService', ['$q', '$rootScope', function($q, $
     // Create a unique callback ID to map requests to responses
     var currentCallbackId = 0;
     // Create our websocket object with the address to the websocket
-    var ws5091 = new WebSocket("ws://localhost:5091/groupManager");
-    var ws5092 = new WebSocket("ws://localhost:5091/messages");
+    var ws5091 = new WebSocket("ws://104.199.70.136:5091/groupManager");
+    var ws5092 = new WebSocket("ws://104.199.70.136:5091/messages");
 
 
     ws5091.onopen = function(){
